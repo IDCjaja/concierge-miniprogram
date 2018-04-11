@@ -1,0 +1,23 @@
+{
+  "pages":[
+    "pages/index/index"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar":{
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "我的预约"
+      },
+      {
+        "pagePath": "pages/index/index",
+        "text": "我是管理员"
+      }
+    ]
+  }
+}
