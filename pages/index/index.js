@@ -14,7 +14,11 @@ Page({
     longitude: 0,
     latitude: 0,
     hiddenDropdown: true,
-    projects: []
+    loading: true,
+    nomoreData: true,
+    pageIndex: 1,
+    projects: [],
+    currentPageProjects: []
   },
   onLoad: function () {
     wx.getLocation({
@@ -30,7 +34,8 @@ Page({
               item.cover = app.globalData.server + item.cover;
             })
             this.setData({
-              projects: response.data.projects
+              projects: response.data.projects,
+              currentPageProjects: response.data.projects
             })
           }
         })
@@ -47,16 +52,19 @@ Page({
     this.setData({
       defaultText: this.data.options[index].text,
       distance: this.data.options[index].value,
-      hiddenDropdown: true
+      hiddenDropdown: true,
+      pageIndex: 1,
+      nomoreData: true
     });
     wx.request({
       url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
       success: (response)=>{
         response.data.projects.forEach(function(item) {
           item.cover = app.globalData.server + item.cover;
-        })
+        });
         this.setData({
-          projects: response.data.projects
+          projects: response.data.projects,
+          currentPageProjects: response.data.projects
         })
       }
     })
@@ -66,5 +74,46 @@ Page({
   },
   showProject(event) {
     console.log(event.currentTarget.dataset.projectIndex)
+  },
+  onReachBottom() {
+    this.setData({
+      loading: false,
+      nomoreData: true
+    })
+    if(this.data.currentPageProjects.length == 3) {
+      this.setData({
+        pageIndex: this.data.pageIndex+1
+      });
+      wx.request({
+        url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude+"&page="+this.data.pageIndex,
+        success: (res)=> {
+          if(res.data.projects.length) {
+            res.data.projects.forEach(function(item) {
+              item.cover = app.globalData.server + item.cover;
+            });
+            this.setData({
+              loading: true,
+              currentPageProjects: res.data.projects,
+              projects: this.data.projects.concat(res.data.projects)
+            });
+          } else {
+            setTimeout(()=>{
+              this.setData({
+                loading: true,
+                nomoreData: false,
+                pageIndex: this.data.pageIndex - 1
+              })
+            },1000)
+          }
+        }
+      });
+    } else {
+      setTimeout(()=>{
+        this.setData({
+          loading: true,
+          nomoreData: false
+        })
+      },1000)
+    }
   }
 })

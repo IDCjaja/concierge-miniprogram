@@ -25,5 +25,7 @@
       <view class="project-name">{{ item.name }}</view>
       <view class="project-address">{{ item.address }}</view>
     </view>
+    <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
+    <view class="projects-loading-complete" hidden="{{ nomoreData }}">没有更多了</view>
   </view>
 </view>
