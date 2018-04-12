@@ -11,22 +11,27 @@ Page({
     ],
     defaultText: '3千米',
     distance: 3,
+    longitude: 0,
+    latitude: 0,
     hiddenDropdown: true,
-    projects: [
-      {
-        "image": "http://cdrtvu.qiniudn.com/Fl_zHyhHaoIQUfmm6CWwaopLvCsw",
-        "name": "成都高新图书馆",
-        "address": "一环建设北路2段4号"
-      }
-    ]
+    projects: []
   },
   onLoad: function () {
     wx.getLocation({
       success:(res)=>{
+        this.setData({
+          longitude: res.longitude,
+          latitude: res.latitude
+        })
         wx.request({
-          url: app.globalData.server + "miniprogram/projects?distance="+this.data.distance+"&longitude="+res.longitude+"&latitude="+res.latitude,
+          url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
           success: (response)=>{
-            console.log(response)
+            response.data.projects.forEach(function(item) {
+              item.cover = app.globalData.server + item.cover;
+            })
+            this.setData({
+              projects: response.data.projects
+            })
           }
         })
       }
@@ -43,9 +48,23 @@ Page({
       defaultText: this.data.options[index].text,
       distance: this.data.options[index].value,
       hiddenDropdown: true
+    });
+    wx.request({
+      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+      success: (response)=>{
+        response.data.projects.forEach(function(item) {
+          item.cover = app.globalData.server + item.cover;
+        })
+        this.setData({
+          projects: response.data.projects
+        })
+      }
     })
   },
   search() {
 
+  },
+  showProject(event) {
+    console.log(event.currentTarget.dataset.projectIndex)
   }
 })
