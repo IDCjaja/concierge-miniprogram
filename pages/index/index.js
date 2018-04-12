@@ -20,7 +20,7 @@ Page({
     projects: [],
     currentPageProjects: []
   },
-  onLoad: function () {
+  onLoad() {
     wx.getLocation({
       success:(res)=>{
         this.setData({
@@ -70,7 +70,9 @@ Page({
     })
   },
   search() {
-
+    wx.navigateTo({
+      url: '../search/search'
+    })
   },
   showProject(event) {
     console.log(event.currentTarget.dataset.projectIndex)

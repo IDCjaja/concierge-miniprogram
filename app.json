@@ -1,11 +1,12 @@
 {
   "pages":[
+    "pages/search/search",
     "pages/index/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "智慧预约",
     "navigationBarTextStyle":"black",
     "onReachBottomDistance": 0
   },

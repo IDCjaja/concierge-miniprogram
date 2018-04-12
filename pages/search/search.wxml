@@ -1,0 +1,25 @@
+<view class="search-container">
+  <view class="search-input-wrapper">
+    <icon type="search" size="18" class="search-icon"></icon>
+    <input class="search-input"
+           placeholder="请输入预约名称"
+           focus="true"
+           confirm-type="search"
+           bindinput="searchProjects"></input>
+    <text class="search-cancel">取消</text>
+  </view>
+  <view class="search-body">
+    <view class="project"
+          wx:for="{{ projects }}"
+          bindtap="showProject"
+          data-project-index="{{ index }}">
+      <image src="{{ item.cover }}" class="project-cover"></image>
+      <view class="project-name">{{ item.name }}</view>
+      <view class="project-address">{{ item.address }}</view>
+    </view>
+    <view class="no-project" hidden="{{ noResult }}">
+      <img src="http://cdrtvu.qiniudn.com/FiJUUanta4uz3CzcMxKUbo4pf08r" class="no-project-icon"></img>
+      <text class="no-project-text">未搜索到相关结果</text>
+    </view>
+  </view>
+</view>
