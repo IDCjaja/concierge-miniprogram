@@ -12,7 +12,8 @@
     <view class="project"
           wx:for="{{ projects }}"
           bindtap="showProject"
-          data-project-index="{{ index }}">
+          data-project-id="{{ item.id }}"
+          bindtap="showProject">
       <image src="{{ item.cover }}" class="project-cover"></image>
       <view class="project-name">{{ item.name }}</view>
       <view class="project-address">{{ item.address }}</view>

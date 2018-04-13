@@ -2,12 +2,26 @@ const app = getApp()
 
 Page({
   data: {
-    options: [
-      {'value': 3, 'text': '3千米'},
-      {'value': 5, 'text': '5千米'},
-      {'value': 10, 'text': '10千米'},
-      {'value': 15, 'text': '15千米'},
-      {'value': '', 'text': '全部'}
+    options: [{
+        'value': 3,
+        'text': '3千米'
+      },
+      {
+        'value': 5,
+        'text': '5千米'
+      },
+      {
+        'value': 10,
+        'text': '10千米'
+      },
+      {
+        'value': 15,
+        'text': '15千米'
+      },
+      {
+        'value': '',
+        'text': '全部'
+      }
     ],
     defaultText: '3千米',
     distance: 3,
@@ -22,15 +36,15 @@ Page({
   },
   onLoad() {
     wx.getLocation({
-      success:(res)=>{
+      success: (res) => {
         this.setData({
           longitude: res.longitude,
           latitude: res.latitude
         })
         wx.request({
-          url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
-          success: (response)=>{
-            response.data.projects.forEach(function(item) {
+          url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude,
+          success: (response) => {
+            response.data.projects.forEach(function (item) {
               item.cover = app.globalData.server + item.cover;
             })
             this.setData({
@@ -62,9 +76,9 @@ Page({
       nomoreData: true
     });
     wx.request({
-      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
-      success: (response)=>{
-        response.data.projects.forEach(function(item) {
+      url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude,
+      success: (response) => {
+        response.data.projects.forEach(function (item) {
           item.cover = app.globalData.server + item.cover;
         });
         this.setData({
@@ -80,6 +94,9 @@ Page({
     })
   },
   showProject(event) {
+    wx.navigateTo({
+      url: "../introduce/introduce?id=" + event.currentTarget.dataset.projectId
+    })
     console.log(event.currentTarget.dataset.projectId)
   },
   onReachBottom() {
@@ -87,15 +104,15 @@ Page({
       loading: false,
       nomoreData: true
     })
-    if(this.data.currentPageProjects.length == 3) {
+    if (this.data.currentPageProjects.length == 3) {
       this.setData({
-        pageIndex: this.data.pageIndex+1
+        pageIndex: this.data.pageIndex + 1
       });
       wx.request({
-        url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude+"&page="+this.data.pageIndex,
-        success: (res)=> {
-          if(res.data.projects.length) {
-            res.data.projects.forEach(function(item) {
+        url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude + "&page=" + this.data.pageIndex,
+        success: (res) => {
+          if (res.data.projects.length) {
+            res.data.projects.forEach(function (item) {
               item.cover = app.globalData.server + item.cover;
             });
             this.setData({
@@ -104,23 +121,23 @@ Page({
               projects: this.data.projects.concat(res.data.projects)
             });
           } else {
-            setTimeout(()=>{
+            setTimeout(() => {
               this.setData({
                 loading: true,
                 nomoreData: false,
                 pageIndex: this.data.pageIndex - 1
               })
-            },1000)
+            }, 1000)
           }
         }
       });
     } else {
-      setTimeout(()=>{
+      setTimeout(() => {
         this.setData({
           loading: true,
           nomoreData: false
         })
-      },1000)
+      }, 1000)
     }
   }
 })

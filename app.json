@@ -1,18 +1,18 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/introduce/introduce"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "智慧预约",
-    "navigationBarTextStyle":"black",
+    "navigationBarTextStyle": "black",
     "onReachBottomDistance": 0
   },
-  "tabBar":{
-    "list": [
-      {
+  "tabBar": {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "我的预约"
       },
