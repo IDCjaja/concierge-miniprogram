@@ -76,5 +76,10 @@ Page({
         })
       },1000)
     }
+  },
+  showProject(event){
+    wx.navigateTo({
+      url: "../introduce/introduce?id=" + event.currentTarget.dataset.projectId
+    })
   }
 })

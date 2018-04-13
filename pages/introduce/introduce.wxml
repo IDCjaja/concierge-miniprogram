@@ -1,0 +1,23 @@
+<view>
+    <image src="{{imageUrl}}" class="introduce-image" />
+</view>
+<view>
+    <text class="introduce-title block-text">{{title}}</text>
+    <text bindtap="openMap" class="introduce-address">{{address}}</text>
+</view>
+<view>
+    <text class="block-text">预约时间</text>
+    <block wx:for="{{bookingTime}}" wx:key="bookingTime" wx:for-item="itemName">
+        <rich-text>{{itemName[0]}} {{itemName[1][0].time}}</rich-text>
+    </block>
+</view>
+<view>
+    <text class="block-text">预约详情</text>
+    <text>{{description}}</text>
+</view>
+<view class="last-view">
+    <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
+</view>
+<button hover-class="deep" bindtap="openOrder" class="submit-btn" disabled="{{isFull}}">
+    立即预约
+</button>
