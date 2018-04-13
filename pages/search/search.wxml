@@ -6,7 +6,7 @@
            focus="true"
            confirm-type="search"
            bindinput="searchProjects"></input>
-    <text class="search-cancel">取消</text>
+    <navigator open-type="navigateBack" class="search-cancel">取消</navigator>
   </view>
   <view class="search-body">
     <view class="project"

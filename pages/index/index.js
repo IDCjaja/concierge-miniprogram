@@ -47,6 +47,11 @@ Page({
       hiddenDropdown: false
     })
   },
+  closeDropdown() {
+    this.setData({
+      hiddenDropdown: true
+    })
+  },
   changeDistance(event) {
     var index = event.currentTarget.dataset.index;
     this.setData({
@@ -75,7 +80,7 @@ Page({
     })
   },
   showProject(event) {
-    console.log(event.currentTarget.dataset.projectIndex)
+    console.log(event.currentTarget.dataset.projectId)
   },
   onReachBottom() {
     this.setData({
