@@ -1,27 +1,13 @@
-const app = getApp()
+var app = getApp()
 
 Page({
   data: {
-    options: [{
-        'value': 3,
-        'text': '3千米'
-      },
-      {
-        'value': 5,
-        'text': '5千米'
-      },
-      {
-        'value': 10,
-        'text': '10千米'
-      },
-      {
-        'value': 15,
-        'text': '15千米'
-      },
-      {
-        'value': '',
-        'text': '全部'
-      }
+    options: [
+      {'value': 3, 'text': '3千米'},
+      {'value': 5, 'text': '5千米'},
+      {'value': 10, 'text': '10千米'},
+      {'value': 15, 'text': '15千米'},
+      {'value': '', 'text': '全部'}
     ],
     defaultText: '3千米',
     distance: 3,
@@ -35,22 +21,40 @@ Page({
     currentPageProjects: []
   },
   onLoad() {
-    wx.getLocation({
-      success: (res) => {
-        this.setData({
-          longitude: res.longitude,
-          latitude: res.latitude
-        })
+    wx.login({
+      success: resCode => {
         wx.request({
-          url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude,
-          success: (response) => {
-            response.data.projects.forEach(function (item) {
-              item.cover = app.globalData.server + item.cover;
-            })
-            this.setData({
-              projects: response.data.projects,
-              currentPageProjects: response.data.projects
-            })
+          url: app.globalData.server + '/miniprogram/login',
+          method: 'POST',
+          data: {
+            'code': resCode.code 
+          },
+          success: resEdit => {
+            app.globalData.token = resEdit.data.token;
+            app.globalData.role = resEdit.data.role
+            wx.getLocation({
+              success: resData => {
+                this.setData({
+                  longitude: resData.longitude,
+                  latitude: resData.latitude
+                })
+                wx.request({
+                  url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+                  header: {
+                    'Authorization': app.globalData.token
+                  },
+                  success: (response)=>{
+                    response.data.projects.forEach(function(item) {
+                      item.cover = app.globalData.server + item.cover;
+                    })
+                    this.setData({
+                      projects: response.data.projects,
+                      currentPageProjects: response.data.projects
+                    })
+                  }
+                })
+              }
+            });
           }
         })
       }
@@ -76,9 +80,12 @@ Page({
       nomoreData: true
     });
     wx.request({
-      url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude,
-      success: (response) => {
-        response.data.projects.forEach(function (item) {
+      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success: (response)=>{
+        response.data.projects.forEach(function(item) {
           item.cover = app.globalData.server + item.cover;
         });
         this.setData({
@@ -97,22 +104,24 @@ Page({
     wx.navigateTo({
       url: "../introduce/introduce?id=" + event.currentTarget.dataset.projectId
     })
-    console.log(event.currentTarget.dataset.projectId)
   },
   onReachBottom() {
     this.setData({
       loading: false,
       nomoreData: true
     })
-    if (this.data.currentPageProjects.length == 3) {
+    if(this.data.currentPageProjects.length == 3) {
       this.setData({
-        pageIndex: this.data.pageIndex + 1
+        pageIndex: this.data.pageIndex+1
       });
       wx.request({
-        url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance + "&longitude=" + this.data.longitude + "&latitude=" + this.data.latitude + "&page=" + this.data.pageIndex,
-        success: (res) => {
-          if (res.data.projects.length) {
-            res.data.projects.forEach(function (item) {
+        url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude+"&page="+this.data.pageIndex,
+        header: {
+          'Authorization': app.globalData.token
+        },
+        success: (res)=> {
+          if(res.data.projects.length) {
+            res.data.projects.forEach(function(item) {
               item.cover = app.globalData.server + item.cover;
             });
             this.setData({
@@ -121,23 +130,23 @@ Page({
               projects: this.data.projects.concat(res.data.projects)
             });
           } else {
-            setTimeout(() => {
+            setTimeout(()=>{
               this.setData({
                 loading: true,
                 nomoreData: false,
                 pageIndex: this.data.pageIndex - 1
               })
-            }, 1000)
+            },1000)
           }
         }
       });
     } else {
-      setTimeout(() => {
+      setTimeout(()=>{
         this.setData({
           loading: true,
           nomoreData: false
         })
-      }, 1000)
+      },1000)
     }
   }
 })
