@@ -9,14 +9,13 @@ Page({
             method: "GET",
             url: 'http://192.168.31.208/miniprogram/projects/'+option.id,
             header: {
-                'content-type': 'application/json'
+                'Authorization': app.globalData.token
             },
             success: (res) => {
                 var json = res.data.time_state;
                 var keyArr = new Array;
                 var keyValue = new Array;
                 var n;
-                console.log(json)
                 Object.keys(json).forEach(key => {
                     keyArr.push([key + ":", json[key]])
                 })
@@ -60,20 +59,36 @@ Page({
                     title: res.data.name,
                     address: res.data.address,
                     description: res.data.description,
-                    bookingTime: keyValue
+                    bookingTime: keyValue,
+                    longitude:res.data.longitude,
+                    latitude: res.data.latitude,
+                    address: res.data.address,
+                    id: option.id,
+                    markers:[{
+                        id:1,
+                        width: 25,
+                        height: 25,
+                        longitude:res.data.longitude,
+                        latitude: res.data.latitude,
+                    }]
                 })
             }
         })
     },
     openMap: function () {
-        wx.navigateTo({
-            url: '/pages/map/map'
-
+        wx.getLocation({
+            success: function(res){
+            wx.openLocation({
+                latitude : res.latitude,
+                longitude : res.longitude,
+                address:res.address
+            })
+            }
         })
     },
-    openOrder: function () {
+    openOrder: function (event) {
         wx.navigateTo({
-            url: '/pages/order/order'
+            url: '/pages/order/order?id=' + event.currentTarget.dataset.projectId
         })
     }
 })

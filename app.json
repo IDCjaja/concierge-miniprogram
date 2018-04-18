@@ -1,8 +1,11 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/regist/regist",
+    "pages/order/order",
     "pages/search/search",
-    "pages/introduce/introduce"
+    "pages/introduce/introduce",
+    "pages/admin/admin"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -17,7 +20,8 @@
         "text": "我的预约"
       },
       {
-        "pagePath": "pages/index/index",
+        
+        "pagePath":"pages/regist/regist",
         "text": "我是管理员"
       }
     ]

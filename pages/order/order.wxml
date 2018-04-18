@@ -1,0 +1,24 @@
+<view>
+    <label class="required block" >姓名</label>
+    <input type="text" bindblur="verifyName" placeholder="请输入预约人姓名" />
+    <label class="required block">手机号码</label>
+    <input type="text"  bindblur="verifyPhone" placeholder="请输入预约人姓名"/>
+    <view class="code-box">
+        <input bindinput="bindHideKeyboard" placeholder="请输入预约人姓名" />
+        <label wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</label>
+        <label wx:else bindtap="getCode">获取验证码</label>
+    </view>
+    <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
+    <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
+</view>
+<view class="footer-button">
+    <button hover-class="deep" class="submit-btn">提交预约</button>
+</view>
+<view class="section">
+    <view class="section__title">多列选择器</view>
+    <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+        <view class="picker">
+            当前选择：
+        </view>
+    </picker>
+</view>
