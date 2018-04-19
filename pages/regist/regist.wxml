@@ -1,6 +1,6 @@
 <view>
-  <input bindblur="nameBindChange" type="text" value="{{name}}" placeholder="用户名" />
-  <input bindblur="phoneBindChange" type="text" value="{{phone}}" placeholder="手机号码" />
+  <input bindblur="nameBindChange" type="text" value="{{name}}" placeholder="用户名"/>
+  <input bindblur="phoneBindChange" type="text" value="{{phone}}" placeholder="手机号码"/>
 </view>
 <view class="code-box">
   <input bindblur="codeBindChange" value="{{code}}" type="text" placeholder="输入验证码" />
