@@ -1,0 +1,22 @@
+<view class="projects-contianer">
+  <view class="projects-tabs">
+    <text class="tab {{ currentIndex == index?'active':'' }}"
+          wx:for="{{ tabList }}"
+          data-tab-index="{{ index }}"
+          bindtap="changeState">
+        {{ item.text }}
+    </text>
+  </view>
+  <view class="current-projects" hidden="{{ currentIndex == 1 }}">
+    <view class="search-wrapper" bindtap="search">
+      <text class="search-placeholder">请输入预约名称</text>
+      <icon type="search" size="18" color="#f1f1f1"></icon>
+    </view>
+    <view class="projects-item">
+      
+    </view>
+  </view>
+  <view class="history-projects" hidden="{{ currentIndex == 0 }}">
+    history
+  </view>
+</view>

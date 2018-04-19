@@ -1,0 +1,25 @@
+.projects-tabs {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom:5px;
+}
+.active {
+  color: blue;
+}
+.current-projects {
+  margin: 0 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-wrapper {
+  border: 1px solid #ebeef5;
+  border-radius: 5px;
+  padding: 5px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.search-placeholder {
+  color: #f1f1f1;
+}

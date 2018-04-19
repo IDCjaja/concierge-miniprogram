@@ -29,9 +29,9 @@ Page({
           data: {
             'code': resCode.code 
           },
-          success: resEdit => {
-            app.globalData.token = resEdit.data.token;
-            app.globalData.role = resEdit.data.role
+          success: result => {
+            app.globalData.token = result.data.token;
+            app.globalData.role = result.data.role
             wx.getLocation({
               success: resData => {
                 this.setData({
