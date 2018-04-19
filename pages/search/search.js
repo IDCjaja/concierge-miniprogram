@@ -17,6 +17,9 @@ Page({
     })
     wx.request({
       url: encodeURI(app.globalData.server + "/miniprogram/projects?search=" + value),
+      header: {
+        'Authorization': app.globalData.token
+      },
       success:(res)=> {
         if(res.data.projects.length) {
           res.data.projects.forEach((item)=> {
@@ -47,6 +50,9 @@ Page({
       });
       wx.request({
         url: encodeURI(app.globalData.server + "/miniprogram/projects?search="+this.data.searchContent+"&page="+this.data.pageIndex),
+        header: {
+          'Authorization': app.globalData.token
+        },
         success: (res)=> {
           if(res.data.projects.length) {
             res.data.projects.forEach(function(item) {
