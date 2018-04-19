@@ -20,7 +20,7 @@ Page({
     projects: [],
     currentPageProjects: []
   },
-  onLoad() {
+  onShow() {
     wx.login({
       success: resCode => {
         wx.request({
@@ -49,6 +49,7 @@ Page({
                     })
                     this.setData({
                       projects: response.data.projects,
+                      pageIndex: 1,
                       currentPageProjects: response.data.projects
                     })
                   }
@@ -110,7 +111,7 @@ Page({
       loading: false,
       nomoreData: true
     })
-    if(this.data.currentPageProjects.length == 3) {
+    if(this.data.currentPageProjects.length == 4) {
       this.setData({
         pageIndex: this.data.pageIndex+1
       });

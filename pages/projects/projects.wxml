@@ -1,22 +1,37 @@
 <view class="projects-contianer">
   <view class="projects-tabs">
-    <text class="tab {{ currentIndex == index?'active':'' }}"
+    <text class="tab {{ currentTabIndex == index?'active':'' }}"
           wx:for="{{ tabList }}"
           data-tab-index="{{ index }}"
           bindtap="changeState">
         {{ item.text }}
     </text>
   </view>
-  <view class="current-projects" hidden="{{ currentIndex == 1 }}">
+  <view class="current-projects" hidden="{{ currentTabIndex == 1 }}">
     <view class="search-wrapper" bindtap="search">
       <text class="search-placeholder">请输入预约名称</text>
       <icon type="search" size="18" color="#f1f1f1"></icon>
     </view>
-    <view class="projects-item">
-      
+    <view class="projects-item"
+          wx:for="{{ projectsList }}" 
+          bindtap="showDetail"
+          data-reservation-id="{{ item.id }}">
+      <view class="project-name">{{ item.project_name }}</view>
+      <view class="project-datatime">
+        <text class="project-date">{{ item.date }}</text>
+        <text>{{ item.time }}</text>
+      </view>
+      <view class="project-address">{{ item.address }}</view>
+      <view class="project-user">
+        <text>{{ item.name }}</text>
+        <text>{{ item.tel }}</text>
+      </view>
+      <view class="project-state">{{ item.state }}</view>
     </view>
   </view>
-  <view class="history-projects" hidden="{{ currentIndex == 0 }}">
+  <view class="history-projects" hidden="{{ currentTabIndex == 0 }}">
     history
   </view>
+  <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
+  <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
 </view>

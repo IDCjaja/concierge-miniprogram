@@ -2,12 +2,12 @@
   "pages": [
     "pages/index/index",
     "pages/projects/projects",
-    "pages/regist/regist",
     "pages/order/order",
     "pages/regist/regist",
     "pages/search/search",
     "pages/introduce/introduce",
-    "pages/admin/admin"
+    "pages/admin/admin",
+    "pages/detail/detail"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,11 +19,11 @@
   "tabBar": {
     "list": [{
         "pagePath": "pages/index/index",
-        "text": "我的预约"
+        "text": "预约项目"
       },
       {
-        "pagePath":"pages/regist/regist",
-        "text": "我是管理员"
+        "pagePath":"pages/projects/projects",
+        "text": "我的预约"
       }
     ]
   }

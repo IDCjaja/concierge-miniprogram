@@ -16,10 +16,46 @@
   border: 1px solid #ebeef5;
   border-radius: 5px;
   padding: 5px;
-  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 .search-placeholder {
   color: #f1f1f1;
+}
+.projects-item {
+  background-color:rgba(242, 242, 242, 1);
+  margin-top:10px;
+  padding:5px;
+  position: relative;
+}
+.project-name {
+  margin-bottom: 10px;
+}
+.project-datatime {
+  margin-bottom: 10px;
+  color: blue;
+}
+.project-date{
+  margin-right: 5px;
+}
+.project-address {
+  margin-bottom: 10px;
+  color: blue;
+}
+.project-user {
+  display:flex;
+  justify-content:space-between;
+}
+.project-state {
+  background-color:blue;
+  width:50px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  position:absolute;
+  top:5px;
+  right:5px;
 }

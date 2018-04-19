@@ -1,27 +1,104 @@
 const app = getApp();
 
 Page({
+  STATE_TEXT: {
+    success: '已成功',
+    wait: '待审核'
+  },
   data: {
     tabList: [
       {"text": "当前预约"},
       {"text": "历史预约"}
     ],
-    currentIndex: 0
+    currentTabIndex: 0,
+    projectsList: [],
+    loading: true,
+    nomoreData: true,
+    currentPageReservations: [],
+    pageIndex: 1
   },
-  onLoad() {
+  onShow() {
     wx.request({
       url: app.globalData.server + '/miniprogram/reservations',
       header: {
         'Authorization': app.globalData.token
       },
       success: res => {
-        console.log(res)
+        this.setData({
+          projectsList: this.formatReservations(res.data.reservations),
+          pageIndex: 1,
+          currentPageReservations: this.formatReservations(res.data.reservations)
+        })
       }
     })
   },
   changeState(event) {
     this.setData({
-      currentIndex: event.currentTarget.dataset.tabIndex
+      currentTabIndex: event.currentTarget.dataset.tabIndex
     })
+  },
+  formatReservations(array) {
+    var formated_reservations = array.map((item) => {
+      return {
+        "time": item.time,
+        "name": item.name,
+        "address": item.address,
+        "id": item.id,
+        "state": this.STATE_TEXT[item.state],
+        "tel": item.tel,
+        "project_name": item.project_name,
+        "date": item.date
+      }
+    })
+    return formated_reservations;
+  },
+  search() {
+
+  },
+  showDetail(event) {
+    wx.navigateTo({
+      url: "../detail/detail?id=" + event.currentTarget.dataset.reservationId
+    })
+  },
+  onReachBottom() {
+    this.setData({
+      loading: false,
+      nomoreData: true
+    })
+    if(this.data.currentPageReservations.length == 4) {
+      this.setData({
+        pageIndex: this.data.pageIndex+1
+      });
+      wx.request({
+        url: app.globalData.server + "/miniprogram/reservations?page="+this.data.pageIndex,
+        header: {
+          'Authorization': app.globalData.token
+        },
+        success: (res)=> {
+          if(res.data.reservations.length) {
+            this.setData({
+              loading: true,
+              currentPageReservations: this.formatReservations(res.data.reservations),
+              projectsList: this.data.projectsList.concat(this.formatReservations(res.data.reservations))
+            });
+          } else {
+            setTimeout(()=>{
+              this.setData({
+                loading: true,
+                nomoreData: false,
+                pageIndex: this.data.pageIndex - 1
+              })
+            },1000)
+          }
+        }
+      });
+    } else {
+      setTimeout(()=>{
+        this.setData({
+          loading: true,
+          nomoreData: false
+        })
+      },1000)
+    }
   }
 })

@@ -4,21 +4,21 @@ Page({
   data:{
     setTimr: false,
     multiArray: [{
-        "date":"2018-4-11",
-        "wday" : "周三",
-        "table":[
-                  {"time":"09:00-12:00","remain":9},
-                  {"time":"13:00-17:00","remain":15}
-                ]
-        },{
-        "date":"2018-4-13",
-        "wday" : "周五",
-        "table":[
-                  {"time":"12:00-13:00","remain":10},
-                  {"time":"14:00-17:00","remain":0},
-                  {"time":"17:00-19:00","remain":15}
-                ]
-        }
+      "date":"2018-4-11",
+      "wday" : "周三",
+      "table":[
+      {"time":"09:00-12:00","remain":9},
+      {"time":"13:00-17:00","remain":15}
+      ]
+    },{
+      "date":"2018-4-13",
+      "wday" : "周五",
+      "table":[
+      {"time":"12:00-13:00","remain":10},
+      {"time":"14:00-17:00","remain":0},
+      {"time":"17:00-19:00","remain":15}
+      ]
+    }
     ],
     multiIndex: [0,0]
   },
@@ -36,8 +36,8 @@ Page({
       }
     })
     var data = {
-        multiArray: this.data.multiArray,
-        multiIndex: this.data.multiIndex
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
     };
     var dayArr = new Array;
     var tableArr = new Array;
@@ -70,14 +70,14 @@ Page({
         var timr = setInterval(() => {
           if(count == 0){
             this.setData({
-                count: 60,
-                setTimr: false
+              count: 60,
+              setTimr: false
             })
             clearInterval(timr)
             return count
-            }else{
-              count -=1;
-              this.setData({
+          }else{
+            count -=1;
+            this.setData({
               count: count,
               setTimr: true
             })
@@ -153,43 +153,49 @@ Page({
           if(res.statusCode == 201){
             wx.showToast({
               title:'预约成功',
-              duration: 2000
+              duration: 1000,
+              success: () => {
+                console.log(111)
+                wx.reLaunch({
+                  url: "../projects/projects"
+                })
+              }
             })
           }
         },
         fail: (res) =>{
-            if(res.statusCode == 422){
-              wx.showToast({
-                title: '验证码错误',
-                icon: 'none',
-                duration: 2000
-              })
-            }else if(res.statusCode == 400){
-              wx.showToast({
-                title: '发送验证码失败',
-                icon: 'none',
-                duration: 2000
-              })
-            }
+          if(res.statusCode == 422){
+            wx.showToast({
+              title: '验证码错误',
+              icon: 'none',
+              duration: 2000
+            })
+          }else if(res.statusCode == 400){
+            wx.showToast({
+              title: '发送验证码失败',
+              icon: 'none',
+              duration: 2000
+            })
+          }
         }
       })
     }
   },
   bindMultiPickerChange: function (e) {
     this.setData({
-        multiIndex: e.detail.value
+      multiIndex: e.detail.value
     })
   },
   bindMultiPickerColumnChange: function(e){
     var data = {
-        multiArray: this.data.multiArray,
-        multiIndex: this.data.multiIndex
+      multiArray: this.data.multiArray,
+      multiIndex: this.data.multiIndex
     };
     var keyArr = new Array;
     data.multiIndex[e.detail.column] = e.detail.value;
     data.multiIndex[0] = [],
     Object.keys(data.multiArray).forEach(key => {
-        keyArr.push([key + ":", json[key]])
+      keyArr.push([key + ":", json[key]])
     })
   }
 })
