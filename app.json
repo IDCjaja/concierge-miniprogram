@@ -1,8 +1,8 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/regist/regist",
     "pages/order/order",
+    "pages/regist/regist",
     "pages/search/search",
     "pages/introduce/introduce",
     "pages/admin/admin"

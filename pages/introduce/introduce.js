@@ -34,13 +34,13 @@ Page({
                             n = "周天";
                             break;
                         case 'Thur:':
-                            n = "周三";
-                            break;
-                        case 'Tues:':
                             n = "周四";
                             break;
-                        case 'Wed:':
+                        case 'Tues:':
                             n = "周二";
+                            break;
+                        case 'Wed:':
+                            n = "周三";
                             break;
                         case 'Mon:':
                             n = "周一";

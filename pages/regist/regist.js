@@ -15,31 +15,16 @@ Page({
     }
   },
   phoneBindChange: function(e){
-    var phone = e.detail.value
-    var res= /^1[34578]\d{9}$/;
-    if(!(/^1[34578]\d{9}$/.test(phone)) || phone=="" || phone==null){
-      wx.showToast({
-        title:'号码格式错误'
-      })
-      return
-    }else{
-      this.setData({
-        phone: phone
-      })
-    }
+    var phone = e.detail.value;
+    this.setData({
+      phone: phone
+    })
   },
   nameBindChange: function(e){
-    var name = e.detail.value
-    if(name=="" || name==null){
-      wx.showToast({
-        title:'用户名不能为空'
-      })
-      return;
-    }else{
-      this.setData({
-        name: name
-      })
-    }
+    var name = e.detail.value;
+    this.setData({
+      name: name
+    })
   },
   codeBindChange: function(e){
     this.setData({
@@ -49,37 +34,68 @@ Page({
   getCode: function(){
     var count = 60;
     var that = this;
-    if(0 < count && count <= 60){
-      var timr = setInterval(() => {
-        if(count == 0){
-          this.setData({
-              count: 60,
-              setTimr: false
-          })
-            clearInterval(timr)
-            return count
-          }else{
-            count -=1;
-            this.setData({
-              count: count,
-              setTimr: true
-            })
-          }
-      },1000);
+    var phone = that.data.phone;
+    var name = that.data.name;
+    if(name=="" || name==null){
+      wx.showToast({
+        title:'用户名不能为空',
+        icon:'none'
+      })
+      return
     }
-    wx.request({
-      url: app.globalData.server + '/miniprogram/admin/code',
-      method:'POST',
-      header: {
-        'Authorization': app.globalData.token
-      },
-      data: {
-        tel: that.data.phone
-      },
-      success: (res) => {
-        console.log("success")
+    if(!(/^1[34578]\d{9}$/.test(phone)) || phone=="" || phone==null){
+      wx.showToast({
+        title:'手机号格式错误',
+        icon:'none'
+      })
+      return
+    }else{
+      if(0 < count && count <= 60){
+        var timr = setInterval(() => {
+          if(count == 0){
+            this.setData({
+                count: 60,
+                setTimr: false
+            })
+              clearInterval(timr)
+              return count
+            }else{
+              count -=1;
+              this.setData({
+                count: count,
+                setTimr: true
+              })
+            }
+        },1000);
       }
-    })
+      wx.request({
+        url: app.globalData.server + '/miniprogram/admin/code',
+        method:'POST',
+        header: {
+          'Authorization': app.globalData.token
+        },
+        data: {
+          tel: that.data.phone
+        },
+        fail :(res) => {
+          if(res.statusCode == 400 || res.statusCode == 422){
+            wx.showToast({
+              title:'发送验证码失败',
+              icon:'none',
+              duration: 1000
+            })
+            return
+          }else if(res.statusCode == 403){
+            wx.showToast({
+              title:'手机号已注册',
+              icon:'none',
+              duration: 1000
+            })
+            return
+          }
+        }
+      })
+    }
   },
   regist: function(){
     var that = this;
@@ -95,7 +111,13 @@ Page({
         name: that.data.name
       },
       success: (res) => {
-        console.log("success")
+        if(res.statusCode == 200){
+          wx.showToast({
+            title:'注册成功',
+            icon:'none',
+            duration: 2000
+          })
+        }
       }
     })
   }
