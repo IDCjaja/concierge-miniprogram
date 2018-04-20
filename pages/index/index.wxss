@@ -62,31 +62,3 @@
 .project-address {
   color:#777;
 }
-.projects-loading {
-  text-align: center;
-  line-height: 25px;
-}
-.projects-loading-complete {
-  text-align: center;
-  line-height: 25px;
-}
-
-.projects-loading:before{
-  display: inline-block;
-  margin-right: 5px;
-  vertical-align: middle;
-  content: '';
-  width: 20px;
-  height: 20px;
-  background-image: url("http://cdrtvu.qiniudn.com/FjJMpJ3JkU_ODLWZ6C4WpPcPi_4u");
-  background-size: contain;
-  animation: rotate 1.5s linear infinite;
-}
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
-}

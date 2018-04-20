@@ -20,7 +20,7 @@ Page({
     projects: [],
     currentPageProjects: []
   },
-  onLoad() {
+  onShow() {
     wx.login({
       success: resCode => {
         wx.request({
@@ -29,9 +29,9 @@ Page({
           data: {
             'code': resCode.code 
           },
-          success: resEdit => {
-            app.globalData.token = resEdit.data.token;
-            app.globalData.role = resEdit.data.role
+          success: result => {
+            app.globalData.token = result.data.token;
+            app.globalData.role = result.data.role
             wx.getLocation({
               success: resData => {
                 this.setData({
@@ -43,12 +43,13 @@ Page({
                   header: {
                     'Authorization': app.globalData.token
                   },
-                  success: (response)=>{
+                  success: response => {
                     response.data.projects.forEach(function(item) {
                       item.cover = app.globalData.server + item.cover;
                     })
                     this.setData({
                       projects: response.data.projects,
+                      pageIndex: 1,
                       currentPageProjects: response.data.projects
                     })
                   }
@@ -80,7 +81,7 @@ Page({
       nomoreData: true
     });
     wx.request({
-      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+      url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
       header: {
         'Authorization': app.globalData.token
       },
@@ -97,7 +98,7 @@ Page({
   },
   search() {
     wx.navigateTo({
-      url: '../search/search'
+      url: '../search/search?type=projects'
     })
   },
   showProject(event) {
@@ -110,7 +111,7 @@ Page({
       loading: false,
       nomoreData: true
     })
-    if(this.data.currentPageProjects.length == 3) {
+    if(this.data.currentPageProjects.length == 4) {
       this.setData({
         pageIndex: this.data.pageIndex+1
       });

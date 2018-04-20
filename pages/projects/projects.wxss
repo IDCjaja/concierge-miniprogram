@@ -1,0 +1,61 @@
+.projects-tabs {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom:5px;
+}
+.active {
+  color: blue;
+}
+.current-projects {
+  margin: 0 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.search-wrapper {
+  border: 1px solid #ebeef5;
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.search-placeholder {
+  color: #f1f1f1;
+}
+.reservations-item {
+  background-color:rgba(242, 242, 242, 1);
+  margin-top:10px;
+  padding:5px;
+  position: relative;
+}
+.reservation-name {
+  margin-bottom: 10px;
+}
+.reservation-datatime {
+  margin-bottom: 10px;
+  color: blue;
+}
+.reservation-date{
+  margin-right: 5px;
+}
+.reservation-address {
+  margin-bottom: 10px;
+  color: blue;
+}
+.reservation-user {
+  display:flex;
+  justify-content:space-between;
+}
+.reservation-state {
+  background-color:blue;
+  width:50px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  position:absolute;
+  top:5px;
+  right:5px;
+}

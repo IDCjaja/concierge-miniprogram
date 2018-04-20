@@ -63,31 +63,40 @@ page {
   height: 100px;
   margin-bottom:20px;
 }
-.projects-loading {
-  text-align: center;
-  line-height: 25px;
+.reservations-item {
+  background-color:rgba(242, 242, 242, 1);
+  margin-top:10px;
+  padding:5px;
+  position: relative;
 }
-.projects-loading-complete {
-  text-align: center;
-  line-height: 25px;
+.reservation-name {
+  margin-bottom: 10px;
 }
-
-.projects-loading:before{
-  display: inline-block;
+.reservation-datatime {
+  margin-bottom: 10px;
+  color: blue;
+}
+.reservation-date{
   margin-right: 5px;
-  vertical-align: middle;
-  content: '';
-  width: 20px;
-  height: 20px;
-  background-image: url("http://cdrtvu.qiniudn.com/FjJMpJ3JkU_ODLWZ6C4WpPcPi_4u");
-  background-size: contain;
-  animation: rotate 1.5s linear infinite;
 }
-@-webkit-keyframes rotate {
-  from {
-    -webkit-transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-  }
+.reservation-address {
+  margin-bottom: 10px;
+  color: blue;
+}
+.reservation-user {
+  display:flex;
+  justify-content:space-between;
+}
+.reservation-state {
+  background-color:blue;
+  width:50px;
+  height:40px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+  position:absolute;
+  top:5px;
+  right:5px;
 }
