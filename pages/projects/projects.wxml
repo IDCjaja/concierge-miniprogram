@@ -12,21 +12,21 @@
       <text class="search-placeholder">请输入预约名称</text>
       <icon type="search" size="18" color="#f1f1f1"></icon>
     </view>
-    <view class="projects-item"
-          wx:for="{{ projectsList }}" 
+    <view class="reservations-item"
+          wx:for="{{ reservationsList }}" 
           bindtap="showDetail"
           data-reservation-id="{{ item.id }}">
-      <view class="project-name">{{ item.project_name }}</view>
-      <view class="project-datatime">
-        <text class="project-date">{{ item.date }}</text>
+      <view class="reservation-name">{{ item.project_name }}</view>
+      <view class="reservation-datatime">
+        <text class="reservation-date">{{ item.date }}</text>
         <text>{{ item.time }}</text>
       </view>
-      <view class="project-address">{{ item.address }}</view>
-      <view class="project-user">
+      <view class="reservation-address">{{ item.address }}</view>
+      <view class="reservation-user">
         <text>{{ item.name }}</text>
         <text>{{ item.tel }}</text>
       </view>
-      <view class="project-state">{{ item.state }}</view>
+      <view class="reservation-state">{{ item.state }}</view>
     </view>
   </view>
   <view class="history-projects" hidden="{{ currentTabIndex == 0 }}">

@@ -11,7 +11,7 @@ Page({
       {"text": "历史预约"}
     ],
     currentTabIndex: 0,
-    projectsList: [],
+    reservationsList: [],
     loading: true,
     nomoreData: true,
     currentPageReservations: [],
@@ -25,7 +25,7 @@ Page({
       },
       success: res => {
         this.setData({
-          projectsList: this.formatReservations(res.data.reservations),
+          reservationsList: this.formatReservations(res.data.reservations),
           pageIndex: 1,
           currentPageReservations: this.formatReservations(res.data.reservations)
         })
@@ -38,22 +38,17 @@ Page({
     })
   },
   formatReservations(array) {
-    var formated_reservations = array.map((item) => {
-      return {
-        "time": item.time,
-        "name": item.name,
-        "address": item.address,
-        "id": item.id,
-        "state": this.STATE_TEXT[item.state],
-        "tel": item.tel,
-        "project_name": item.project_name,
-        "date": item.date
+    array.forEach(item => {
+      if(this.STATE_TEXT[item.state]) {
+        item.state = this.STATE_TEXT[item.state]
       }
     })
-    return formated_reservations;
+    return array;
   },
   search() {
-
+    wx.navigateTo({
+      url: '../search/search?type=reservations'
+    })
   },
   showDetail(event) {
     wx.navigateTo({
@@ -79,7 +74,7 @@ Page({
             this.setData({
               loading: true,
               currentPageReservations: this.formatReservations(res.data.reservations),
-              projectsList: this.data.projectsList.concat(this.formatReservations(res.data.reservations))
+              reservationsList: this.data.reservationsList.concat(this.formatReservations(res.data.reservations))
             });
           } else {
             setTimeout(()=>{

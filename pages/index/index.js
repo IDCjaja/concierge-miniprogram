@@ -43,7 +43,7 @@ Page({
                   header: {
                     'Authorization': app.globalData.token
                   },
-                  success: (response)=>{
+                  success: response => {
                     response.data.projects.forEach(function(item) {
                       item.cover = app.globalData.server + item.cover;
                     })
@@ -81,7 +81,7 @@ Page({
       nomoreData: true
     });
     wx.request({
-      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+      url: app.globalData.server + "/miniprogram/projects?distance=" + this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
       header: {
         'Authorization': app.globalData.token
       },
@@ -98,7 +98,7 @@ Page({
   },
   search() {
     wx.navigateTo({
-      url: '../search/search'
+      url: '../search/search?type=projects'
     })
   },
   showProject(event) {

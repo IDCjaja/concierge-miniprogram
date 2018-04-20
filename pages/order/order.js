@@ -155,7 +155,6 @@ Page({
               title:'预约成功',
               duration: 1000,
               success: () => {
-                console.log(111)
                 wx.reLaunch({
                   url: "../projects/projects"
                 })

@@ -9,15 +9,35 @@
     <navigator open-type="navigateBack" class="search-cancel">取消</navigator>
   </view>
   <view class="search-body">
-    <view class="project"
-          wx:for="{{ projects }}"
-          bindtap="showProject"
-          data-project-id="{{ item.id }}"
-          bindtap="showProject">
-      <image src="{{ item.cover }}" class="project-cover"></image>
-      <view class="project-name">{{ item.name }}</view>
-      <view class="project-address">{{ item.address }}</view>
-    </view>
+    <block wx:if="{{ isSearchProjects }}">
+      <view class="project"
+            wx:for="{{ projects }}"
+            bindtap="showProject"
+            data-project-id="{{ item.id }}"
+            bindtap="showProject">
+        <image src="{{ item.cover }}" class="project-cover"></image>
+        <view class="project-name">{{ item.name }}</view>
+        <view class="project-address">{{ item.address }}</view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="reservations-item"
+            wx:for="{{ reservationsList }}" 
+            bindtap="showDetail"
+            data-reservation-id="{{ item.id }}">
+        <view class="reservation-name">{{ item.project_name }}</view>
+        <view class="reservation-datatime">
+          <text class="reservation-date">{{ item.date }}</text>
+          <text>{{ item.time }}</text>
+        </view>
+        <view class="reservation-address">{{ item.address }}</view>
+        <view class="reservation-user">
+          <text>{{ item.name }}</text>
+          <text>{{ item.tel }}</text>
+        </view>
+        <view class="reservation-state">{{ item.state }}</view>
+      </view>
+    </block>
     <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
     <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
     <view class="no-project" hidden="{{ noResult }}">
