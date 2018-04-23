@@ -38,6 +38,7 @@ Page({
         this.setData({
           imageUrl: app.globalData.server + res.data.cover,
           title: res.data.name,
+          id: option.id,
           address: res.data.address,
           description: res.data.description,
           bookingTime: keyArr,

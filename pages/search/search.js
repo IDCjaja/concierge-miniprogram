@@ -15,7 +15,8 @@ Page({
     currentPageProjects: [],
     currentPageReservations: [],
     searchContent: '',
-    isSearchProjects: ''
+    isSearchProjects: '',
+    timer: null
   },
   onLoad(param) {
     if(param.type === 'projects') {
@@ -83,15 +84,23 @@ Page({
     })
     return array;
   },
-  searchProjects(event) {
+  handleInput(event) {
     var value = event.detail.value;
     this.setData({
       searchContent: value
     })
+    if(this.data.timer){
+      clearTimeout(this.data.timer)
+    }
+    this.setData({
+      timer: setTimeout(this.searchProjects, 1000)
+    })
+  },
+  searchProjects(event) {
     if(this.data.isSearchProjects) {
-      this.requestProjects(value);
+      this.requestProjects(this.data.searchContent);
     } else {
-      this.requestReservations(value);
+      this.requestReservations(this.data.searchContent);
     }
   },
   getProjectsPagination() {
@@ -188,8 +197,36 @@ Page({
     })
   },
   showDetail(event) {
+    var id = event.currentTarget.dataset.reservationId;
+    var currentProjectList;
+    this.data.reservationsList.forEach(item => {
+      if(item.id == id){
+        currentProjectList = item;
+        wx.setStorage({
+          key: 'currentProjectList',
+          data: currentProjectList
+        })
+      }
+    });
     wx.navigateTo({
-      url: "../detail/detail?id=" + event.currentTarget.dataset.reservationId
+      url: "../detail/detail"
+    })
+  },
+  openMap(event) {
+    wx.request({
+      method: "GET",
+      url: app.globalData.server + '/miniprogram/reservations/' + event.currentTarget.dataset.reservationId,
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success:(res) =>{
+        wx.openLocation({
+          latitude: res.data.latitude,
+          longitude: res.data.longitude,
+          name: res.data.project_name,
+          address: res.data.address
+        })
+      }
     })
   }
 })

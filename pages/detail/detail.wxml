@@ -9,7 +9,7 @@
       <text class="date">{{ reservation.date }}</text>
       <text class="time">{{ reservation.time }}</text>
     </view>
-    <view class="detail-address">{{ reservation.address }}</view>
+    <view class="detail-address" bindtap="openMap">{{ reservation.address }}</view>
     <view class="detail-user">
       <view class="user-information">
         <text>姓名</text>

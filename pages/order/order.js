@@ -14,7 +14,9 @@ Page({
       },
       success: (res) => {
         this.setData({
-          id: option.id
+          id: option.id,
+          name: res.data.tmp_name,
+          phone: res.data.tmp_tel
         })
         var stringMultiArray=this.data.stringMultiArray;
         var d = new Date;

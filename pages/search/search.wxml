@@ -5,7 +5,7 @@
            placeholder="请输入预约名称"
            focus="true"
            confirm-type="search"
-           bindinput="searchProjects"></input>
+           bindinput="handleInput"></input>
     <navigator open-type="navigateBack" class="search-cancel">取消</navigator>
   </view>
   <view class="search-body">
@@ -30,7 +30,7 @@
           <text class="reservation-date">{{ item.date }}</text>
           <text>{{ item.time }}</text>
         </view>
-        <view class="reservation-address">{{ item.address }}</view>
+        <view class="reservation-address" catchtap="openMap" data-reservation-id="{{ item.id }}">{{ item.address }}</view>
         <view class="reservation-user">
           <text>{{ item.name }}</text>
           <text>{{ item.tel }}</text>
