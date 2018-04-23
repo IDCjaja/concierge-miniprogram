@@ -35,6 +35,10 @@ page {
 .detail-address {
   padding-bottom:10px;
   border-bottom:1px solid #f1f1f1;
+  color: #0366d6;
+}
+.detail-address:hover {
+  text-decoration: underline;
 }
 .user-information {
   margin-bottom:10px;

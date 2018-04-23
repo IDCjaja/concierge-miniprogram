@@ -51,8 +51,38 @@ Page({
     })
   },
   showDetail(event) {
+    var id = event.currentTarget.dataset.reservationId;
+    var reservationInfo;
+    console.log(this.data.reservationsList)
+    this.data.reservationsList.forEach(item => {
+      if(item.id == id){
+        reservationInfo = item;
+        console.log(reservationInfo)
+        wx.setStorage({
+          key: 'reservationInfo',
+          data: reservationInfo
+        })
+      }
+    });
     wx.navigateTo({
-      url: "../detail/detail?id=" + event.currentTarget.dataset.reservationId
+      url: "../detail/detail"
+    })
+  },
+  openMap(event) {
+    wx.request({
+      method: "GET",
+      url: app.globalData.server + '/miniprogram/reservations/' + event.currentTarget.dataset.reservationId,
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success:(res) =>{
+        wx.openLocation({
+          latitude: res.data.latitude,
+          longitude: res.data.longitude,
+          name: res.data.project_name,
+          address: res.data.address
+        })
+      }
     })
   },
   onReachBottom() {

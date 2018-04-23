@@ -8,7 +8,11 @@
 <view>
   <text class="block-text">预约时间</text>
   <block wx:for="{{bookingTime}}" wx:key="bookingTime" wx:for-item="itemName">
-    <view class="time-item">{{itemName[0]}}, {{itemName[1][0].time}}</view>
+    <view class="time-item">{{itemName[0]}}
+      <text>{{itemName[1][0].time}}</text>
+      <text wx:if="{{itemName[1].length > 1}}">,{{itemName[1][1].time}}</text>
+      <text wx:if="{{itemName[1].length > 2}}">...</text>
+    </view>
   </block>
 </view>
 <view>

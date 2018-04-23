@@ -55,7 +55,7 @@ input {
   width: 35px;
   height: 35px;
   top: 8px;
-  left: 45px;
+  right: -20px;
 }
 .warning {
   color: red;

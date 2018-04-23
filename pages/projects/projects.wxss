@@ -42,6 +42,9 @@
   margin-bottom: 10px;
   color: blue;
 }
+.reservation-address:hover {
+  text-decoration: underline;
+}
 .reservation-user {
   display:flex;
   justify-content:space-between;
