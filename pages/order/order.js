@@ -3,7 +3,8 @@ const app = getApp()
 Page({
   data:{
     setTimr: false,
-    multiIndex: [0,0]
+    multiIndex: [0,0],
+    buttonDis: true
   },
   onLoad: function(option){
     wx.request({
@@ -18,9 +19,6 @@ Page({
           name: res.data.tmp_name,
           phone: res.data.tmp_tel
         })
-        var stringMultiArray=this.data.stringMultiArray;
-        var d = new Date;
-        var today = new Date(d.getFullYear (), d.getMonth (), d.getDate ());
         var dayArr = [];
         var timeArr = [];
         var arr = [];
@@ -36,9 +34,6 @@ Page({
         }
         multiArray = JSON.parse(res.data.time_table);
         multiArray.forEach(function(time_table){
-          var pdate = time_table.date;
-          var temp = pdate.match(/\d+/g);
-          var day = new Date(temp[0],parseInt(temp[1])-1,temp[2])
           dayArr.push(time_table.date + ' ' + WEEKDAY_MAP[time_table.wday])
           time_table.table.forEach(function(item){
             if(item.remain == null){
@@ -57,7 +52,8 @@ Page({
           dayArr: dayArr,
           arr: arr,
           requestDate: requestDate,
-          requestTime: requestTime
+          requestTime: requestTime,
+          selectValue: dayArr[0]+','+arr[0][0]
         })
       }
     })
@@ -100,7 +96,7 @@ Page({
         data: {
           tel: that.data.phone
         },
-        fail :(res) => {
+        success :(res) => {
           if(res.statusCode == 400 || res.statusCode == 422){
             wx.showToast({
               title:'发送验证码失败',
@@ -130,15 +126,31 @@ Page({
     this.setData({
       code: code
     })
+    if(code == ""|| code == null){
+      this.setData({
+        buttonDis:true
+      })
+    }else{
+      this.setData({
+        buttonDis: false
+      })
+    }
   },
-  regist: function(){
-    var that = this;
-    var name = that.data.name;
-    var code = that.data.code
+  order: function(){
+    var name = this.data.name;
+    var code = this.data.code;
+    var remain = this.data.selectValue.slice(30,31);
     if(name == ''|| name == null){
       wx.showToast({
-      title:'用户名不为空',
-      icon: 'none'
+        title:'用户名不为空',
+        icon: 'none'
+      })
+      return;
+    }else if(remain == 0){
+      wx.showToast({
+        title:'名额不足',
+        icon: 'none',
+        duration: 2000
       })
       return;
     }else{
@@ -149,12 +161,12 @@ Page({
           'Authorization': app.globalData.token
         },
         data:{
-          code: that.data.code,
-          project_id: that.data.id,
-          name: that.data.name,
-          tel: that.data.phone,
-          date: that.data.requestDate,
-          time: that.data.requestTime
+          code: this.data.code,
+          project_id: this.data.id,
+          name: this.data.name,
+          tel: this.data.phone,
+          date: this.data.requestDate,
+          time: this.data.requestTime
         },
         success: (res) =>{
           if(res.statusCode == 201){
@@ -167,30 +179,22 @@ Page({
                 })
               }
             })
-          }
-        },
-        fail: (res) =>{
-          if(res.statusCode == 422){
+          }else if(res.statusCode == 422){
             wx.showToast({
               title: '验证码错误',
               icon: 'none',
               duration: 2000
             })
-          }else if(res.statusCode == 400){
+          }else if(res.statusCode == 400 ){
             wx.showToast({
               title: '发送验证码失败',
               icon: 'none',
               duration: 2000
             })
           }
-        }
+        },
       })
     }
-  },
-  bindMultiPickerChange: function (e) {
-    this.setData({
-      multiIndex: e.detail.value
-    })
   },
   bindMultiPickerColumnChange: function(e){
     var that = this;
@@ -205,18 +209,36 @@ Page({
     })
     if(e.detail.column == 0){
       var multiArray = that.data.multiArray;
-      var multiIndex = that.data.multiIndex;
-      var pickerDateValue = multiArray[0][multiIndex[0]];
-      var pickerTimeValue = multiArray[1][multiIndex[1]];
-      var requestDate = pickerDateValue.slice(0,11);
-      var requestTime = pickerTimeValue.slice(0,11);
+      var multiIndex = [data.multiIndex[0],0];
+      var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
+      var requestTime = multiArray[1][multiIndex[1]].slice(0,11);
       this.setData({
-        multiIndex: [data.multiIndex[0],0],
-        pickerDateValue: pickerDateValue,
-        pickerTimeValue: pickerTimeValue,
+        multiIndex: multiIndex,
+        // pickerDateValue: pickerDateValue,
+        // pickerTimeValue: pickerTimeValue,
         requestDate: requestDate,
         requestTime: requestTime
       })
+    }else{
+      this.setData({
+        multiIndex: data.multiIndex,
+      })
+    }
+  },
+  bindMultiPickerChange: function (e) {
+    var remain = this.data.multiArray[1][this.data.multiIndex[1]].slice(16,17);
+    if(remain !=0){
+      this.setData({
+        multiIndex: e.detail.value,
+        selectValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]]
+      })
+    }else{
+      wx.showToast({
+        title: '名额不足',
+        icon: 'none',
+        duration: 2000
+      })
+      return
     }
   }
 })

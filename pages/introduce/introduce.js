@@ -2,7 +2,7 @@ const app = getApp()
 
 Page({
   data: {
-    isFull: false,
+    
   },
   WEEKDAY_MAP : {
     "Sun":"周日",
@@ -39,6 +39,7 @@ Page({
           imageUrl: app.globalData.server + res.data.cover,
           title: res.data.name,
           id: option.id,
+          isFull: res.data.full,
           address: res.data.address,
           description: res.data.description,
           bookingTime: keyArr,

@@ -16,9 +16,34 @@ Page({
     hiddenDropdown: true,
     loading: true,
     nomoreData: true,
+    refresh: true,
     pageIndex: 1,
     projects: [],
     currentPageProjects: []
+  },
+  refreshData(){
+    wx.request({
+      url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success: response => {
+        response.data.projects.forEach(function(item) {
+          item.cover = app.globalData.server + item.cover;
+        })
+        this.setData({
+          projects: response.data.projects,
+          pageIndex: 1,
+          currentPageProjects: response.data.projects
+        })
+        setTimeout(()=>{
+          wx.stopPullDownRefresh()
+          this.setData({
+            refresh: true
+          })
+        },1000)
+      }
+    })
   },
   onShow() {
     wx.login({
@@ -38,22 +63,7 @@ Page({
                   longitude: resData.longitude,
                   latitude: resData.latitude
                 })
-                wx.request({
-                  url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
-                  header: {
-                    'Authorization': app.globalData.token
-                  },
-                  success: response => {
-                    response.data.projects.forEach(function(item) {
-                      item.cover = app.globalData.server + item.cover;
-                    })
-                    this.setData({
-                      projects: response.data.projects,
-                      pageIndex: 1,
-                      currentPageProjects: response.data.projects
-                    })
-                  }
-                })
+                this.refreshData();
               }
             });
           }
@@ -149,5 +159,11 @@ Page({
         })
       },1000)
     }
+  },
+  onPullDownRefresh(){
+    this.setData({
+      refresh: false
+    })
+    this.refreshData();
   }
 })

@@ -2,26 +2,35 @@
   <view class="detail-header">预约详情</view>
   <view class="detail-body">
     <view class="detail-name">
-      <text class="name">{{ reservation.project_name }}</text>
-      <text class="state">{{ reservation.state }}</text>
+      <text class="name">{{reservation.project_name}}</text>
+      <text class="state">{{reservation.state}}</text>
     </view>
     <view class="detail-datetime">
-      <text class="date">{{ reservation.date }}</text>
-      <text class="time">{{ reservation.time }}</text>
+      <text class="date">{{reservation.date}}</text>
+      <text class="time">{{reservation.time}}</text>
     </view>
-    <view class="detail-address" bindtap="openMap">{{ reservation.address }}</view>
+    <view class="detail-address" bindtap="openMap">{{reservation.address}}</view>
     <view class="detail-user">
       <view class="user-information">
         <text>姓名</text>
-        <text>{{ reservation.name }}</text>
+        <text>{{reservation.name}}</text>
       </view>
       <view class="user-information">
         <text>手机号码</text>
-        <text>{{ reservation.tel }}</text>
+        <text>{{reservation.tel}}</text>
+      </view>
+      <view class="user-information" wx:if="{{reservation.state === '已拒绝'}}">
+        <text>拒绝意见</text>
+        <text>{{reservation.remark}}</text>
+      </view>
+      <view class="user-information" wx:elif="{{reservation.state === '已取消' && reservation.remark}}">
+        <text>取消意见</text>
+        <text>{{reservation.remark}}</text>
       </view>
     </view>
   </view>
   <view class="detail-footer">
-    <button type="primary">取消预约</button>
+    <button type="primary" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
+    <button type="primary" hidden="{{orderAgain}}" bindtap="orderAgain">再次预约</button>
   </view>
 </view>
