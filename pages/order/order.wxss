@@ -3,14 +3,14 @@ page {
   background-color: #f5f5f5;
 
 }
-label.required {
+text.required {
   padding: 10px;
 }
-label.required::before {
+text.required::before {
   content:'*';
   color: red;
 }
-label.block,text.block {
+text.block,text.block {
   display: block;
   margin: 5px;
 }
@@ -29,7 +29,7 @@ input {
   flex: auto;
   margin: 0;
 }
-.code-box label {
+.code-box text {
   color:  #0366d6;
   padding:0 10px;
   white-space: nowrap;
@@ -39,23 +39,25 @@ input {
   background-color: #fff;
   font-size: 14px;
 }
-.code-box label:hover {
+.code-box text:hover {
   color: #0652a8;
 }
-.code-box label.disabled {
+.code-box text.disabled {
   color: #ccc;
 }
 .picker-text {
+  width: 100%;
   background: #fff;
   line-height: 42px;
   padding: 0 10px;
+  position: absolute;
 }
 .picker-icon {
   position: relative;
   width: 35px;
   height: 35px;
   top: 8px;
-  right: -20px;
+  right: -30px;
 }
 .warning {
   color: red;
@@ -65,13 +67,6 @@ input {
   width: 100%;
   position: absolute;
   bottom: 0;
-}
-.submit-btn {
-  width: 100%;
-  color: #fff;
-  background-color: #0366d6;
-  font-weight: normal;
-  display: block;
 }
 .deep {
   background-color: #0652a8;

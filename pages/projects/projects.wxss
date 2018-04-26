@@ -25,8 +25,11 @@
 .reservations-item {
   background-color:rgba(242, 242, 242, 1);
   margin-top:10px;
-  padding:5px;
+  padding:10px;
   position: relative;
+}
+.reservations-item view {
+  line-height: 1.5;
 }
 .reservation-name {
   margin-bottom: 10px;

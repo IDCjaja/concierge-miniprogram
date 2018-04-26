@@ -3,7 +3,11 @@ const app = getApp();
 Page({
   STATE_TEXT: {
     success: '已成功',
-    wait: '待审核'
+    wait: '待审核',
+    overtime: '已过期',
+    refused: '已拒绝',
+    checked: '已核销',
+    cancelled: '已取消'
   },
   data: {
     tabList: [
@@ -14,10 +18,11 @@ Page({
     reservationsList: [],
     loading: true,
     nomoreData: true,
+    refresh: true,
     currentPageReservations: [],
     pageIndex: 1
   },
-  onShow() {
+  refreshData(){
     wx.request({
       url: app.globalData.server + '/miniprogram/reservations',
       header: {
@@ -29,8 +34,15 @@ Page({
           pageIndex: 1,
           currentPageReservations: this.formatReservations(res.data.reservations)
         })
+        wx.stopPullDownRefresh()
+        this.setData({
+          refresh: true
+        })
       }
     })
+  },
+  onShow() {
+    this.refreshData()
   },
   changeState(event) {
     this.setData({
@@ -53,11 +65,9 @@ Page({
   showDetail(event) {
     var id = event.currentTarget.dataset.reservationId;
     var reservationInfo;
-    console.log(this.data.reservationsList)
     this.data.reservationsList.forEach(item => {
       if(item.id == id){
         reservationInfo = item;
-        console.log(reservationInfo)
         wx.setStorage({
           key: 'reservationInfo',
           data: reservationInfo
@@ -107,13 +117,11 @@ Page({
               reservationsList: this.data.reservationsList.concat(this.formatReservations(res.data.reservations))
             });
           } else {
-            setTimeout(()=>{
-              this.setData({
-                loading: true,
-                nomoreData: false,
-                pageIndex: this.data.pageIndex - 1
-              })
-            },1000)
+            this.setData({
+              loading: true,
+              nomoreData: false,
+              pageIndex: this.data.pageIndex - 1
+            })
           }
         }
       });
@@ -125,5 +133,11 @@ Page({
         })
       },1000)
     }
+  },
+  onPullDownRefresh(){
+    this.setData({
+      refresh: false
+    })
+    this.refreshData();
   }
 })

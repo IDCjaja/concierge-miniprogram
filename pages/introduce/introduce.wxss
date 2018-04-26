@@ -39,15 +39,6 @@ text {
   font-size: 12px;
   color: red;
 }
-.submit-btn {
-  width: 100%;
-  color: #fff;
-  background-color: #0366d6;
-  font-weight: normal;
-  position: fixed;
-  bottom: 0;
-  display: block;
-}
 .deep {
   background-color: #0652a8;
 }

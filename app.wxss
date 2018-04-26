@@ -4,13 +4,19 @@ page {
 .projects-loading {
   text-align: center;
   line-height: 25px;
+  color: #ccc;
 }
 .projects-loading-complete {
   text-align: center;
   line-height: 25px;
 }
-
-.projects-loading:before{
+.pullDownRefresh {
+  color: #ccc;
+  font-size: 14px;
+  text-align: center;
+  line-height: 25px;
+}
+.projects-loading:before,.pullDownRefresh:before{
   display: inline-block;
   margin-right: 5px;
   vertical-align: middle;
@@ -28,4 +34,14 @@ page {
   to {
     -webkit-transform: rotate(360deg);
   }
+}
+input {
+  font-weight: blod;
+}
+.submit-btn {
+  width: 100%;
+  color: #fff;
+  background-color: #0366d6;
+  font-weight: normal;
+  display: block;
 }
