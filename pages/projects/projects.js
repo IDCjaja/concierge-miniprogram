@@ -34,12 +34,10 @@ Page({
           pageIndex: 1,
           currentPageReservations: this.formatReservations(res.data.reservations)
         })
-        setTimeout(()=>{
-          wx.stopPullDownRefresh()
-          this.setData({
-            refresh: true
-          })
-        },1000)
+        wx.stopPullDownRefresh()
+        this.setData({
+          refresh: true
+        })
       }
     })
   },
@@ -119,13 +117,11 @@ Page({
               reservationsList: this.data.reservationsList.concat(this.formatReservations(res.data.reservations))
             });
           } else {
-            setTimeout(()=>{
-              this.setData({
-                loading: true,
-                nomoreData: false,
-                pageIndex: this.data.pageIndex - 1
-              })
-            },1000)
+            this.setData({
+              loading: true,
+              nomoreData: false,
+              pageIndex: this.data.pageIndex - 1
+            })
           }
         }
       });

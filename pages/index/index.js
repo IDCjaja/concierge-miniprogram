@@ -141,13 +141,11 @@ Page({
               projects: this.data.projects.concat(res.data.projects)
             });
           } else {
-            setTimeout(()=>{
-              this.setData({
-                loading: true,
-                nomoreData: false,
-                pageIndex: this.data.pageIndex - 1
-              })
-            },1000)
+            this.setData({
+              loading: true,
+              nomoreData: false,
+              pageIndex: this.data.pageIndex - 1
+            })
           }
         }
       });

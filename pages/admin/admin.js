@@ -29,12 +29,10 @@ Page({
           pageIndex: 1,
           currentPageProjects: res.data.projects,
         })
-        setTimeout(()=>{
-          wx.stopPullDownRefresh()
-          this.setData({
-            refresh: true
-          })
-        },1000)
+        wx.stopPullDownRefresh()
+        this.setData({
+          refresh: true
+        })
       }
     })
   },
@@ -67,13 +65,11 @@ Page({
               projects: this.data.projects.concat(res.data.projects)
             });
           } else {
-            setTimeout(()=>{
-              this.setData({
-                loading: true,
-                nomoreData: false,
-                pageIndex: this.data.pageIndex - 1
-              })
-            },1000)
+            this.setData({
+              loading: true,
+              nomoreData: false,
+              pageIndex: this.data.pageIndex - 1
+            })
           }
         }
       });
