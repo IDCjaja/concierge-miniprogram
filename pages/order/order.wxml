@@ -11,15 +11,15 @@
   <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
   <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
 </view>
-<view class="footer-button">
-  <button bindtap="order" hover-class="deep" disabled="{{buttonDis}}" class="submit-btn">提交预约</button>
-</view>
 <view class="section">
   <text class="required block">预约时间</text>
   <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcancel="bindMultiPickerCancel" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
     <view class="picker picker-text">
-      {{selectValue}}
+      <text class="picker-value">{{selectValue}}</text>
       <image class="picker-icon" src="../../images/time.png" />
     </view>
   </picker>
+</view>
+<view class="footer-button">
+  <button bindtap="order" hover-class="deep" disabled="{{buttonDis}}" class="submit-btn">提交预约</button>
 </view>

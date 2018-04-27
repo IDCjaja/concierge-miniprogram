@@ -49,15 +49,18 @@ input {
   width: 100%;
   background: #fff;
   line-height: 42px;
+  display: flex;
+  align-items: center;
+}
+.picker-value {
+  flex: auto;
   padding: 0 10px;
-  position: absolute;
 }
 .picker-icon {
-  position: relative;
   width: 35px;
   height: 35px;
-  top: 8px;
-  right: -30px;
+  text-align: right;
+  padding-right: 10px;
 }
 .warning {
   color: red;

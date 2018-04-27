@@ -1,9 +1,6 @@
 const app = getApp()
 
 Page({
-  data: {
-    
-  },
   WEEKDAY_MAP : {
     "Sun":"周日",
     "Mon":"周一",
@@ -58,14 +55,13 @@ Page({
     })
   },
   openMap: function () {
-    var that = this;
     wx.getLocation({
       success: function(res){
       wx.openLocation({
-        latitude : that.data.latitude,
-        longitude : that.data.longitude,
-        name: that.data.title,
-        address: that.data.address
+        latitude : this.data.latitude,
+        longitude : this.data.longitude,
+        name: this.data.title,
+        address: this.data.address
       })
       }
     })

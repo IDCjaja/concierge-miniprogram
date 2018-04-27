@@ -33,9 +33,8 @@ Page({
   },
   getCode: function(){
     var count = 60;
-    var that = this;
-    var phone = that.data.phone;
-    var name = that.data.name;
+    var phone = this.data.phone;
+    var name = this.data.name;
     if(name=="" || name==null){
       wx.showToast({
         title:'用户名不能为空',
@@ -75,7 +74,7 @@ Page({
           'Authorization': app.globalData.token
         },
         data: {
-          tel: that.data.phone
+          tel: this.data.phone
         },
         fail :(res) => {
           if(res.statusCode == 400 || res.statusCode == 422){
@@ -98,7 +97,6 @@ Page({
     }
   },
   regist: function(){
-    var that = this;
     wx.request({
       url:app.globalData.server + '/miniprogram/admin/login',
       method: 'POST',
@@ -106,9 +104,9 @@ Page({
         'Authorization': app.globalData.token
       },
       data: {
-        tel: that.data.phone,
-        code: that.data.code,
-        name: that.data.name
+        tel: this.data.phone,
+        code: this.data.code,
+        name: this.data.name
       },
       success: (res) => {
         if(res.statusCode == 200){
