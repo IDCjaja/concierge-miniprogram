@@ -4,20 +4,21 @@ Page({
   data:{
     setTimr: false,
     multiIndex: [0,0],
-    buttonDis: true
+    buttonDisabled: true,
+    code: '',
+    phone:''
   },
   onLoad: function(option){
-    wx.request({
-      method:'GET',
-      url:app.globalData.server + '/miniprogram/projects/'+option.id,
-      header: {
-        'Authorization': app.globalData.token
-      },
+    wx.getStorage({
+      key: 'project',
       success: (res) => {
         this.setData({
           id: option.id,
+          defaultName: res.data.tmp_name,
           name: res.data.tmp_name,
-          phone: res.data.tmp_tel
+          defaultPhone: res.data.tmp_tel,
+          phone: res.data.tmp_tel,
+          need_sms: res.data.need_sms
         })
         var dayArr = [];
         var timeArr = [];
@@ -55,14 +56,24 @@ Page({
           requestTime: requestTime,
           selectValue: dayArr[0]+','+arr[0][0]
         })
+
+        if(res.data.need_sms == true){
+          this.setData({
+            codeBox: false
+          })
+        }else if(res.data.need_sms == false){
+          this.setData({
+            codeBox: true,
+            buttonDisabled: false
+          })
+        }
       }
     })
   },
   getCode: function(){
-    var that = this;
-    var phone = that.data.phone;
+    var phone = this.data.phone;
     var count = 60;
-    if(!(/^1[34578]\d{9}$/.test(phone)) || phone=="" || phone==null){
+    if(!(/^1[34578]\d{9}$/.test(phone))){
       wx.showToast({
         title:'手机号格式错误',
         icon:'none'
@@ -88,13 +99,13 @@ Page({
         },1000);
       }
       wx.request({
-        url: app.globalData.server + '/miniprogram/projects/'+ that.data.id +'/code',
+        url: app.globalData.server + '/miniprogram/projects/'+ this.data.id +'/code',
         method:'POST',
         header: {
           'Authorization': app.globalData.token
         },
         data: {
-          tel: that.data.phone
+          tel: this.data.phone
         },
         success :(res) => {
           if(res.statusCode == 400 || res.statusCode == 422){
@@ -109,6 +120,13 @@ Page({
       })
     }
   },
+  validate(){
+    if(this.data.code.length === 6 && (/^1[34578]\d{9}$/.test(this.data.phone))){
+      return true;
+    }else{
+      return false
+    }
+  },
   bindNameChange: function(e){
     var name = e.detail.value;
     this.setData({
@@ -116,30 +134,42 @@ Page({
     })
   },
   bindPhoneChange: function(e){
-    var phone = e.detail.value;
     this.setData({
-      phone: phone
+      phone:e.detail.value
     })
+    if(this.data.need_sms){
+      this.setData({
+        buttonDisabled: !this.validate()
+      })
+    } else {
+      if(this.data.phone === this.data.defaultPhone) {
+        this.setData({
+          buttonDisabled: false,
+          codeBox: true
+        })
+      } else {
+        this.setData({
+          codeBox: false
+        })
+        this.setData({
+          buttonDisabled: !this.validate()
+        })
+      }
+    }
   },
   bindCodeChange: function(e){
     var code = e.detail.value;
     this.setData({
       code: code
     })
-    if(code == ""|| code == null){
-      this.setData({
-        buttonDis:true
-      })
-    }else{
-      this.setData({
-        buttonDis: false
-      })
-    }
+    this.setData({
+      buttonDisabled: !this.validate()      
+    })
   },
   order: function(){
     var name = this.data.name;
     var code = this.data.code;
-    var remain = this.data.selectValue.slice(30,31);
+    var remain = this.getRemain(this.data.selectValue);
     if(name == ''|| name == null){
       wx.showToast({
         title:'用户名不为空',
@@ -174,9 +204,11 @@ Page({
               title:'预约成功',
               duration: 1000,
               success: () => {
-                wx.reLaunch({
-                  url: "../projects/projects"
-                })
+                setTimeout(function() {
+                  wx.reLaunch({
+                    url: "../projects/projects"
+                  })
+                }, 1000)
               }
             })
           }else if(res.statusCode == 422){
@@ -197,7 +229,6 @@ Page({
     }
   },
   bindMultiPickerColumnChange: function(e){
-    var that = this;
     var data = {
       multiArray: this.data.multiArray,
       multiIndex: this.data.multiIndex
@@ -205,28 +236,31 @@ Page({
     data.multiIndex[e.detail.column] = e.detail.value;
     
     this.setData({
-      multiArray: [that.data.dayArr,that.data.arr[data.multiIndex[0]]]
+      multiArray: [this.data.dayArr,this.data.arr[data.multiIndex[0]]]
     })
+    var multiArray = this.data.multiArray;
     if(e.detail.column == 0){
-      var multiArray = that.data.multiArray;
       var multiIndex = [data.multiIndex[0],0];
       var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
       var requestTime = multiArray[1][multiIndex[1]].slice(0,11);
       this.setData({
         multiIndex: multiIndex,
-        // pickerDateValue: pickerDateValue,
-        // pickerTimeValue: pickerTimeValue,
         requestDate: requestDate,
         requestTime: requestTime
       })
     }else{
+      var requestDate = multiArray[0][data.multiIndex[0]].slice(0,11);
+      var requestTime = multiArray[1][data.multiIndex[1]].slice(0,11);
       this.setData({
         multiIndex: data.multiIndex,
+        requestDate: requestDate,
+        requestTime: requestTime
       })
     }
   },
   bindMultiPickerChange: function (e) {
-    var remain = this.data.multiArray[1][this.data.multiIndex[1]].slice(16,17);
+    var valueStr = this.data.multiArray[1][this.data.multiIndex[1]];
+    var remain = this.getRemain(valueStr);
     if(remain !=0){
       this.setData({
         multiIndex: e.detail.value,
@@ -240,5 +274,9 @@ Page({
       })
       return
     }
+  },
+  getRemain(valueStr){
+    var remain = valueStr.substring(valueStr.indexOf("(")+1,valueStr.indexOf(")")).slice(3,6);
+    return remain
   }
 })

@@ -6,14 +6,6 @@ Page({
     code: '',
     name: ''
   },
-  onLoad: function(){
-    var role = app.globalData.role;
-    if(role == 'manager'){
-      wx.navigateTo({
-        url: '../admin/admin'
-      })
-    }
-  },
   phoneBindChange: function(e){
     var phone = e.detail.value;
     this.setData({
@@ -49,24 +41,6 @@ Page({
       })
       return
     }else{
-      if(0 < count && count <= 60){
-        var timr = setInterval(() => {
-          if(count == 0){
-            this.setData({
-                count: 60,
-                setTimr: false
-            })
-              clearInterval(timr)
-              return count
-            }else{
-              count -=1;
-              this.setData({
-                count: count,
-                setTimr: true
-              })
-            }
-        },1000);
-      }
       wx.request({
         url: app.globalData.server + '/miniprogram/admin/code',
         method:'POST',
@@ -76,21 +50,38 @@ Page({
         data: {
           tel: this.data.phone
         },
-        fail :(res) => {
+        success :(res) => {
           if(res.statusCode == 400 || res.statusCode == 422){
             wx.showToast({
               title:'发送验证码失败',
               icon:'none',
               duration: 1000
             })
-            return
           }else if(res.statusCode == 403){
             wx.showToast({
               title:'手机号已注册',
               icon:'none',
               duration: 1000
             })
-            return
+          }else{
+            if(0 < count && count <= 60){
+              var timr = setInterval(() => {
+                if(count == 0){
+                  this.setData({
+                      count: 60,
+                      setTimr: false
+                  })
+                    clearInterval(timr)
+                    return count
+                  }else{
+                    count -=1;
+                    this.setData({
+                      count: count,
+                      setTimr: true
+                    })
+                  }
+              },1000);
+            }
           }
         }
       })
@@ -112,6 +103,27 @@ Page({
         if(res.statusCode == 200){
           wx.showToast({
             title:'注册成功',
+            icon:'none',
+            duration: 2000
+          })
+          wx.redirectTo({
+            url:'../admin/admin'
+          })
+        }else if(res.statusCode == 400){
+          wx.showToast({
+            title:'发送失败',
+            icon:'none',
+            duration: 2000
+          })
+        }else if(res.statusCode == 403){
+          wx.showToast({
+            title:'手机号已注册',
+            icon:'none',
+            duration: 2000
+          })
+        }else if(res.statusCode == 422){
+          wx.showToast({
+            title:'验证码错误',
             icon:'none',
             duration: 2000
           })

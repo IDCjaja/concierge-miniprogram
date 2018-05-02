@@ -7,7 +7,7 @@
     <image src="../../images/plus.png" class="createProject"/>
   </view>
   <view class="content">
-    <view class="project-title">预约项目2</view>
+    <view class="project-title">预约项目·{{projectsLength}}</view>
     <view class="project" wx:for="{{ projects }}"  data-project-id="{{ item.id }}">
       <image class="project-cover" src="{{ item.image }}" />
       <view class="project-name">{{ item.name }}

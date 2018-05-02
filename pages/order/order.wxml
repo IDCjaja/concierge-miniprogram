@@ -1,9 +1,9 @@
 <view>
   <text class="required block" >姓名</text>
-  <input type="text" bindinput="bindNameChange" value="{{name}}" placeholder-class="phstyle" placeholder="请输入预约人姓名" />
+  <input type="text" bindinput="bindNameChange" value="{{defaultName}}" placeholder="请输入预约人姓名" />
   <text class="required block">手机号码</text>
-  <input type="text"  bindinput="bindPhoneChange" value="{{phone}}" placeholder-class="phstyle" placeholder="请输入手机号"/>
-  <view class="code-box">
+  <input type="text"  bindinput="bindPhoneChange" value="{{defaultPhone}}" placeholder="请输入手机号"/>
+  <view class="code-box" hidden="{{codeBox}}">
     <input placeholder="请输入验证码" bindinput="bindCodeChange" value="{{code}}" placeholder-class="phstyle" />
     <text wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</text>
     <text wx:else bindtap="getCode">获取验证码</text>
@@ -21,5 +21,5 @@
   </picker>
 </view>
 <view class="footer-button">
-  <button bindtap="order" hover-class="deep" disabled="{{buttonDis}}" class="submit-btn">提交预约</button>
+  <button bindtap="order" hover-class="deep" disabled="{{buttonDisabled}}" class="submit-btn">提交预约</button>
 </view>

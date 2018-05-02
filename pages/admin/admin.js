@@ -1,4 +1,4 @@
-const app =getApp();
+const app = getApp();
 
 Page({
   data: {
@@ -28,6 +28,7 @@ Page({
           projects: res.data.projects,
           pageIndex: 1,
           currentPageProjects: res.data.projects,
+          projectsLength: res.data.projects.length
         })
         wx.stopPullDownRefresh()
         this.setData({
@@ -37,6 +38,12 @@ Page({
     })
   },
   onLoad(){
+    var role = app.globalData.role;
+    if(role == 'customer'){
+      wx.navigateTo({
+        url: '../regist/regist'
+      })
+    }
     this.refreshData();
   },
   onReachBottom() {

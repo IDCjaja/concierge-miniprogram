@@ -51,19 +51,19 @@ Page({
             latitude: res.data.latitude,
           }]
         })
+        wx.setStorage({
+          key: 'project',
+          data: res.data
+        })
       }
     })
   },
   openMap: function () {
-    wx.getLocation({
-      success: function(res){
-      wx.openLocation({
-        latitude : this.data.latitude,
-        longitude : this.data.longitude,
-        name: this.data.title,
-        address: this.data.address
-      })
-      }
+    wx.openLocation({
+      latitude : this.data.latitude,
+      longitude : this.data.longitude,
+      name: this.data.title,
+      address: this.data.address
     })
   },
   openOrder: function (event) {

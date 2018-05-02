@@ -42,24 +42,39 @@ Page({
     })
   },
   orderCancel(){
-    wx.request({
-      url: app.globalData.server + '/miniprogram/reservations/'+ this.data.id +'/cancel',
-      method: 'POST',
-      header: {
-        'Authorization': app.globalData.token
-      },
+    wx.showModal({
+      title:'确认取消',
+      content:'是否取消预约？',
       success: res => {
-        if(res.statusCode == 201){
-          wx.showToast({
-            title: '已取消',
-            icon: 'success',
-            duration: 2000
-          })
-        }else if(res.statusCode == 401 || res.statusCode == 403){
-          wx.showToast({
-            title: '没有权限',
-            icon: 'none',
-            duration: 2000
+        if(res.confirm){
+          wx.request({
+            url: app.globalData.server + '/miniprogram/reservations/'+ this.data.id +'/cancel',
+            method: 'POST',
+            header: {
+              'Authorization': app.globalData.token
+            },
+            success: response => {
+              if(response.statusCode == 201){
+                wx.showToast({
+                  title: '已取消',
+                  icon: 'success',
+                  duration: 1500,
+                  success: () => {
+                    setTimeout(function(){
+                      wx.switchTab({
+                        url:'../projects/projects'
+                      })
+                    }, 1500)
+                  }
+                })
+              }else if(response.statusCode == 401 || response.statusCode == 403){
+                wx.showToast({
+                  title: '没有权限',
+                  icon: 'none',
+                  duration: 2000
+                })
+              }
+            }
           })
         }
       }

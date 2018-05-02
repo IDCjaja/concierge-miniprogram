@@ -6,7 +6,7 @@ view {
   padding: 10px;
 }
 .last-view {
-  margin-bottom: 46px;
+  margin-bottom: 26px;
 }
 text {
   line-height: 2;
@@ -27,7 +27,7 @@ text {
   text-decoration: underline;
 }
 .time-item {
-  padding: 10px 0;
+  padding: 0;
 }
 .time-item text:first-child {
   margin-left: 10px;
@@ -38,6 +38,10 @@ text {
 .warning-text {
   font-size: 12px;
   color: red;
+}
+.submit-btn {
+  display: fixed;
+  bottom: 0;
 }
 .deep {
   background-color: #0652a8;
