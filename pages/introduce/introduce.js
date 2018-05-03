@@ -1,7 +1,7 @@
 const app = getApp()
 
 Page({
-  WEEKDAY_MAP : {
+  WEEKDAY_MAP: {
     "Sun":"周日",
     "Mon":"周一",
     "Tues":"周二",
@@ -13,6 +13,9 @@ Page({
     "Holiday":"节假日"
     },
   onLoad: function (option) {
+    this.setData({
+      mask: false
+    })
     wx.request({
       method: "GET",
       url: app.globalData.server + '/miniprogram/projects/' + option.id,
@@ -49,11 +52,12 @@ Page({
             height: 25,
             longitude:res.data.longitude,
             latitude: res.data.latitude,
-          }]
+          }],
+          mask: true
         })
         wx.setStorage({
           key: 'project',
-          data: res.data
+          data: res.data,
         })
       }
     })

@@ -29,7 +29,11 @@ text {
 .time-item {
   padding: 0;
 }
-.time-item text:first-child {
+.time-item .date-text {
+  width: 65px;
+  display: inline-block;
+}
+.time-item text:nth-child(2) {
   margin-left: 10px;
 }
 .time-item text {
@@ -40,7 +44,7 @@ text {
   color: red;
 }
 .submit-btn {
-  display: fixed;
+  position: fixed;
   bottom: 0;
 }
 .deep {

@@ -5,6 +5,7 @@ Page({
     setTimr: false,
     multiIndex: [0,0],
     buttonDisabled: true,
+    flag: true,
     code: '',
     phone:''
   },
@@ -183,7 +184,10 @@ Page({
         duration: 2000
       })
       return;
-    }else{
+    }else if(this.data.flag == true){
+      this.setData({
+        flag: false
+      })
       wx.request({
         url: app.globalData.server + '/miniprogram/reservations',
         method: 'POST',
@@ -224,6 +228,9 @@ Page({
               duration: 2000
             })
           }
+          this.setData({
+            flag: true
+          })
         },
       })
     }

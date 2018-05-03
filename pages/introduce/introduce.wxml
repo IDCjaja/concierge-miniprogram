@@ -1,3 +1,6 @@
+<view class="laoding-mask" hidden="{{mask}}">
+  <image src="http://p1ctmsz1g.bkt.clouddn.com/loadingBackground.gif"></image>
+</view>
 <view>
   <image src="{{imageUrl}}" class="introduce-image" />
 </view>
@@ -8,7 +11,8 @@
 <view>
   <text class="block-text">预约时间</text>
   <block wx:for="{{bookingTime}}" wx:key="bookingTime" wx:for-item="itemName">
-    <view class="time-item">{{itemName[0]}}
+    <view class="time-item">
+      <text class="date-text">{{itemName[0]}}</text>
       <text>{{itemName[1][0].time}}</text>
       <text wx:if="{{itemName[1].length > 1}}">,{{itemName[1][1].time}}</text>
       <text wx:if="{{itemName[1].length > 2}}">...</text>

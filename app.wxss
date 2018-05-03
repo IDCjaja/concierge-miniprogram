@@ -1,6 +1,19 @@
 page {
   font-size: 14px;
 }
+.laoding-mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 1s;
+}
 .projects-loading {
   text-align: center;
   line-height: 25px;
@@ -44,4 +57,5 @@ input {
   background-color: #0366d6;
   font-weight: normal;
   display: block;
+  z-index: 2;
 }
