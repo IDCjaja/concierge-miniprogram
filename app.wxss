@@ -1,7 +1,7 @@
 page {
   font-size: 14px;
 }
-.laoding-mask {
+.loading-mask {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -13,6 +13,10 @@ page {
   justify-content: center;
   align-items: center;
   transition: all 1s;
+}
+.loading-mask image {
+  width: 120px;
+  height: 15px;
 }
 .projects-loading {
   text-align: center;

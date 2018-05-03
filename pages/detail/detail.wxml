@@ -29,8 +29,8 @@
       </view>
     </view>
   </view>
-  <view class="detail-footer">
-    <button type="primary" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
-    <button type="primary" hidden="{{orderAgain}}" bindtap="orderAgain">再次预约</button>
-  </view>
+</view>
+<view class="detail-footer">
+  <button type="primary" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
+  <button type="primary" hidden="{{orderAgain}}" bindtap="orderAgain">再次预约</button>
 </view>

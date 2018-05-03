@@ -1,5 +1,5 @@
-<view class="laoding-mask" hidden="{{mask}}">
-  <image src="http://p1ctmsz1g.bkt.clouddn.com/loadingBackground.gif"></image>
+<view class="loading-mask" hidden="{{mask}}">
+  <image src="http://p1ctmsz1g.bkt.clouddn.com/colorLoading.gif"></image>
 </view>
 <view>
   <image src="{{imageUrl}}" class="introduce-image" />
