@@ -15,8 +15,8 @@ page {
   transition: all 1s;
 }
 .loading-mask image {
-  width: 120px;
-  height: 15px;
+  width: 30px;
+  height: 30px;
 }
 .projects-loading {
   text-align: center;

@@ -103,10 +103,10 @@ Page({
         if(res.statusCode == 200){
           wx.showToast({
             title:'注册成功',
-            icon:'none',
             duration: 2000
           })
-          wx.redirectTo({
+          app.globalData.role = res.data.role
+          wx.switchTab({
             url:'../admin/admin'
           })
         }else if(res.statusCode == 400){

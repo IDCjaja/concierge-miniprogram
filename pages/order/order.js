@@ -177,7 +177,7 @@ Page({
         icon: 'none'
       })
       return;
-    }else if(remain == 0){
+    }else if(remain === 0){
       wx.showToast({
         title:'名额不足',
         icon: 'none',
@@ -273,7 +273,7 @@ Page({
         multiIndex: e.detail.value,
         selectValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]]
       })
-    }else{
+    }else if(remain === 0){
       wx.showToast({
         title: '名额不足',
         icon: 'none',
@@ -283,7 +283,14 @@ Page({
     }
   },
   getRemain(valueStr){
-    var remain = valueStr.substring(valueStr.indexOf("(")+1,valueStr.indexOf(")")).slice(3,6);
+    var value = valueStr.substring(valueStr.indexOf("(")+1,valueStr.indexOf(")")).trim();
+    console.log(value)
+    if(value !="无限"){
+      var remain = value.slice(2,6)
+    } else if(value == "无限") {
+      var remain = value;
+    }
+    console.log(remain)
     return remain
   }
 })
