@@ -51,3 +51,6 @@ page {
   width:100%;
   bottom:5px;
 }
+.detail-footer .warning-text {
+  padding: 10px;
+}

@@ -17,11 +17,6 @@ Page({
             orderAgain: false,
             orderCancel: true
           })
-        }else{
-          this.setData({
-            orderAgain: true,
-            orderCancel: false
-          })
           if(res.data.project_state == "open"){
             this.setData({
               canOrder: false,
@@ -33,6 +28,11 @@ Page({
               open: true
             })
           }
+        }else{
+          this.setData({
+            orderAgain: true,
+            orderCancel: false
+          })
         }
         this.setData({
           reservation: res.data,

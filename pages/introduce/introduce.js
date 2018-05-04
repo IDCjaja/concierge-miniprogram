@@ -23,7 +23,6 @@ Page({
         'Authorization': app.globalData.token
       },
       success: (res) => {
-        console.log(res)
         var json = res.data.time_state;
         var keyArr = [];
         var keyValue = [];

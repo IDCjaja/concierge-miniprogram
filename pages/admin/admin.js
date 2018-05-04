@@ -11,7 +11,7 @@ Page({
   },
   STATE_TEXT: {
     open: '开启',
-    close: '暂停'
+    pause: '暂停'
   },
   refreshData(){
     wx.request({
@@ -25,6 +25,7 @@ Page({
           item.state = this.STATE_TEXT[item.state]
         });
         this.setData({
+          count: res.data.count,
           projects: res.data.projects,
           pageIndex: 1,
           currentPageProjects: res.data.projects,
