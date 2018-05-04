@@ -39,7 +39,7 @@ Page({
           dayArr.push(time_table.date + ' ' + WEEKDAY_MAP[time_table.wday])
           time_table.table.forEach(function(item){
             if(item.remain == null){
-              timeArr.push(item.time+' ( 无限 )')
+              timeArr.push(item.time+' ( 无限制 )')
             }else{
               timeArr.push(item.time+' (剩余 '+item.remain+' )')
             }
@@ -129,9 +129,8 @@ Page({
     }
   },
   bindNameChange: function(e){
-    var name = e.detail.value;
     this.setData({
-      name: name
+      name: e.detail.value
     })
   },
   bindPhoneChange: function(e){
@@ -159,9 +158,8 @@ Page({
     }
   },
   bindCodeChange: function(e){
-    var code = e.detail.value;
     this.setData({
-      code: code
+      code: e.detail.value
     })
     this.setData({
       buttonDisabled: !this.validate()      
@@ -170,7 +168,7 @@ Page({
   order: function(){
     var name = this.data.name;
     var code = this.data.code;
-    var remain = this.getRemain(this.data.selectValue);
+    var remain = Number(this.getRemain(this.data.selectValue));
     if(name == ''|| name == null){
       wx.showToast({
         title:'用户名不为空',
@@ -236,38 +234,28 @@ Page({
     }
   },
   bindMultiPickerColumnChange: function(e){
-    var data = {
-      multiArray: this.data.multiArray,
-      multiIndex: this.data.multiIndex
-    };
-    data.multiIndex[e.detail.column] = e.detail.value;
-    
+    var multiIndex = this.data.multiIndex
+    multiIndex[e.detail.column] = e.detail.value;
     this.setData({
-      multiArray: [this.data.dayArr,this.data.arr[data.multiIndex[0]]]
+      multiArray: [this.data.dayArr,this.data.arr[multiIndex[0]]]
     })
     var multiArray = this.data.multiArray;
     if(e.detail.column == 0){
-      var multiIndex = [data.multiIndex[0],0];
-      var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
-      var requestTime = multiArray[1][multiIndex[1]].slice(0,11);
-      this.setData({
-        multiIndex: multiIndex,
-        requestDate: requestDate,
-        requestTime: requestTime
-      })
+      var multiIndex = [multiIndex[0],0];
     }else{
-      var requestDate = multiArray[0][data.multiIndex[0]].slice(0,11);
-      var requestTime = multiArray[1][data.multiIndex[1]].slice(0,11);
-      this.setData({
-        multiIndex: data.multiIndex,
-        requestDate: requestDate,
-        requestTime: requestTime
-      })
+      var multiIndex = multiIndex;
     }
+    var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
+    var requestTime = multiArray[1][multiIndex[1]].slice(0,11);
+    this.setData({
+      multiIndex: multiIndex,
+      requestDate: requestDate,
+      requestTime: requestTime
+    })
   },
   bindMultiPickerChange: function (e) {
     var valueStr = this.data.multiArray[1][this.data.multiIndex[1]];
-    var remain = this.getRemain(valueStr);
+    var remain = Number(this.getRemain(valueStr));
     if(remain !=0){
       this.setData({
         multiIndex: e.detail.value,
@@ -284,13 +272,11 @@ Page({
   },
   getRemain(valueStr){
     var value = valueStr.substring(valueStr.indexOf("(")+1,valueStr.indexOf(")")).trim();
-    console.log(value)
-    if(value !="无限"){
+    if(value !="无限制"){
       var remain = value.slice(2,6)
-    } else if(value == "无限") {
+    } else if(value == "无限制") {
       var remain = value;
     }
-    console.log(remain)
     return remain
   }
 })

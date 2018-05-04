@@ -23,9 +23,10 @@ Page({
         'Authorization': app.globalData.token
       },
       success: (res) => {
+        console.log(res)
         var json = res.data.time_state;
-        var keyArr = new Array;
-        var keyValue = new Array;
+        var keyArr = [];
+        var keyValue = [];
         var n;
         Object.keys(json).forEach(key => {
           if(json[key].length > 0 ){

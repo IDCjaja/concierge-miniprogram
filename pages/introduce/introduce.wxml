@@ -1,5 +1,7 @@
 <view class="loading-mask" hidden="{{mask}}">
-  <image src="http://p1ctmsz1g.bkt.clouddn.com/spinner.gif"></image>
+  <view class="box">
+    <view class="loader"></view>
+  </view>
 </view>
 <view>
   <image src="{{imageUrl}}" class="introduce-image" />

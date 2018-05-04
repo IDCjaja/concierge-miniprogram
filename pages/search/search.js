@@ -206,7 +206,7 @@ Page({
       if(item.id == id){
         currentProjectList = item;
         wx.setStorage({
-          key: 'currentProjectList',
+          key: 'reservationInfo',
           data: currentProjectList
         })
       }

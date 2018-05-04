@@ -6,6 +6,9 @@ Page({
     reservation: {}
   },
   onLoad(options) {
+    this.setData({
+      mask: false
+    })
     wx.getStorage({
       key: 'reservationInfo',
       success: (res) => {
@@ -19,11 +22,23 @@ Page({
             orderAgain: true,
             orderCancel: false
           })
+          if(res.data.project_state == "open"){
+            this.setData({
+              canOrder: false,
+              open: false
+            })
+          }else{
+            this.setData({
+              canOrder: true,
+              open: true
+            })
+          }
         }
         this.setData({
           reservation: res.data,
           project_id: res.data.project_id,
-          id: res.data.id
+          id: res.data.id,
+          mask: true
         })
       }
     })

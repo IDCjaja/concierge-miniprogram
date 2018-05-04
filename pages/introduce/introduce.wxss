@@ -13,9 +13,6 @@ text {
   font-size: 14px;
   font-weight: normal;
 }
-.block-text {
-  display: block;
-}
 .introduce-title {
   font-size: 18px;
   font-weight: 400;
@@ -39,10 +36,7 @@ text {
 .time-item text {
   font-size: 16px;
 }
-.warning-text {
-  font-size: 12px;
-  color: red;
-}
+
 .submit-btn {
   position: fixed;
   bottom: 0;
