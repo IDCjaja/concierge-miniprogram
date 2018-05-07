@@ -41,6 +41,7 @@ Page({
     })
   },
   onShow() {
+    app.globalData.flag = true
     this.refreshData()
   },
   changeState(event) {

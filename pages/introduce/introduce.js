@@ -46,13 +46,6 @@ Page({
           longitude:res.data.longitude,
           latitude: res.data.latitude,
           address: res.data.address,
-          markers:[{
-            id:1,
-            width: 25,
-            height: 25,
-            longitude:res.data.longitude,
-            latitude: res.data.latitude,
-          }],
           mask: true
         })
         wx.setStorage({

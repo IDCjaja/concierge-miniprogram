@@ -1,15 +1,15 @@
-const app = getApp()
+var app = getApp()
 
 Page({
   data:{
     setTimr: false,
     multiIndex: [0,0],
     buttonDisabled: true,
-    flag: true,
     code: '',
     phone:''
   },
   onLoad: function(option){
+    app.globalData.flag = true;
     wx.getStorage({
       key: 'project',
       success: (res) => {
@@ -182,10 +182,8 @@ Page({
         duration: 2000
       })
       return;
-    }else if(this.data.flag == true){
-      this.setData({
-        flag: false
-      })
+    }else if(app.globalData.flag == true){
+      app.globalData.flag = false
       wx.request({
         url: app.globalData.server + '/miniprogram/reservations',
         method: 'POST',
@@ -232,11 +230,6 @@ Page({
               duration: 2000
             })
           }
-          setTimeout(()=>{
-            this.setData({
-              flag: true
-            })
-          },2000)
         },
       })
     }
