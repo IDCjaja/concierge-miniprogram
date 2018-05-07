@@ -93,9 +93,9 @@ Page({
           }else{
             count -=1;
             this.setData({
-            count: count,
-            setTimr: true
-          })
+              count: count,
+              setTimr: true
+            })
           }
         },1000);
       }
@@ -225,10 +225,18 @@ Page({
               icon: 'none',
               duration: 2000
             })
+          }else if(res.statusCode == 403 ){
+            wx.showToast({
+              title: '请刷新再试',
+              icon: 'none',
+              duration: 2000
+            })
           }
-          this.setData({
-            flag: true
-          })
+          setTimeout(()=>{
+            this.setData({
+              flag: true
+            })
+          },2000)
         },
       })
     }
