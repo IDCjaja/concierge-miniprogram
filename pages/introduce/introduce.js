@@ -1,4 +1,4 @@
-const app = getApp()
+var app = getApp()
 
 Page({
   WEEKDAY_MAP: {
@@ -13,6 +13,7 @@ Page({
     "Holiday":"节假日"
     },
   onLoad: function (option) {
+    app.globalData.flag = true
     this.setData({
       mask: false
     })

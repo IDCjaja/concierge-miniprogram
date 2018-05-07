@@ -46,30 +46,42 @@ Page({
     })
   },
   onShow() {
-    wx.login({
-      success: resCode => {
-        wx.request({
-          url: app.globalData.server + '/miniprogram/login',
-          method: 'POST',
-          data: {
-            'code': resCode.code 
-          },
-          success: result => {
-            app.globalData.token = result.data.token;
-            app.globalData.role = result.data.role
-            wx.getLocation({
-              success: resData => {
-                this.setData({
-                  longitude: resData.longitude,
-                  latitude: resData.latitude
-                })
-                this.refreshData();
-              }
-            });
-          }
-        })
-      }
-    })
+    if(app.globalData.token){
+      wx.getLocation({
+        success: resData => {
+          this.setData({
+            longitude: resData.longitude,
+            latitude: resData.latitude
+          })
+          this.refreshData();
+        }
+      })
+    } else {
+      wx.login({
+        success: resCode => {
+          wx.request({
+            url: app.globalData.server + '/miniprogram/login',
+            method: 'POST',
+            data: {
+              'code': resCode.code 
+            },
+            success: result => {
+              app.globalData.token = result.data.token;
+              app.globalData.role = result.data.role
+              wx.getLocation({
+                success: resData => {
+                  this.setData({
+                    longitude: resData.longitude,
+                    latitude: resData.latitude
+                  })
+                  this.refreshData();
+                }
+              });
+            }
+          })
+        }
+      })
+    }
   },
   openDropdown() {
     this.setData({
