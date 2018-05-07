@@ -46,6 +46,16 @@ page {
   justify-content:space-between;
   align-items:center;
 }
+.detail-cancelMessage {
+  white-space: nowrap;
+  margin-right: 15px;
+}
+.cancelRemark {
+  max-width: 60%;
+  word-break: break-all;
+  word-wrap: break-word;
+
+}
 .detail-footer {
   position:absolute;
   width:100%;

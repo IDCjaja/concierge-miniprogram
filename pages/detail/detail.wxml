@@ -25,12 +25,12 @@
         <text>{{reservation.tel}}</text>
       </view>
       <view class="user-information" wx:if="{{reservation.state === '已拒绝'}}">
-        <text>拒绝意见</text>
+        <text class="detail-cancelMessage">拒绝意见</text>
         <text>{{reservation.remark}}</text>
       </view>
       <view class="user-information" wx:elif="{{reservation.state === '已取消' && reservation.remark}}">
-        <text>取消意见</text>
-        <text>{{reservation.remark}}</text>
+        <text class="detail-cancelMessage">取消意见</text>
+        <text class="cancelRemark">{{reservation.remark}}</text>
       </view>
     </view>
   </view>
