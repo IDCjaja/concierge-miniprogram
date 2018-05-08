@@ -64,9 +64,9 @@ Page({
       address: this.data.address
     })
   },
-  openOrder: function (event) {
+  openReservation: function (event) {
     wx.navigateTo({
-      url: '/pages/order/order?id=' + event.currentTarget.dataset.projectId
+      url: '/pages/reservation/reservation?id=' + event.currentTarget.dataset.projectId
     })
   }
 })

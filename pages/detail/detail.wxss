@@ -59,7 +59,7 @@ page {
 .detail-footer {
   position:absolute;
   width:100%;
-  bottom:5px;
+  bottom:0;
 }
 .detail-footer .warning-text {
   padding: 10px;

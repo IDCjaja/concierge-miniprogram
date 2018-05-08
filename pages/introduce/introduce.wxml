@@ -28,6 +28,6 @@
 <view class="last-view">
   <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
 </view>
-<button bindtap="openOrder" data-project-id="{{ id }}" hover-class="deep" class="submit-btn" disabled="{{isFull}}">
+<button bindtap="openReservation" data-project-id="{{ id }}" hover-class="deep" class="submit-btn" disabled="{{isFull}}">
   立即预约
 </button>

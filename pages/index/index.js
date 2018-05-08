@@ -45,7 +45,7 @@ Page({
       }
     })
   },
-  onShow() {
+  onLoad() {
     if(app.globalData.token){
       wx.getLocation({
         success: resData => {

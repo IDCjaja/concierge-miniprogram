@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/projects/projects",
-    "pages/order/order",
+    "pages/reservation/reservation",
     "pages/regist/regist",
     "pages/search/search",
     "pages/introduce/introduce",
