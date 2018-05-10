@@ -1,4 +1,4 @@
-const app =getApp();
+const app = getApp();
 
 Page({
   data: {
@@ -11,7 +11,7 @@ Page({
   },
   STATE_TEXT: {
     open: '开启',
-    close: '暂停'
+    pause: '暂停'
   },
   refreshData(){
     wx.request({
@@ -25,9 +25,11 @@ Page({
           item.state = this.STATE_TEXT[item.state]
         });
         this.setData({
+          count: res.data.count,
           projects: res.data.projects,
           pageIndex: 1,
           currentPageProjects: res.data.projects,
+          projectsLength: res.data.projects.length
         })
         wx.stopPullDownRefresh()
         this.setData({
@@ -37,7 +39,14 @@ Page({
     })
   },
   onLoad(){
-    this.refreshData();
+    var role = app.globalData.role;
+    if(role == 'customer'){
+      wx.redirectTo({
+        url: '../regist/regist'
+      })
+    } else {
+      this.refreshData();
+    }
   },
   onReachBottom() {
     this.setData({

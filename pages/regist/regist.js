@@ -6,14 +6,6 @@ Page({
     code: '',
     name: ''
   },
-  onLoad: function(){
-    var role = app.globalData.role;
-    if(role == 'manager'){
-      wx.navigateTo({
-        url: '../admin/admin'
-      })
-    }
-  },
   phoneBindChange: function(e){
     var phone = e.detail.value;
     this.setData({
@@ -33,9 +25,8 @@ Page({
   },
   getCode: function(){
     var count = 60;
-    var that = this;
-    var phone = that.data.phone;
-    var name = that.data.name;
+    var phone = this.data.phone;
+    var name = this.data.name;
     if(name=="" || name==null){
       wx.showToast({
         title:'用户名不能为空',
@@ -50,24 +41,6 @@ Page({
       })
       return
     }else{
-      if(0 < count && count <= 60){
-        var timr = setInterval(() => {
-          if(count == 0){
-            this.setData({
-                count: 60,
-                setTimr: false
-            })
-              clearInterval(timr)
-              return count
-            }else{
-              count -=1;
-              this.setData({
-                count: count,
-                setTimr: true
-              })
-            }
-        },1000);
-      }
       wx.request({
         url: app.globalData.server + '/miniprogram/admin/code',
         method:'POST',
@@ -75,30 +48,46 @@ Page({
           'Authorization': app.globalData.token
         },
         data: {
-          tel: that.data.phone
+          tel: this.data.phone
         },
-        fail :(res) => {
+        success :(res) => {
           if(res.statusCode == 400 || res.statusCode == 422){
             wx.showToast({
               title:'发送验证码失败',
               icon:'none',
               duration: 1000
             })
-            return
           }else if(res.statusCode == 403){
             wx.showToast({
               title:'手机号已注册',
               icon:'none',
               duration: 1000
             })
-            return
+          }else{
+            if(0 < count && count <= 60){
+              var timr = setInterval(() => {
+                if(count == 0){
+                  this.setData({
+                      count: 60,
+                      setTimr: false
+                  })
+                    clearInterval(timr)
+                    return count
+                  }else{
+                    count -=1;
+                    this.setData({
+                      count: count,
+                      setTimr: true
+                    })
+                  }
+              },1000);
+            }
           }
         }
       })
     }
   },
   regist: function(){
-    var that = this;
     wx.request({
       url:app.globalData.server + '/miniprogram/admin/login',
       method: 'POST',
@@ -106,14 +95,35 @@ Page({
         'Authorization': app.globalData.token
       },
       data: {
-        tel: that.data.phone,
-        code: that.data.code,
-        name: that.data.name
+        tel: this.data.phone,
+        code: this.data.code,
+        name: this.data.name
       },
       success: (res) => {
         if(res.statusCode == 200){
           wx.showToast({
             title:'注册成功',
+            duration: 2000
+          })
+          app.globalData.role = res.data.role
+          wx.switchTab({
+            url:'../admin/admin'
+          })
+        }else if(res.statusCode == 400){
+          wx.showToast({
+            title:'发送失败',
+            icon:'none',
+            duration: 2000
+          })
+        }else if(res.statusCode == 403){
+          wx.showToast({
+            title:'手机号已注册',
+            icon:'none',
+            duration: 2000
+          })
+        }else if(res.statusCode == 422){
+          wx.showToast({
+            title:'验证码错误',
             icon:'none',
             duration: 2000
           })

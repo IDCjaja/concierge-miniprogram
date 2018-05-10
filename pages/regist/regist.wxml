@@ -1,10 +1,9 @@
 <view>
-  <input bindblur="nameBindChange" placeholder-class="phstyle" type="text" value="{{name}}" placeholder="用户名"/>
-  <input bindblur="phoneBindChange" placeholder-class="phstyle" type="text" value="{{phone}}" placeholder="手机号码"/>
-  <input placeholder="test"/>
+  <input bindinput="nameBindChange" placeholder-class="phstyle" type="text" value="{{name}}" placeholder="用户名"/>
+  <input bindinput="phoneBindChange" placeholder-class="phstyle" type="text" value="{{phone}}" placeholder="手机号码"/>
 </view>
 <view class="code-box">
-  <input bindblur="codeBindChange" placeholder-class="phstyle" value="{{code}}" type="text" placeholder="输入验证码" />
+  <input bindinput="codeBindChange" placeholder-class="phstyle" value="{{code}}" type="text" placeholder="输入验证码" />
   <text wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</text>
   <text wx:else bindtap="getCode">获取验证码</text>
 </view>

@@ -22,7 +22,7 @@
         <text class="reservation-date">{{ item.date }}</text>
         <text>{{ item.time }}</text>
       </view>
-      <view catchtap="openMap" data-reservation-id="{{ item.id }}" class="reservation-address">{{ item.address }}</view>
+      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">{{ item.address }}</view>
       <view class="reservation-user">
         <text>{{ item.name }}</text>
         <text>{{ item.tel }}</text>

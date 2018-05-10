@@ -1,6 +1,6 @@
 App({
   globalData: {
-    server: "http://192.168.31.208",
+    server: "http://www.axuzz.cn",
     role: '',
     token: ''
   }

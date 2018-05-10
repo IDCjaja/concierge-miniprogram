@@ -1,13 +1,13 @@
 <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
 <view class="container">
   <view class="header">
-    <image src="../../images/780707038.jpg" class="page-chathead" />
+    <image class="page-chathead" />
     <view class="page-title">预约项目</view>
     <icon type="search" size="18" color="#f1f1f1"></icon>
     <image src="../../images/plus.png" class="createProject"/>
   </view>
   <view class="content">
-    <view class="project-title">预约项目2</view>
+    <view class="project-title">预约项目·{{count}}</view>
     <view class="project" wx:for="{{ projects }}"  data-project-id="{{ item.id }}">
       <image class="project-cover" src="{{ item.image }}" />
       <view class="project-name">{{ item.name }}

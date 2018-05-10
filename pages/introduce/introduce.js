@@ -1,10 +1,7 @@
-const app = getApp()
+var app = getApp()
 
 Page({
-  data: {
-    
-  },
-  WEEKDAY_MAP : {
+  WEEKDAY_MAP: {
     "Sun":"周日",
     "Mon":"周一",
     "Tues":"周二",
@@ -16,6 +13,10 @@ Page({
     "Holiday":"节假日"
     },
   onLoad: function (option) {
+    app.globalData.flag = true
+    this.setData({
+      mask: false
+    })
     wx.request({
       method: "GET",
       url: app.globalData.server + '/miniprogram/projects/' + option.id,
@@ -24,8 +25,8 @@ Page({
       },
       success: (res) => {
         var json = res.data.time_state;
-        var keyArr = new Array;
-        var keyValue = new Array;
+        var keyArr = [];
+        var keyValue = [];
         var n;
         Object.keys(json).forEach(key => {
           if(json[key].length > 0 ){
@@ -46,33 +47,26 @@ Page({
           longitude:res.data.longitude,
           latitude: res.data.latitude,
           address: res.data.address,
-          markers:[{
-            id:1,
-            width: 25,
-            height: 25,
-            longitude:res.data.longitude,
-            latitude: res.data.latitude,
-          }]
+          mask: true
+        })
+        wx.setStorage({
+          key: 'project',
+          data: res.data,
         })
       }
     })
   },
   openMap: function () {
-    var that = this;
-    wx.getLocation({
-      success: function(res){
-      wx.openLocation({
-        latitude : that.data.latitude,
-        longitude : that.data.longitude,
-        name: that.data.title,
-        address: that.data.address
-      })
-      }
+    wx.openLocation({
+      latitude : this.data.latitude,
+      longitude : this.data.longitude,
+      name: this.data.title,
+      address: this.data.address
     })
   },
-  openOrder: function (event) {
+  openReservation: function (event) {
     wx.navigateTo({
-      url: '/pages/order/order?id=' + event.currentTarget.dataset.projectId
+      url: '/pages/reservation/reservation?id=' + event.currentTarget.dataset.projectId
     })
   }
 })

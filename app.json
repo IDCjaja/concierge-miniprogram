@@ -2,7 +2,7 @@
   "pages": [
     "pages/index/index",
     "pages/projects/projects",
-    "pages/order/order",
+    "pages/reservation/reservation",
     "pages/regist/regist",
     "pages/search/search",
     "pages/introduce/introduce",
@@ -24,6 +24,10 @@
       {
         "pagePath":"pages/projects/projects",
         "text": "我的预约"
+      },
+      {
+        "pagePath":"pages/admin/admin",
+        "text": "管理员"
       }
     ]
   }

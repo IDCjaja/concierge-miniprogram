@@ -5,7 +5,6 @@ Page({
     success: '已成功',
     wait: '待审核',
     overtime: '已过期',
-    refused: '已拒绝',
     checked: '已核销',
     cancelled: '已取消'
   },
@@ -79,20 +78,12 @@ Page({
     })
   },
   openMap(event) {
-    wx.request({
-      method: "GET",
-      url: app.globalData.server + '/miniprogram/reservations/' + event.currentTarget.dataset.reservationId,
-      header: {
-        'Authorization': app.globalData.token
-      },
-      success:(res) =>{
-        wx.openLocation({
-          latitude: res.data.latitude,
-          longitude: res.data.longitude,
-          name: res.data.project_name,
-          address: res.data.address
-        })
-      }
+    var index = event.currentTarget.dataset.reservationIndex;
+    wx.openLocation({
+      latitude: this.data.reservationsList[index].latitude,
+      longitude: this.data.reservationsList[index].longitude,
+      name: this.data.reservationsList[index].project_name,
+      address: this.data.reservationsList[index].address
     })
   },
   onReachBottom() {
@@ -100,7 +91,7 @@ Page({
       loading: false,
       nomoreData: true
     })
-    if(this.data.currentPageReservations.length == 4) {
+    if(this.data.currentPageReservations.length == 10) {
       this.setData({
         pageIndex: this.data.pageIndex+1
       });
