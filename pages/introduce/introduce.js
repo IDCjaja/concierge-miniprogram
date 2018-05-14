@@ -11,7 +11,7 @@ Page({
     "Sat":"周六",
     "Special":"特殊",
     "Holiday":"节假日"
-    },
+  },
   onLoad: function (option) {
     app.globalData.flag = true
     this.setData({
@@ -44,6 +44,9 @@ Page({
           address: res.data.address,
           description: res.data.description,
           bookingTime: keyArr,
+          aheadTime: res.data.ahead_time,
+          perCount: res.data.reservation_per_user,
+          reservable: res.data.reservable,
           longitude:res.data.longitude,
           latitude: res.data.latitude,
           address: res.data.address,

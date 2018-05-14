@@ -3,8 +3,14 @@
 }
 .homepage-header {
   display: flex;
-  margin-top: 5px;
-  margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #fff;
+  padding: 10px 0;
+}
+.homepage-body {
+  margin-top: 52px;
 }
 .dropdown-icon {
   width: 18px;

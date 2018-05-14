@@ -4,9 +4,28 @@ Page({
   data:{
     setTimr: false,
     multiIndex: [0,0],
+    value: [0,0],
+    selList: [],
     buttonDisabled: true,
     code: '',
-    phone:''
+    phone:'',
+    selValue:[],
+    multiHidden: true,
+    dateShow: "请选择时间"
+  },
+  dataInit(){
+    var times = this.data.times;
+    times.forEach((time) => {
+      var id=0
+      time.forEach((item) => {
+        item.selStatus = false;
+        item.id = id;
+        id+=1;
+      })
+    })
+    this.setData({
+      times: times,
+    })
   },
   getData(res,id,multiIndex){
     this.setData({
@@ -15,11 +34,14 @@ Page({
       name: res.data.tmp_name,
       defaultPhone: res.data.tmp_tel,
       phone: res.data.tmp_tel,
-      need_sms: res.data.need_sms
+      need_sms: res.data.need_sms,
+      multi_time: res.data.multi_time
     })
+    var multi_time = res.data.multi_time;
     var dayArr = [];
     var timeArr = [];
     var arr = [];
+    var times = [];
     var multiArray= [];
     var WEEKDAY_MAP = {
       0:"周日",
@@ -35,33 +57,66 @@ Page({
       dayArr.push(time_table.date + ' ' + WEEKDAY_MAP[time_table.wday])
       time_table.table.forEach(function(item){
         if(item.remain == null){
-          timeArr.push(item.time+' ( 无限制 )')
+          timeArr.push(item.time+' ( 无限制 )');
+          item.remain = "无限制"
         }else{
           timeArr.push(item.time+' (剩余 '+item.remain+' )')
         }
       })
       arr.push(timeArr);
+      times.push(time_table.table);
       timeArr = [];
     })
     var requestDate = dayArr[0].slice(0,11);
-    var requestTime = arr[0].toString().slice(0,11);
+    var requestTime = [arr[0].toString().slice(0,11)];
+    times.forEach((time) => {
+      var id=0
+      time.forEach((item) => {
+        item.selStatus = false;
+        item.id = id;
+        id+=1;
+      })
+    })
     this.setData({
       multiArray: [dayArr,arr[0]],
       dayArr: dayArr,
       arr: arr,
+      times: times,
+      dates: dayArr,
+      date: dayArr[0],
+      timeList: times[0],
       requestDate: requestDate,
       requestTime: requestTime,
       selectValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]]
     })
-
     if(res.data.need_sms == true){
       this.setData({
         codeBox: false
       })
     }else if(res.data.need_sms == false){
+      if(multi_time == true){
+        this.setData({
+          codeBox: true,
+          buttonDisabled: true
+        })
+      } else {
+        this.setData({
+          codeBox: true,
+          buttonDisabled: false
+        })
+      }
+    }
+    if(multi_time == true){
       this.setData({
-        codeBox: true,
-        buttonDisabled: false
+        multiPicker: true,
+        radioPicker: false,
+        requestDate: [],
+        requestTime: []
+      })
+    } else {
+      this.setData({
+        multiPicker: false,
+        radioPicker: true
       })
     }
   },
@@ -128,8 +183,14 @@ Page({
     }
   },
   validate(){
-    if(this.data.code.length === 6 && (/^1[34578]\d{9}$/.test(this.data.phone))){
-      return true;
+    if(this.data.need_sms == false){
+      if((/^1[34578]\d{9}$/.test(this.data.phone)) && this.data.requestTime != ""){
+        return true;
+      }
+    }else if(this.data.need_sms == true){
+      if(this.data.code.length === 6 && (/^1[34578]\d{9}$/.test(this.data.phone)) && this.data.requestTime != ""){
+        return true;
+      }
     }else{
       return false
     }
@@ -235,7 +296,6 @@ Page({
               icon: 'none',
               duration: 2000
             })
-            app.globalData.flag = true
             wx.request({
               url: app.globalData.server + '/miniprogram/projects/' + this.data.projectId,
               method: 'GET',
@@ -248,6 +308,9 @@ Page({
             })
           }
         },
+        complete(){
+          app.globalData.flag = true
+        }
       })
     }
   },
@@ -264,7 +327,7 @@ Page({
       var multiIndex = multiIndex;
     }
     var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
-    var requestTime = multiArray[1][multiIndex[1]].slice(0,11);
+    var requestTime = [multiArray[1][multiIndex[1]].slice(0,11)];
     this.setData({
       multiIndex: multiIndex,
       requestDate: requestDate,
@@ -287,6 +350,81 @@ Page({
       })
       return
     }
+  },
+  bindChange(e) {
+    const val = e.detail.value;
+    this.dataInit();
+    this.setData({
+      value: [val[0],val[0]],
+      selList:[],
+    })
+    this.setData({
+      date: this.data.dates[this.data.value[0]],
+      timeList: this.data.times[this.data.value[1]],
+    })
+  },
+  select(e){
+    var selArr = this.data.selList;
+    var dataList = this.data.times[this.data.value[1]];
+    var selIndex = e.currentTarget.dataset.selectIndex;
+    var index = this.data.selList.indexOf(selIndex);
+    if(index < 0){
+      selArr.push(e.currentTarget.dataset.selectIndex);
+      dataList.forEach((item) => {
+        if(item.id == selIndex){
+          item.selStatus = true
+        } 
+      })
+    } else {
+      dataList.forEach((item) => {
+        if(item.id == selIndex){
+          item.selStatus = false
+        }
+        selArr.splice(index,1)
+      })
+    }
+    var selValue = []
+    selArr.forEach((index)=>{
+      selValue.push(dataList[index].time)
+    })
+    this.setData({
+      selList: selArr,
+      timeList: dataList,
+      selValue: selValue,
+    })
+  },
+  cancel(){
+    this.setData({
+      multiHidden: true
+    })
+  },
+  confirm(){
+    if(this.data.selValue.length > 0){
+      this.setData({
+        dateShow: this.data.date,
+        selValueShow: this.data.selValue,
+        requestDate: this.data.date.slice(0,10),
+        requestTime: this.data.selValue,
+        buttonDisabled: false
+      })
+    }else if(this.data.selValue.length < 1){
+      this.setData({
+        dateShow: "请选择时间",
+        selValueShow: this.data.selValue,
+        requestDate: [],
+        requestTime: [],
+        buttonDisabled: true
+      })
+    }
+    this.setData({
+      multiHidden: true,
+      buttonDisabled: !this.validate()
+    })
+  },
+  multiShow(){
+    this.setData({
+      multiHidden: false
+    })
   },
   getRemain(valueStr){
     var value = valueStr.substring(valueStr.indexOf("(")+1,valueStr.indexOf(")")).trim();
