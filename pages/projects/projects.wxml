@@ -1,5 +1,9 @@
 <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
 <view class="projects-contianer">
+  <view class="search-wrapper" bindtap="search">
+    <icon type="search" size="14" color="#909399" class="search-icon"></icon>
+    <text class="search-placeholder">请输入预约名称</text>
+  </view>
   <view class="projects-tabs">
     <text class="tab {{ currentTabIndex == index?'active':'' }}"
           wx:for="{{ tabList }}"
@@ -9,10 +13,6 @@
     </text>
   </view>
   <view class="current-projects" hidden="{{ currentTabIndex == 1 }}">
-    <view class="search-wrapper" bindtap="search">
-      <text class="search-placeholder">请输入预约名称</text>
-      <icon type="search" size="18" color="#f1f1f1"></icon>
-    </view>
     <view class="reservations-item"
           wx:for="{{ reservationsList }}" 
           bindtap="showDetail"

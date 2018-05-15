@@ -1,32 +1,35 @@
-<view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
-<view class="container" bindtap="closeDropdown">
-  <view class="homepage-header">
-    <view class="dropdown-wrapper">
-      <view class="dropdown" catchtap="openDropdown">
-        <image src="../../images/location.png" class="dropdown-icon"></image>
-        <text>{{ defaultText }}</text>
-      </view>
-      <view class="dropdown-options" hidden="{{ hiddenDropdown }}">
-        <view class="dropdown-options-item {{ (distance == item.value)?'dropdown-active':'' }}"
-              wx:for="{{ options }}"
-              data-index="{{ index }}"
-              bindtap="changeDistance">
-          {{ item.text }}
+<view class="content-wrapper {{ maskHidden?'':'content-with-mask' }}" bindtap="closeDropdown">
+  <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
+  <view class="container">
+    <view class="homepage-header">
+      <view class="dropdown-wrapper">
+        <view class="dropdown" catchtap="openDropdown">
+          <image src="../../images/location.png" class="dropdown-icon"></image>
+          <text>{{ defaultText }}</text>
+        </view>
+        <view class="dropdown-options" hidden="{{ hiddenDropdown }}">
+          <view class="dropdown-options-item {{ (distance == item.value)?'dropdown-active':'' }}"
+                wx:for="{{ options }}"
+                data-index="{{ index }}"
+                bindtap="changeDistance">
+            {{ item.text }}
+          </view>
         </view>
       </view>
+      <view class="search-wrapper" bindtap="search">
+        <icon type="search" size="14" color="#909399" class="search-icon"></icon>
+        <text class="search-placeholder">请输入预约名称</text>
+      </view>
     </view>
-    <view class="search-wrapper" bindtap="search">
-      <text class="search-placeholder">请输入预约名称</text>
-      <icon type="search" size="18" color="#f1f1f1"></icon>
+    <view class="homepage-body">
+      <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
+        <image src="{{ item.cover }}" class="project-cover"></image>
+        <view class="project-name">{{ item.name }}</view>
+        <view class="project-address">{{ item.address }}</view>
+      </view>
+      <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
+      <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
     </view>
   </view>
-  <view class="homepage-body">
-    <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
-      <image src="{{ item.cover }}" class="project-cover"></image>
-      <view class="project-name">{{ item.name }}</view>
-      <view class="project-address">{{ item.address }}</view>
-    </view>
-    <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
-    <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
-  </view>
+  <view class="mask" hidden="{{ maskHidden }}"></view>
 </view>

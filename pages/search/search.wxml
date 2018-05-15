@@ -1,11 +1,12 @@
 <view class="search-container">
   <view class="search-input-wrapper">
-    <icon type="search" size="18" class="search-icon"></icon>
     <input class="search-input"
            placeholder="请输入预约名称"
            focus="true"
            confirm-type="search"
-           bindinput="handleInput"></input>
+           bindinput="handleInput">
+      <icon type="search" size="14" class="search-icon"></icon>
+    </input>
     <navigator open-type="navigateBack" class="search-cancel">取消</navigator>
   </view>
   <view class="search-body">

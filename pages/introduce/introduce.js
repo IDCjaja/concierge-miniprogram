@@ -13,13 +13,15 @@ Page({
     "Holiday":"节假日"
   },
   onLoad: function (option) {
-    app.globalData.flag = true
     this.setData({
       mask: false
     })
+    var project_id = '';
+    if(option.id) project_id = option.id;
+    else if(decodeURIComponent(option.scene).id) project_id = decodeURIComponent(option.scene).id;
     wx.request({
       method: "GET",
-      url: app.globalData.server + '/miniprogram/projects/' + option.id,
+      url: app.globalData.server + '/miniprogram/projects/' + project_id,
       header: {
         'Authorization': app.globalData.token
       },

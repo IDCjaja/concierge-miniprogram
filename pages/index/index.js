@@ -17,6 +17,7 @@ Page({
     loading: true,
     nomoreData: true,
     refresh: true,
+    maskHidden: true,
     pageIndex: 1,
     projects: [],
     currentPageProjects: []
@@ -85,12 +86,14 @@ Page({
   },
   openDropdown() {
     this.setData({
-      hiddenDropdown: false
+      hiddenDropdown: false,
+      maskHidden: false
     })
   },
   closeDropdown() {
     this.setData({
-      hiddenDropdown: true
+      hiddenDropdown: true,
+      maskHidden: true
     })
   },
   changeDistance(event) {
