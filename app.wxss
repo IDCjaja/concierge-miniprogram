@@ -1,5 +1,6 @@
 page {
   font-size: 14px;
+  height: 100%;
 }
 .projects-loading {
   text-align: center;
