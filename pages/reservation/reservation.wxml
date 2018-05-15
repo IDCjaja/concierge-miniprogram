@@ -41,13 +41,21 @@
         <picker-view-column>
           <view wx:for="{{dates}}" style="line-height: 50px">{{item}}</view>
         </picker-view-column>
+      </picker-view> 
+      <picker-view indicator-style="height: 50px;" class="multi-picker" value="{{timeValue}}">
+        <picker-view-column>
+          <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
+            {{item.time}}  剩余:{{item.remain}}
+            <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
+          </view>
+        </picker-view-column>
       </picker-view>
-      <scroll-view class="multi-picker" scroll-y="true">
+      <!-- <scroll-view class="multi-picker" scroll-y="true">
         <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
           {{item.time}}  剩余:{{item.remain}}
           <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
         </view>
-      </scroll-view>
+      </scroll-view> -->
     </view>
   </view>
 </view>

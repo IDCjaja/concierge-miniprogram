@@ -1,0 +1,28 @@
+<view class="page-body-info">
+  <view class="userinfo">
+    <view class="userinfo-avatar">
+      <open-data type="userAvatarUrl"></open-data>
+    </view>
+    <view class="userinfo-nickname">
+      <open-data type="userNickName"></open-data>
+    </view>
+  </view>
+</view>
+
+<view class="">
+  <view class="item" bindtap="myReservation">
+    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <text class="item-title">我的预约</text>
+    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  </view>
+  <view class="item" bindtap="userGuide">
+    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <text class="item-title">使用指南</text>
+    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  </view>
+  <view class="item" bindtap="admin">
+    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <text class="item-title">我是管理员</text>
+    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  </view>
+</view>

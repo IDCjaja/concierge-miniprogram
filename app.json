@@ -7,7 +7,8 @@
     "pages/search/search",
     "pages/introduce/introduce",
     "pages/admin/admin",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/userInfo/userInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,12 +23,8 @@
         "text": "预约项目"
       },
       {
-        "pagePath":"pages/projects/projects",
-        "text": "我的预约"
-      },
-      {
-        "pagePath":"pages/admin/admin",
-        "text": "管理员"
+        "pagePath":"pages/userInfo/userInfo",
+        "text": "我的"
       }
     ]
   }

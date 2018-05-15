@@ -132,7 +132,7 @@ picker-view view {
   text-align: center;
 }
 .multi-picker {
-  height: 200px;
+  height: 300px;
   flex: 5;
 }
 .selected-icon {

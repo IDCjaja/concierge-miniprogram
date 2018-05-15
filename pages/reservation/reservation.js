@@ -273,7 +273,7 @@ Page({
               success: () => {
                 setTimeout(function() {
                   wx.reLaunch({
-                    url: "../projects/projects"
+                    url: "../userInfo/userInfo"
                   })
                 }, 1000)
               }
@@ -353,10 +353,14 @@ Page({
   },
   bindChange(e) {
     const val = e.detail.value;
+    var timeVal = [];
+    timeVal[0] = 0;
     this.dataInit();
     this.setData({
       value: [val[0],val[0]],
       selList:[],
+      timeValue: timeVal,
+      selValue: []
     })
     this.setData({
       date: this.data.dates[this.data.value[0]],

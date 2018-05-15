@@ -1,27 +1,46 @@
+page {
+	background-color:#eeeeee;
+}
 .introduce-image{
   width: 100%;
   height: 150px;
+  border-radius: 5px;
 }
 view {
-  padding: 10px;
+  background: #fff;
 }
-.last-view {
-  margin-bottom: 26px;
+
+.content {
+  margin-top: 10px;
+  padding: 15px;
 }
 text {
   line-height: 2;
   font-size: 14px;
   font-weight: normal;
 }
+.underline {
+  border-bottom: 1px solid #eeeeee;
+}
 .introduce-title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
 }
 .introduce-address {
   color: #0366d6;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
 }
 .introduce-address:hover{
   text-decoration: underline;
+}
+.introduce-address text {
+  flex: auto;
+}
+.address-more {
+  width: 15px;
+  height: 15px;
 }
 .time-item {
   padding: 0;
@@ -34,7 +53,7 @@ text {
   margin-left: 10px;
 }
 .time-item text {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .submit-btn {
