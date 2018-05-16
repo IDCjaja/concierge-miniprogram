@@ -9,7 +9,7 @@
   </view>
   <view>
     <text class="introduce-title block-text underline">{{title}}</text>
-    <text bindtap="openMap" class="introduce-address"><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" /></text>
+    <view bindtap="openMap" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
   </view>
 </view>
 <view class="content">
@@ -24,7 +24,7 @@
       </view>
     </block>
   </view>
-  <view class="project-detail">
+  <view class="project-detail" wx:if="{{description}}">
     <text class="block-text">预约详情</text>
     <text>{{description}}</text>
   </view>
@@ -41,7 +41,7 @@
 <view class="last-view">
   <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
 </view>
-<view style="margin-bottom: 50px"></view>
+<view style="margin-bottom: 50px;width:100%;height:10px;"></view>
 <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable}}">
   立即预约
 </button>

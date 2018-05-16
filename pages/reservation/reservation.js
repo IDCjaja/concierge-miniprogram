@@ -11,7 +11,7 @@ Page({
     phone:'',
     selValue:[],
     multiHidden: true,
-    dateShow: "请选择时间"
+    dateShow: ""
   },
   dataInit(){
     var times = this.data.times;
@@ -413,7 +413,7 @@ Page({
       })
     }else if(this.data.selValue.length < 1){
       this.setData({
-        dateShow: "请选择时间",
+        dateShow: "",
         selValueShow: this.data.selValue,
         requestDate: [],
         requestTime: [],

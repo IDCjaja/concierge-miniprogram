@@ -20,11 +20,15 @@
   "tabBar": {
     "list": [{
         "pagePath": "pages/index/index",
-        "text": "预约项目"
+        "text": "预约项目",
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/homeBlue.png"
       },
       {
         "pagePath":"pages/userInfo/userInfo",
-        "text": "我的"
+        "text": "我的",
+        "iconPath": "./images/mine.png",
+        "selectedIconPath": "./images/mineBlue.png"
       }
     ]
   }

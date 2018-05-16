@@ -1,7 +1,8 @@
 App({
   globalData: {
-    server: "https://concierge.skylarkly.com",
+    server: "http://192.168.31.208",
     role: '',
     token: ''
   }
+  //https://concierge.skylarkly.com
 })

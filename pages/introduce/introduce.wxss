@@ -42,6 +42,15 @@ text {
   width: 15px;
   height: 15px;
 }
+.address-icon {
+  width: 15px;
+  height: 15px;
+  margin-right: 10px;
+}
+.reservation-time {
+  padding-bottom: 10px;
+  font-size: 16px;
+}
 .time-item {
   padding: 0;
 }
