@@ -5,14 +5,18 @@ page {
 .projects-loading {
   text-align: center;
   line-height: 25px;
-  color: #ccc;
+	color: #ccc;
+	background-color: #f1f1f1;	
 }
 .projects-loading-complete {
   text-align: center;
-  line-height: 25px;
+	line-height: 25px;
+	color: #ccc;
+	background-color: #f1f1f1;
 }
 .pullDownRefresh {
-  color: #ccc;
+	color: #ccc;
+	background-color: #fff;
   font-size: 14px;
   text-align: center;
   line-height: 25px;
@@ -20,7 +24,7 @@ page {
 .projects-loading:before,.pullDownRefresh:before{
   display: inline-block;
   margin-right: 5px;
-  vertical-align: middle;
+	vertical-align: middle;
   content: '';
   width: 20px;
   height: 20px;

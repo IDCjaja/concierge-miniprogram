@@ -17,21 +17,31 @@
           wx:for="{{ reservationsList }}" 
           bindtap="showDetail"
           data-reservation-id="{{ item.id }}">
-      <view class="reservation-name">{{ item.project_name }}</view>
+      <view class="name-state-wrapper">
+        <view class="reservation-name">{{ item.project_name }}</view>
+        <view class="reservation-state success" wx:if="{{ item.state === '已成功' }}">{{ item.state }}</view>
+        <view class="reservation-state waitting" wx:elif="{{ item.state === '待审核'}}">{{ item.state }}</view>
+        <view class="reservation-state history" wx:else>{{ item.state }}</view>
+      </view>
       <view class="reservation-datatime">
-        <text class="reservation-date">{{ item.date }}</text>
-        <text>{{ item.time }}</text>
+        <view class="icon-datetime-wrapper">
+          <image src="http://p1ctmsz1g.bkt.clouddn.com/9.png" class="icon"></image>
+          <view class="date-time-wrapper">
+            <view class="date-time-item" wx:for="{{ item.time }}" wx:for-item="time">
+              <text class="reservation-date">{{ item.date }}</text>
+              <text class="reservation-time">{{ time }}</text>
+            </view>
+          </view>
+        </view>
       </view>
-      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">{{ item.address }}</view>
-      <view class="reservation-user">
-        <text>{{ item.name }}</text>
-        <text>{{ item.tel }}</text>
+      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/10.png"></image>
+        <text class="address-text">{{ item.address }}</text>
+        <text class="more-icon">></text>
       </view>
-      <view class="reservation-state">{{ item.state }}</view>
     </view>
   </view>
   <view class="history-projects" hidden="{{ currentTabIndex == 0 }}">
-    history
   </view>
   <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
   <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>

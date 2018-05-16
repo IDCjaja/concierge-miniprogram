@@ -24,16 +24,13 @@ page {
 }
 .homepage-header {
   display: flex;
-  position: fixed;
-  top: 0;
+  padding:10px 0;
   width: 100%;
   background: #fff;
-  padding:10px 2%;
   z-index: 999;
+  justify-content: center;
+  position: relative;
   border-bottom:1px solid #f1f1f1;
-}
-.homepage-body {
-  padding-top: 52px;
 }
 .dropdown-icon {
   width: 18px;
