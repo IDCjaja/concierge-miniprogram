@@ -1,5 +1,5 @@
 <view class="content-wrapper {{ maskHidden?'':'content-with-mask' }}" bindtap="closeDropdown">
-  <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
+  <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新hello</view>
   <view class="container">
     <view class="homepage-header">
       <view class="dropdown-wrapper">
