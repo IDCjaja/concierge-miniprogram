@@ -1,14 +1,28 @@
-page {
-  min-height: 100%;
+.page-container {
+  height: 100%;
   background-color: #f5f5f5;
   overflow: hidden;
+  position: relative;
+}
+.content {
+  padding-left: 10px;
+  margin-top: 10px;
+  background: #fff;
+}
+.group-inline {
+  display: flex;
+  border-bottom: 1px solid #eeeeee;
+  background: #fff;
+}
+.group-inline input {
+  flex: auto;
+}
+.group-inline .picker-text {
+  flex: auto;
 }
 text.required {
   padding: 10px;
-}
-text.required::before {
-  content:'*';
-  color: red;
+  white-space: nowrap;
 }
 text.block,text.block {
   display: block;
@@ -17,7 +31,6 @@ text.block,text.block {
 input {
   background-color: #fff;
   padding: 10px;
-  margin: 5px 0;
   font-size: 14px;
 }
 .code-box {
@@ -28,6 +41,7 @@ input {
 .code-box input {
   flex: auto;
   margin: 0;
+  margin-left: 45px;
 }
 .code-box text {
   color:  #0366d6;
@@ -44,6 +58,9 @@ input {
 }
 .code-box text.disabled {
   color: #ccc;
+}
+.section {
+  margin-top: 10px;
 }
 .picker-text {
   width: 100%;
@@ -130,9 +147,12 @@ picker-view view {
   height: 50px;
   overflow: hidden;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .multi-picker {
-  height: 200px;
+  height: 300px;
   flex: 5;
 }
 .selected-icon {

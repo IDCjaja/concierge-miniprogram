@@ -76,7 +76,7 @@ Page({
                   duration: 1500,
                   success: () => {
                     setTimeout(function(){
-                      wx.switchTab({
+                      wx.navigateTo({
                         url:'../projects/projects'
                       })
                     }, 1500)

@@ -1,56 +1,73 @@
 
-<view class="mask {{multiHidden?'hidden':'show'}}" bindtap="cancel"></view>
-<view>
-  <text class="required block" >姓名</text>
-  <input type="text" bindinput="bindNameChange" value="{{defaultName}}" placeholder="请输入预约人姓名" />
-  <text class="required block">手机号码</text>
-  <input type="text"  bindinput="bindPhoneChange" value="{{defaultPhone}}" placeholder="请输入手机号"/>
-  <view class="code-box" hidden="{{codeBox}}">
-    <input placeholder="请输入验证码" bindinput="bindCodeChange" value="{{code}}" placeholder-class="phstyle" />
-    <text wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</text>
-    <text wx:else bindtap="getCode">获取验证码</text>
+
+
+<view class="page-container">
+  <view class="mask {{multiHidden?'hidden':'show'}}" bindtap="cancel"></view>
+  <view class="content">
+    <view class="group-inline">
+      <text class="required">姓名</text>
+      <input type="text" bindinput="bindNameChange" value="{{defaultName}}" placeholder="请输入预约人姓名" />
+    </view>
+    <view class="group-inline">
+      <text class="required">手机</text>
+      <input type="text"  bindinput="bindPhoneChange" value="{{defaultPhone}}" placeholder="请输入手机号"/>
+    </view>
+    <view class="code-box" hidden="{{codeBox}}">
+      <input placeholder="请输入验证码" bindinput="bindCodeChange" value="{{code}}" placeholder-class="phstyle" />
+      <text wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</text>
+      <text wx:else bindtap="getCode">获取验证码</text>
+    </view>
+    <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
+    <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
   </view>
-  <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
-  <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
-</view>
-<view class="section">
-  <text class="required block">预约时间</text>
-  <view wx:if="{{multiPicker}}" class="picker picker-text" bindtap="multiShow">
-    <view class="multipicker-value">
-      <view class="multipicker-date">{{dateShow}}</view>
-      <view class="multipicker-time">
-        <view wx:for="{{selValueShow}}">
-          {{item}}
+  <view class="section group-inline">
+    <text class="required" style="white-space: nowrap;">预约时间</text>
+    <view wx:if="{{multiPicker}}" class="picker picker-text" bindtap="multiShow">
+      <view class="multipicker-value">
+        <view class="multipicker-date">{{dateShow}}</view>
+        <view class="multipicker-time">
+          <view wx:for="{{selValueShow}}">
+            {{item}}
+          </view>
         </view>
       </view>
-    </view>
-    <image class="picker-icon" src="../../images/time.png" />
-  </view>
-  <!-- 单选时间选择器 -->
-  <picker mode="multiSelector" wx:if="{{radioPicker}}" bindchange="bindMultiPickerChange" bindcancel="bindMultiPickerCancel" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-    <view class="picker picker-text">
-      <text class="picker-value">{{selectValue}}</text>
       <image class="picker-icon" src="../../images/time.png" />
     </view>
-  </picker>
-  <!-- 多选时间选择器 -->
-  <view wx:if="{{multiPicker}}" class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
-    <view class="picker-btngroup"><text bindtap="cancel" class="picker-btn cancel-btn">取消</text><text bindtap="confirm" class="picker-btn confirm-btn">确定</text></view>
-    <view class="picker-box">
-      <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
-        <picker-view-column>
-          <view wx:for="{{dates}}" style="line-height: 50px">{{item}}</view>
-        </picker-view-column>
-      </picker-view>
-      <scroll-view class="multi-picker" scroll-y="true">
-        <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
-          {{item.time}}  剩余:{{item.remain}}
-          <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
-        </view>
-      </scroll-view>
+    <!-- 单选时间选择器 -->
+    <picker mode="multiSelector" wx:if="{{radioPicker}}" bindchange="bindMultiPickerChange" bindcancel="bindMultiPickerCancel" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+      <view class="picker picker-text">
+        <text class="picker-value">{{selectValue}}</text>
+        <image class="picker-icon" src="../../images/time.png" />
+      </view>
+    </picker>
+    <!-- 多选时间选择器 -->
+    <view wx:if="{{multiPicker}}" class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
+      <view class="picker-btngroup"><text bindtap="cancel" class="picker-btn cancel-btn">取消</text><text bindtap="confirm" class="picker-btn confirm-btn">确定</text></view>
+      <view class="picker-box">
+        <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+          <picker-view-column>
+            <view wx:for="{{dates}}" style="line-height: 50px">{{item}}</view>
+          </picker-view-column>
+        </picker-view> 
+        <picker-view indicator-style="height: 50px;" class="multi-picker" value="{{timeValue}}">
+          <picker-view-column>
+            <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
+              {{item.time}}  剩余:{{item.remain}}
+              <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
+            </view>
+          </picker-view-column>
+        </picker-view>
+        <!-- <scroll-view class="multi-picker" scroll-y="true">
+          <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
+            {{item.time}}  剩余:{{item.remain}}
+            <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
+          </view>
+        </scroll-view> -->
+      </view>
     </view>
   </view>
+  <view class="footer-button">
+    <button bindtap="reservation" hover-class="deep" disabled="{{buttonDisabled}}" class="submit-btn">提交预约</button>
+  </view>
 </view>
-<view class="footer-button">
-  <button bindtap="reservation" hover-class="deep" disabled="{{buttonDisabled}}" class="submit-btn">提交预约</button>
-</view>
+

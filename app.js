@@ -5,5 +5,4 @@ App({
     token: ''
   }
   //https://concierge.skylarkly.com
-  //http://192.168.31.208
 })

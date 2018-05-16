@@ -1,1 +1,52 @@
-@import "../reservation/reservation.wxss"
+input {
+  background-color: #fff;
+  padding: 10px;
+  font-size: 14px;
+  margin-top: 15px;
+}
+.phstyle {
+  color: #a3a5a1;
+}
+.input-group {
+  padding-left: 10px;
+}
+.input-group input {
+  border-bottom: 1px solid #d7d8d5;
+}
+.code-box {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  padding-top: 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #d7d8d5;
+}
+.code-box input {
+  flex: auto;
+  margin: 0;
+}
+.code-box text {
+  color:  #0366d6;
+  padding:0 10px;
+  white-space: nowrap;
+  margin: 0;
+  border: none;
+  border-left: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 14px;
+}
+.code-box text:hover {
+  color: #0652a8;
+}
+.code-box text.disabled {
+  color: #ccc;
+}
+.footer-button {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  margin-top: 20px;
+}
+.deep {
+  background-color: #0652a8;
+}

@@ -7,7 +7,8 @@
     "pages/search/search",
     "pages/introduce/introduce",
     "pages/admin/admin",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/userInfo/userInfo"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,15 +20,15 @@
   "tabBar": {
     "list": [{
         "pagePath": "pages/index/index",
-        "text": "预约项目"
+        "text": "预约项目",
+        "iconPath": "./images/home.png",
+        "selectedIconPath": "./images/homeBlue.png"
       },
       {
-        "pagePath":"pages/projects/projects",
-        "text": "我的预约"
-      },
-      {
-        "pagePath":"pages/admin/admin",
-        "text": "管理员"
+        "pagePath":"pages/userInfo/userInfo",
+        "text": "我的",
+        "iconPath": "./images/mine.png",
+        "selectedIconPath": "./images/mineBlue.png"
       }
     ]
   }

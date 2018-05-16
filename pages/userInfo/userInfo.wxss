@@ -1,0 +1,34 @@
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userinfo-avatar {
+  width: 50px;
+  height: 50px;
+  margin: 10px;
+  border-radius: 50%;
+  overflow:hidden;
+  display:block
+}
+.userinfo-nickname {
+  color: #aaa;
+}
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+.item-icon {
+  width: 15px;
+  height: 15px;
+}
+.item-title {
+  flex: auto;
+  padding-left: 20px;
+}
+.item-truncate {
+  width: 20px;
+  height: 20px;
+}
