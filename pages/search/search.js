@@ -34,7 +34,7 @@ Page({
   },
   requestProjects(value) {
     wx.request({
-      url: encodeURI(app.globalData.server + "/miniprogram/projects?search=" + value),
+      url: app.globalData.server + "/miniprogram/projects?search=" + encodeURI(value),
       header: {
         'Authorization': app.globalData.token
       },
@@ -59,7 +59,7 @@ Page({
   },
   requestReservations(value) {
     wx.request({
-      url: encodeURI(app.globalData.server + "/miniprogram/reservations?type='current'&search=" + value),
+      url: app.globalData.server + "/miniprogram/reservations?type=" + "current&search=" + encodeURI(value),
       header: {
         'Authorization': app.globalData.token
       },
@@ -112,7 +112,7 @@ Page({
         pageIndex: this.data.pageIndex+1
       });
       wx.request({
-        url: encodeURI(app.globalData.server + "/miniprogram/projects?search="+this.data.searchContent+"&page="+this.data.pageIndex),
+        url: app.globalData.server + "/miniprogram/projects?search="+encodeURI(this.data.searchContent)+"&page="+this.data.pageIndex,
         header: {
           'Authorization': app.globalData.token
         },
@@ -152,7 +152,7 @@ Page({
         pageIndex: this.data.pageIndex + 1
       });
       wx.request({
-        url: encodeURI(app.globalData.server + "/miniprogram/reservations?type='current'&search="+this.data.searchContent+"&page="+this.data.pageIndex),
+        url: app.globalData.server + "/miniprogram/reservations?type="+"current&search="+encodeURI(this.data.searchContent)+"&page="+this.data.pageIndex,
         header: {
           'Authorization': app.globalData.token
         },
