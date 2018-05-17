@@ -123,12 +123,14 @@ Page({
 
   },
   openMap: function () {
-    wx.openLocation({
-      latitude : this.data.latitude,
-      longitude : this.data.longitude,
-      name: this.data.title,
-      address: this.data.address
-    })
+    if(this.data.latitude && this.data.longitude){
+      wx.openLocation({
+        latitude : this.data.latitude,
+        longitude : this.data.longitude,
+        name: this.data.title,
+        address: this.data.address
+      })
+    }
   },
   openReservation: function (event) {
     wx.navigateTo({

@@ -34,7 +34,7 @@
           </view>
         </view>
       </view>
-      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">
+      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address" wx:if="{{ item.address }}">
         <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/10.png"></image>
         <text class="address-text">{{ item.address }}</text>
         <text class="more-icon">></text>

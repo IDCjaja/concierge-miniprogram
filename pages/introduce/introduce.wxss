@@ -1,5 +1,7 @@
 page {
-	background-color:#eeeeee;
+  background-color:#f6f9fe;
+  padding-bottom: 60px;
+  height: auto;
 }
 .introduce-image{
   width: 100%;
@@ -25,12 +27,14 @@ text {
 .introduce-title {
   font-size: 16px;
   font-weight: 400;
+  padding: 10px 0;
 }
 .introduce-address {
   color: #0366d6;
   font-size: 12px;
   display: flex;
   align-items: center;
+  padding-top: 10px;
 }
 .introduce-address:hover{
   text-decoration: underline;

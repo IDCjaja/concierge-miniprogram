@@ -79,12 +79,14 @@ Page({
   },
   openMap(event) {
     var index = event.currentTarget.dataset.reservationIndex;
-    wx.openLocation({
-      latitude: this.data.reservationsList[index].latitude,
-      longitude: this.data.reservationsList[index].longitude,
-      name: this.data.reservationsList[index].project_name,
-      address: this.data.reservationsList[index].address
-    })
+    if(this.this.data.reservationsList[index].latitude && this.data.reservationsList[index].longitude){
+      wx.openLocation({
+        latitude: this.data.reservationsList[index].latitude,
+        longitude: this.data.reservationsList[index].longitude,
+        name: this.data.reservationsList[index].project_name,
+        address: this.data.reservationsList[index].address
+      })
+    }
   },
   onReachBottom() {
     this.setData({

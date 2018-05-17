@@ -1,11 +1,11 @@
 .page-container {
   height: 100%;
-  background-color: #f5f5f5;
+  background-color: #f6f9fe;
   overflow: hidden;
   position: relative;
 }
 .content {
-  padding-left: 10px;
+  padding-left: 15px;
   margin-top: 10px;
   background: #fff;
 }
@@ -13,6 +13,7 @@
   display: flex;
   border-bottom: 1px solid #eeeeee;
   background: #fff;
+  align-items: center;
 }
 .group-inline input {
   flex: auto;
@@ -23,6 +24,8 @@
 text.required {
   padding: 10px;
   white-space: nowrap;
+  font-size: 15px;
+  text-align: justify;
 }
 text.block,text.block {
   display: block;
@@ -41,16 +44,14 @@ input {
 .code-box input {
   flex: auto;
   margin: 0;
-  margin-left: 45px;
 }
-.code-box text {
+.code-box .get-code {
   color:  #0366d6;
-  padding:0 10px;
+  padding: 10px 15px;
   white-space: nowrap;
   margin: 0;
   border: none;
   border-left: 1px solid #ccc;
-  background-color: #fff;
   font-size: 14px;
 }
 .code-box text:hover {
@@ -58,6 +59,9 @@ input {
 }
 .code-box text.disabled {
   color: #ccc;
+  padding: 10px 15px;
+  white-space: nowrap;
+  border-left: 1px solid #ccc;
 }
 .section {
   margin-top: 10px;
@@ -65,22 +69,23 @@ input {
 .picker-text {
   width: 100%;
   background: #fff;
-  line-height: 42px;
+  padding: 15px 0;
   display: flex;
   align-items: center;
-  min-height: 42px;
 }
 .picker-value {
   flex: auto;
   padding: 0 10px;
   font-size:12px;
 }
-
+.picker-value {
+  padding:8.5px 0;
+}
 .picker-icon {
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
   text-align: right;
-  padding-right: 10px;
+  margin: 0 15px;
 }
 /*多项时间选择器*/
 .mask {
@@ -109,6 +114,7 @@ input {
 }
 .picker-btngroup {
   display: flex;
+  padding: 0 15px;
 }
 .picker-btn {
   flex: 1;
@@ -128,10 +134,15 @@ input {
   display: flex;
   align-items: center;
 }
+picker-view-column view {
+  font-size: 14px;
+}
 .multipicker-value {
   flex: auto;
-  padding: 0 10px;
-  display: flex;
+  padding: 0 10px 17px 10px;
+}
+.multipicker-value:last-child {
+  padding-bottom: 0;
 }
 .multipicker-date {
   margin-right: 10px;
@@ -146,6 +157,7 @@ picker-view view {
 .multi-column {
   line-height: 50px;
   height: 50px;
+  font-size: 14px;
   overflow: hidden;
   text-align: center;
   display: flex;

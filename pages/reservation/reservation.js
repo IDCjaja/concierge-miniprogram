@@ -54,7 +54,7 @@ Page({
     }
     multiArray = JSON.parse(res.data.time_table);
     multiArray.forEach(function(time_table){
-      dayArr.push(time_table.date + ' ' + WEEKDAY_MAP[time_table.wday])
+      dayArr.push(time_table.date + '   ' + WEEKDAY_MAP[time_table.wday])
       time_table.table.forEach(function(item){
         if(item.remain == null){
           timeArr.push(item.time+' ( 无限制 )');
@@ -274,7 +274,7 @@ Page({
               success: () => {
                 setTimeout(function() {
                   wx.reLaunch({
-                    url: "../userInfo/userInfo"
+                    url: "../projects/projects"
                   })
                 }, 1000)
               }
