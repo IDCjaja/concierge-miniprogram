@@ -1,5 +1,6 @@
 .projects-contianer {
   height: 100%;
+  background-color: #f6f9fe;
 }
 .projects-tabs {
   display: flex;
@@ -15,7 +16,7 @@
 }
 .current-projects {
   padding-top: 10px;
-  background-color: #f1f1f1;
+  background-color: #f6f9fe;
   margin-bottom: 10px;
 }
 .search-wrapper {
@@ -24,7 +25,7 @@
   padding: 8px;
   margin:0 4%;
   display: flex;
-  background-color: #f1f1f1;
+  background-color: #f6f9fe;
 }
 .search-placeholder {
   color: #909399;
@@ -104,4 +105,31 @@
 }
 .history {
   color: #f1f1f1;
+}
+.state-select {
+  position: relative;
+  font-size:15px;
+  height:55px;
+  width: 100%;
+  background-color: #f6f9fe;
+}
+.state-btn-wrapper {
+  max-width: 100%;
+  height: 100%;
+  margin: 0 4%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.state-btn {
+  background-color: #fff;
+  border:1px solid #f1f1f1;
+  padding:5px 10px;
+  border-radius:15px;
+  width:20%;
+  text-align: center;
+}
+.state-active {
+  background-color: #409eff;
+  color: #fff;
 }

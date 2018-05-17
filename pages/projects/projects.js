@@ -1,19 +1,25 @@
 const app = getApp();
 
+const STATE_TEXT =  {
+  success: '已成功',
+  wait: '待审核',
+  overtime: '已过期',
+  checked: '已核销',
+  cancelled: '已取消'
+}
 Page({
-  STATE_TEXT: {
-    success: '已成功',
-    wait: '待审核',
-    overtime: '已过期',
-    checked: '已核销',
-    cancelled: '已取消'
-  },
   data: {
     tabList: [
       {"text": "当前预约"},
       {"text": "历史预约"}
     ],
+    stateList: [
+      {"text": STATE_TEXT['checked'], "state": "checked"},
+      {"text": STATE_TEXT['cancelled'], "state": "cancelled"},
+      {"text": STATE_TEXT['overtime'], "state": "overtime"}
+    ],
     currentTabIndex: 0,
+    currentState: 'checked',
     reservationsList: [],
     loading: true,
     nomoreData: true,
@@ -21,9 +27,13 @@ Page({
     currentPageReservations: [],
     pageIndex: 1
   },
+  onShow() {
+    this.refreshData()
+  },
   refreshData(){
+    this.getStateType();
     wx.request({
-      url: app.globalData.server + '/miniprogram/reservations',
+      url: app.globalData.server + '/miniprogram/reservations?type=' + this.data.stateType,
       header: {
         'Authorization': app.globalData.token
       },
@@ -33,25 +43,42 @@ Page({
           pageIndex: 1,
           currentPageReservations: this.formatReservations(res.data.reservations)
         })
-        wx.stopPullDownRefresh()
-        this.setData({
-          refresh: true
-        })
+        setTimeout(()=>{
+          wx.stopPullDownRefresh()
+          this.setData({
+            refresh: true
+          })
+        },1000)
       }
     })
   },
-  onShow() {
+  getStateType() {
+    if(this.data.currentTabIndex === 0) {
+      this.setData({
+        stateType: 'current'
+      })
+    } else {
+      this.setData({
+        stateType: this.data.currentState
+      })
+    }
+  },
+  changeTab(event) {
+    this.setData({
+      currentTabIndex: event.currentTarget.dataset.tabIndex
+    })
     this.refreshData()
   },
   changeState(event) {
     this.setData({
-      currentTabIndex: event.currentTarget.dataset.tabIndex
+      currentState: event.currentTarget.dataset.state
     })
+    this.refreshData()
   },
   formatReservations(array) {
     array.forEach(item => {
-      if(this.STATE_TEXT[item.state]) {
-        item.state = this.STATE_TEXT[item.state]
+      if(STATE_TEXT[item.state]) {
+        item.state = STATE_TEXT[item.state]
       }
     })
     return array;
@@ -96,7 +123,7 @@ Page({
         pageIndex: this.data.pageIndex+1
       });
       wx.request({
-        url: app.globalData.server + "/miniprogram/reservations?page="+this.data.pageIndex,
+        url: app.globalData.server + "/miniprogram/reservations?type="+this.data.stateType+"&page="+this.data.pageIndex,
         header: {
           'Authorization': app.globalData.token
         },

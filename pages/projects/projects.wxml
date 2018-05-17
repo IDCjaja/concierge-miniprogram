@@ -1,20 +1,22 @@
 <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
 <view class="projects-contianer">
-  <view class="search-wrapper" bindtap="search">
-    <icon type="search" size="14" color="#909399" class="search-icon"></icon>
-    <text class="search-placeholder">请输入预约名称</text>
-  </view>
-  <view class="projects-tabs">
-    <text class="tab {{ currentTabIndex == index?'active':'' }}"
-          wx:for="{{ tabList }}"
-          data-tab-index="{{ index }}"
-          bindtap="changeState">
-        {{ item.text }}
-    </text>
+  <view style="background-color: #fff">
+    <view class="search-wrapper" bindtap="search">
+      <icon type="search" size="14" color="#909399" class="search-icon"></icon>
+      <text class="search-placeholder">请输入预约名称</text>
+    </view>
+    <view class="projects-tabs">
+      <text class="tab {{ currentTabIndex == index?'active':'' }}"
+            wx:for="{{ tabList }}"
+            data-tab-index="{{ index }}"
+            bindtap="changeTab">
+          {{ item.text }}
+      </text>
+    </view>
   </view>
   <view class="current-projects" hidden="{{ currentTabIndex == 1 }}">
     <view class="reservations-item"
-          wx:for="{{ reservationsList }}" 
+          wx:for="{{ reservationsList }}"
           bindtap="showDetail"
           data-reservation-id="{{ item.id }}">
       <view class="name-state-wrapper">
@@ -42,6 +44,43 @@
     </view>
   </view>
   <view class="history-projects" hidden="{{ currentTabIndex == 0 }}">
+    <view class="state-select">
+      <view class="state-btn-wrapper">
+        <view class="state-btn {{ currentState === item.state?'state-active':'' }}"
+              wx:for="{{ stateList }}"
+              data-state="{{ item.state }}"
+              bindtap="changeState">
+            {{ item.text }}
+        </view>
+      </view>
+    </view>
+        <view class="reservations-item"
+          wx:for="{{ reservationsList }}" 
+          bindtap="showDetail"
+          data-reservation-id="{{ item.id }}">
+      <view class="name-state-wrapper">
+        <view class="reservation-name">{{ item.project_name }}</view>
+        <view class="reservation-state success" wx:if="{{ item.state === '已成功' }}">{{ item.state }}</view>
+        <view class="reservation-state waitting" wx:elif="{{ item.state === '待审核'}}">{{ item.state }}</view>
+        <view class="reservation-state history" wx:else>{{ item.state }}</view>
+      </view>
+      <view class="reservation-datatime">
+        <view class="icon-datetime-wrapper">
+          <image src="http://p1ctmsz1g.bkt.clouddn.com/9.png" class="icon"></image>
+          <view class="date-time-wrapper">
+            <view class="date-time-item" wx:for="{{ item.time }}" wx:for-item="time">
+              <text class="reservation-date">{{ item.date }}</text>
+              <text class="reservation-time">{{ time }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/10.png"></image>
+        <text class="address-text">{{ item.address }}</text>
+        <text class="more-icon">></text>
+      </view>
+    </view>
   </view>
   <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
   <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>

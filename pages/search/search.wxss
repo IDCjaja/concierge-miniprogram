@@ -1,5 +1,5 @@
 page {
-  background-color: #f1f1f1;
+  background-color: #f6f9fe;
   height: 100%;
 }
 .search-container {

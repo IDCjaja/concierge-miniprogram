@@ -1,6 +1,6 @@
 page {
   height: 100%;
-  background-color: #f1f1f1;
+  background-color: #f6f9fe;
 }
 .content-wrapper {
   height: 100%;
@@ -68,14 +68,14 @@ page {
   border-bottom: 0px;
 }
 .search-wrapper {
-  border: 1px solid #ebeef5;
+  background-color: #ecf0f3;
   border-radius: 5px;
   padding: 5px;
   width: 65%;
   display: flex;
 }
 .search-placeholder {
-  color: #909399;
+  color: #acacac;
   margin-left: 5px;
 }
 .search-icon {

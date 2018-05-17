@@ -6,13 +6,13 @@ page {
   text-align: center;
   line-height: 25px;
 	color: #ccc;
-	background-color: #f1f1f1;	
+	background-color: #f6f9fe;	
 }
 .projects-loading-complete {
   text-align: center;
 	line-height: 25px;
 	color: #ccc;
-	background-color: #f1f1f1;
+	background-color: #f6f9fe;
 }
 .pullDownRefresh {
 	color: #ccc;
