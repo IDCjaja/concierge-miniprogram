@@ -36,7 +36,7 @@
     <!-- 单选时间选择器 -->
     <picker mode="multiSelector" wx:if="{{radioPicker}}" bindchange="bindMultiPickerChange" bindcancel="bindMultiPickerCancel" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
       <view class="picker picker-text">
-        <text class="picker-value">{{selectValue}}</text>
+        <text class="picker-value">{{displayValue}}</text>
         <image class="picker-icon" src="../../images/time.png" />
       </view>
     </picker>

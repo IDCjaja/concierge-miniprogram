@@ -87,7 +87,8 @@ Page({
       timeList: times[0],
       requestDate: requestDate,
       requestTime: requestTime,
-      selectValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]]
+      selectValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]],
+      displayValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]].slice(0,11)
     })
     if(res.data.need_sms == true){
       this.setData({
@@ -340,7 +341,8 @@ Page({
     if(remain !=0){
       this.setData({
         multiIndex: e.detail.value,
-        selectValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]]
+        selectValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]],
+        displayValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]].slice(0,11)
       })
     }else if(remain === 0){
       wx.showToast({
