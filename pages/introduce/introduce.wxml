@@ -9,10 +9,10 @@
   </view>
   <view>
     <text class="introduce-title block-text underline">{{title}}</text>
-    <view bindtap="openMap" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
+    <view bindtap="openMap" wx:if="{{address}}" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
   </view>
 </view>
-<view class="content">
+<view class="content content-with-tip">
   <view class="underline" style="padding-bottom: 10px">
     <text class="block-text underline reservation-time">预约时间</text>
     <block wx:for="{{bookingTime}}" wx:key="bookingTime" wx:for-item="itemName">
@@ -28,20 +28,22 @@
     <text class="block-text">预约详情</text>
     <text>{{description}}</text>
   </view>
+  <view class="tip">
+    <view class="project-detail" wx:if="{{aheadTime.hour}}">
+      <text class="block-text">提前{{aheadTime.hour}}小时预约</text>
+    </view> 
+    <view class="project-detail" wx:if="{{aheadTime.day}}">
+      <text class="block-text">提前{{aheadTime.day}}天预约</text>
+    </view>
+    <view class="project-detail" wx:if="{{!(perCount === null)}}">
+      <text class="block-text">每人可预约该项目的个数{{perCount}}</text>
+    </view> 
+    <view class="full-tip">
+      <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
+    </view>
+  </view>
 </view>
-<view class="project-detail" wx:if="{{aheadTime.hour}}">
-  <text class="block-text">提前{{aheadTime.hour}}小时预约</text>
-</view> 
-<view class="project-detail" wx:if="{{aheadTime.day}}">
-  <text class="block-text">提前{{aheadTime.day}}天预约</text>
-</view>
-<view class="project-detail" wx:if="{{!(perCount === null)}}">
-  <text class="block-text">每人可预约该项目的个数{{perCount}}</text>
-</view> 
-<view class="last-view">
-  <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
-</view>
-<view style="margin-bottom: 50px;width:100%;height:10px;"></view>
+
 <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable}}">
   立即预约
 </button>

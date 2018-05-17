@@ -44,12 +44,14 @@ Page({
     })
   },
   openMap() {
-    wx.openLocation({
-      latitude: this.data.reservation.latitude,
-      longitude: this.data.reservation.longitude,
-      name: this.data.reservation.project_name,
-      address: this.data.reservation.address
-    })
+    if(this.data.latitude && this.data.longitude){
+      wx.openLocation({
+        latitude: this.data.reservation.latitude,
+        longitude: this.data.reservation.longitude,
+        name: this.data.reservation.project_name,
+        address: this.data.reservation.address
+      })
+    }
   },
   orderAgain(){
     wx.navigateTo({

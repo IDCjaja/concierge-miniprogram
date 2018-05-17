@@ -1,6 +1,11 @@
 page {
   height: 100%;
-	background-color:#eeeeee;
+	background-color:#f6f9fe;
+}
+.detail-card {
+  margin: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 20px #ccc;
 }
 .reservation-detail {
   height: 100%;
@@ -12,14 +17,15 @@ view {
 }
 .detail-header {
   font-size:16px;
-  padding:10px;
+  padding:15px;
+  padding-top: 22px;
   border-bottom:1px solid #f1f1f1;
   color: #fff;
   background: #6177ff;
 }
 .detail-title {
   text-align: center;
-  line-height: 30px;
+  font-weight: bold;
   background: #6177ff;
 }
 .detail-Qrcode {
@@ -33,9 +39,8 @@ view {
   margin: 0 auto;
 }
 .detail-body {
-  margin-left: 3%;
-  margin-top: 10px;
-  padding: 10px;
+  margin-left: 15px;
+  padding: 15px;
   padding-left: 0;
   border-top: 1px solid #f1f1f1;
 }
@@ -51,8 +56,8 @@ view {
 .state {
   display: flex;
   align-items: center;
-  font-size: 22px;
-  line-height: 40px;
+  font-size: 24px;
+  padding: 15px 0;
   background: #6177ff;
 }
 .state image {
@@ -67,7 +72,7 @@ view {
   margin-right: 5px;
 }
 .detail-address {
-  padding:10px;
+  padding:15px;
   border-top:1px solid #f1f1f1;
   border-bottom:1px solid #f1f1f1;
   display: flex;
@@ -93,10 +98,13 @@ view {
   margin-right: 10px;
 }
 .user-information {
-  margin-bottom:10px;
+  margin-bottom:8.5px;
   display:flex;
   justify-content:space-between;
   align-items:center;
+}
+.user-information:last-child {
+  margin-bottom: 0;
 }
 .detail-times {
   display: flex;
@@ -116,7 +124,12 @@ view {
   position:fixed;
   width:100%;
   bottom:0;
+  background-color: #fff; 
 }
 .detail-footer .warning-text {
   padding: 10px;
+}
+.submit-btn {
+  width: auto;
+  margin: 0 15px;
 }
