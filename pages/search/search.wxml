@@ -53,7 +53,7 @@
     <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
     <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
     <view class="no-project" hidden="{{ noResult }}">
-      <image src="http://cdrtvu.qiniudn.com/FiJUUanta4uz3CzcMxKUbo4pf08r" class="no-project-icon"></image>
+      <image src="../../images/search-without-result.png" class="no-project-icon"></image>
       <text class="no-project-text">未搜索到相关结果</text>
     </view>
   </view>
