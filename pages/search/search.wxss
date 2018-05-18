@@ -1,6 +1,6 @@
 page {
   background-color: #f6f9fe;
-  height: 100%;
+  height: auto;
 }
 .search-container {
   height: 100%;

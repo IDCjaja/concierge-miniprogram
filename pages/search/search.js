@@ -46,12 +46,16 @@ Page({
           this.setData({
             projects: res.data.projects,
             currentPageProjects: res.data.projects,
-            noResult: true
+            noResult: true,
+            loading: true,
+            nomoreData: true
           })
         } else {
           this.setData({
             projects: res.data.projects,
-            noResult: false
+            noResult: false,
+            loading: true,
+            nomoreData: true
           })
         }
       }
@@ -68,12 +72,16 @@ Page({
           this.setData({
             reservationsList: this.formatReservations(res.data.reservations),
             currentPageReservations: this.formatReservations(res.data.reservations),
-            noResult: true
+            noResult: true,
+            loading: true,
+            nomoreData: true
           })
         } else {
           this.setData({
             reservationsList: this.formatReservations(res.data.reservations),
-            noResult: false
+            noResult: false,
+            loading: true,
+            nomoreData: true
           })
         }
       }

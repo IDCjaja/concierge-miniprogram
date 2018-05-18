@@ -73,7 +73,6 @@
 .icon {
   width: 15px;
   height: 15px;
-  margin-top: 2px;
   margin-right: 15px;
 }
 .reservation-date{
