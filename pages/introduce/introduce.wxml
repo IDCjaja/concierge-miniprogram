@@ -31,19 +31,20 @@
   <view class="tip">
     <view class="project-detail" wx:if="{{aheadTime.hour}}">
       <text class="block-text">提前{{aheadTime.hour}}小时预约</text>
-    </view> 
+    </view>
     <view class="project-detail" wx:if="{{aheadTime.day}}">
       <text class="block-text">提前{{aheadTime.day}}天预约</text>
     </view>
     <view class="project-detail" wx:if="{{!(perCount === null)}}">
       <text class="block-text">每人可预约该项目的个数{{perCount}}</text>
-    </view> 
+    </view>
     <view class="full-tip">
       <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
     </view>
   </view>
 </view>
-
-<button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable}}">
-  立即预约
-</button>
+<view class="introduce-footer">
+  <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable}}">
+    立即预约
+  </button>
+</view>

@@ -3,7 +3,8 @@ const app = getApp()
 
 Page({
   data: {
-    reservation: {}
+    reservation: {},
+    modalHidden: true
   },
   onLoad(options) {
     this.setData({
@@ -59,42 +60,47 @@ Page({
     })
   },
   orderCancel(){
-    wx.showModal({
-      title:'确认取消',
-      content:'是否取消预约？',
-      success: res => {
-        if(res.confirm){
-          wx.request({
-            url: app.globalData.server + '/miniprogram/reservations/'+ this.data.id +'/cancel',
-            method: 'POST',
-            header: {
-              'Authorization': app.globalData.token
-            },
-            success: response => {
-              if(response.statusCode == 201){
-                wx.showToast({
-                  title: '已取消',
-                  icon: 'success',
-                  duration: 1500,
-                  success: () => {
-                    setTimeout(function(){
-                      wx.navigateTo({
-                        url:'../projects/projects'
-                      })
-                    }, 1500)
-                  }
+    this.setData({
+      modalHidden: false
+    })
+  },
+  confirmCancel(){
+    wx.request({
+      url: app.globalData.server + '/miniprogram/reservations/'+ this.data.id +'/cancel',
+      method: 'POST',
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success: response => {
+        if(response.statusCode == 201){
+          wx.showToast({
+            title: '已取消',
+            icon: 'success',
+            duration: 1500,
+            success: () => {
+              setTimeout(function(){
+                wx.navigateTo({
+                  url:'../projects/projects'
                 })
-              }else if(response.statusCode == 401 || response.statusCode == 403){
-                wx.showToast({
-                  title: '没有权限',
-                  icon: 'none',
-                  duration: 2000
-                })
-              }
+              }, 1500)
             }
+          })
+        }else if(response.statusCode == 401 || response.statusCode == 403){
+          wx.showToast({
+            title: '没有权限',
+            icon: 'none',
+            duration: 2000
           })
         }
       }
+    })
+    this.setData({
+      modalHidden: true
+    })
+  },
+  close(){
+    this.setData({
+      modalHidden: true
     })
   }
 })

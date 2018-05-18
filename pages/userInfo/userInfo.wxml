@@ -11,17 +11,17 @@
 
 <view class="">
   <view class="item" bindtap="myReservation">
-    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <image class="item-icon" src="../../images/reservation.jpg"/>
     <text class="item-title">我的预约</text>
     <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
   </view>
   <view class="item" bindtap="userGuide">
-    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <image class="item-icon" src="../../images/guide.jpg"/>
     <text class="item-title">使用指南</text>
     <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
   </view>
   <view class="item" bindtap="admin">
-    <image class="item-icon" src="http://p1ctmsz1g.bkt.clouddn.com/ViewGallery.png"/>
+    <image class="item-icon" src="../../images/admin.jpg"/>
     <text class="item-title">我是管理员</text>
     <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
   </view>

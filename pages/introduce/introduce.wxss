@@ -15,6 +15,7 @@ view {
 .content {
   margin-top: 10px;
   padding: 15px;
+  margin-bottom: 20px;
 }
 text {
   line-height: 2;
@@ -30,17 +31,17 @@ text {
   padding: 10px 0;
 }
 .introduce-address {
-  color: #0366d6;
+  color: #737373;
   font-size: 12px;
   display: flex;
   align-items: center;
   padding-top: 10px;
 }
-.introduce-address:hover{
-  text-decoration: underline;
-}
 .introduce-address text {
-  flex: auto;
+  flex:  0 0 85%;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 .address-more {
   width: 15px;
@@ -68,10 +69,15 @@ text {
 .time-item text {
   font-size: 14px;
 }
-
+.introduce-footer {
+  position:fixed;
+  width:100%;
+  bottom:0;
+  background-color: #fff; 
+}
 .submit-btn {
-  position: fixed;
-  bottom: 0;
+  width: auto;
+  margin: 10px 15px;
 }
 .deep {
   background-color: #0652a8;

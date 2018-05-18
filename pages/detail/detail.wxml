@@ -3,6 +3,23 @@
     <view class="loader"></view>
   </view>
 </view>
+<view class="modal-mask" hidden="{{modalHidden}}">
+  <view class="modal-wrap {{modalHidden?'wrap-hidden':'wrap-show'}}">
+    <view class="modal-header">
+      <text>取消预约</text>
+      <image bindtap="close" src="http://p1ctmsz1g.bkt.clouddn.com/delete.jpg"></image>
+    </view>
+    <view class="modal-body">
+      <view class="modal-tip">
+        <view>您确认要取消这个预约吗?</view>
+        <view>取消预约后可以在历史预约查看详情</view>
+      </view>
+      <view class="modal-button">
+        <button class="submit-btn" bindtap="confirmCancel">确认取消</button>
+      </view>
+    </view>
+  </view>
+</view>
 <view class="detail-card">
   <view class="reservation-detail">
     <view class="detail-header">
