@@ -1,3 +1,4 @@
+<view class="regist-title">注册</view>
 <view class="input-group">
   <input bindinput="nameBindChange" placeholder-class="phstyle" type="text" value="{{name}}" placeholder="请输入用户名"/>
   <input bindinput="phoneBindChange" placeholder-class="phstyle" type="text" value="{{phone}}" placeholder="请输入手机号码"/>

@@ -1,3 +1,9 @@
+.regist-title {
+  padding: 35px 0 33px 0;
+  color: #409eff;
+  font-size: 36px;
+  text-align: center;
+}
 input {
   background-color: #fff;
   padding: 10px;

@@ -68,11 +68,10 @@
       <text>{{reservation.address}}</text>
       <image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/blueMore.png"></image>
     </view>
+    <text class="warning-text block-text" wx:if="{{open}}">该预约已暂停</text>
   </view>
 </view>
-
 <view class="detail-footer">
   <button class="submit-btn" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
-  <text class="warning-text block-text" wx:if="{{open}}">该预约已暂停</text>
   <button class="submit-btn" hidden="{{orderAgain}}" disabled="{{canOrder}}" bindtap="orderAgain">再次预约</button>
 </view>

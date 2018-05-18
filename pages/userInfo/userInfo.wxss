@@ -27,6 +27,10 @@
   align-items: center;
   justify-content: center;
   padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+}
+.item:last-child {
+  border-bottom-color: transparent;
 }
 .item-icon {
   width: 20px;

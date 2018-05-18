@@ -22,7 +22,7 @@
   flex: auto;
 }
 text.required {
-  padding: 10px;
+  padding: 10px 10px 10px 0;
   white-space: nowrap;
   font-size: 15px;
   text-align: justify;
@@ -46,6 +46,7 @@ input {
   margin: 0;
 }
 .code-box .get-code {
+  width: 110px;
   color:  #0366d6;
   padding: 10px 15px;
   white-space: nowrap;
@@ -53,15 +54,18 @@ input {
   border: none;
   border-left: 1px solid #ccc;
   font-size: 14px;
+  text-align: center;
 }
 .code-box text:hover {
   color: #0652a8;
 }
 .code-box text.disabled {
+  width: 110px;
   color: #ccc;
   padding: 10px 15px;
   white-space: nowrap;
   border-left: 1px solid #ccc;
+  text-align: center;
 }
 .section {
   margin-top: 10px;
@@ -141,7 +145,7 @@ picker-view-column view {
 }
 .multipicker-value {
   flex: auto;
-  padding: 0 10px 17px 10px;
+  padding: 0 10px 17px 15px;
 }
 .multipicker-value:last-child {
   padding-bottom: 0;
@@ -171,6 +175,12 @@ picker-view view {
   height: 300px;
   flex: 5;
 }
+.multi-column-time {
+  width: 130px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 .selected-icon {
   width: 16px;
   height: 16px;
@@ -196,6 +206,11 @@ picker-view view {
   position: absolute;
   bottom: 0;
   margin-top: 20px;
+  background-color: #fff; 
+}
+.submit-btn {
+  width: auto;
+  margin: 10px 15px;
 }
 .deep {
   background-color: #0652a8;

@@ -58,10 +58,10 @@
         </picker-view> 
         <picker-view indicator-style="height: 34px;" class="multi-picker" value="{{timeValue}}">
           <picker-view-column>
-            <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
-              {{item.time}}  剩余:{{item.remain}}
+            <view wx:for="{{timeList}}" bindtap="select" class="multi-column" data-select-index="{{index}}" data-selected="{{select}}">
+              <text class="multi-column-time">{{item.time}}  剩余:{{item.remain}}</text>
               <image wx:if="{{item.selStatus}}" class="selected-icon" src="http://p1ctmsz1g.bkt.clouddn.com/reservation-checked.jpg" />
-              <image wx:if="{{!item.selStatus}}" class="selected-icon" src="http://p1ctmsz1g.bkt.clouddn.com/reservation-unckecked.jpg" />
+              <image wx:else class="selected-icon" src="http://p1ctmsz1g.bkt.clouddn.com/reservation-unckecked.jpg" />
             </view>
           </picker-view-column>
         </picker-view>

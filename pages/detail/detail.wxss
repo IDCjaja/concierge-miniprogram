@@ -181,8 +181,8 @@ view {
   bottom:0;
   background-color: #fff; 
 }
-.detail-footer .warning-text {
-  padding: 10px;
+.warning-text {
+  padding: 10px 15px;
 }
 .submit-btn {
   width: auto;
