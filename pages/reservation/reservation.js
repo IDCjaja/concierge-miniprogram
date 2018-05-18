@@ -273,7 +273,7 @@ Page({
               duration: 1000,
               success: () => {
                 setTimeout(function() {
-                  wx.reLaunch({
+                  wx.navigateTo({
                     url: "../projects/projects"
                   })
                 }, 1000)

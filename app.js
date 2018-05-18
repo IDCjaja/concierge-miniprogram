@@ -5,5 +5,4 @@ App({
     role: '',
     token: ''
   }
-  //https://concierge.skylarkly.com
 })
