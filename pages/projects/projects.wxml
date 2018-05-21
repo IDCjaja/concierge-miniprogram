@@ -47,6 +47,7 @@
         <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
         <text class="address-text">{{ item.address }}</text>
         <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
+      </view>
     </block>
     <block wx:else>
       <view class="no-reservations">
@@ -99,6 +100,7 @@
         <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
         <text class="address-text">{{ item.address }}</text>
         <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
+      </view>
     </block>
     <block wx:else>
       <view class="no-reservations">

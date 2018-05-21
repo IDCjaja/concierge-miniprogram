@@ -77,6 +77,8 @@ page {
 .search-placeholder {
   color: #acacac;
   margin-left: 5px;
+  height:24px;
+  line-height:24px;
 }
 .search-icon {
   display: flex;
