@@ -9,7 +9,7 @@
   </view>
   <view>
     <text class="introduce-title block-text underline">{{title}}</text>
-    <view bindtap="openMap" wx:if="{{address}}" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
+    <view bindtap="openMap" wx:if="{{address}}" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate-gray.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
   </view>
 </view>
 <view class="content content-with-tip">

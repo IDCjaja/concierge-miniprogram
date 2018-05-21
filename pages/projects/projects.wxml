@@ -36,10 +36,10 @@
           </view>
         </view>
       </view>
-      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address" wx:if="{{ item.address }}">
-        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/10.png"></image>
+      <view catchtap="openMap" wx:if="{{ item.address }}" data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
         <text class="address-text">{{ item.address }}</text>
-        <text class="more-icon">></text>
+        <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
       </view>
     </view>
   </view>
@@ -75,10 +75,10 @@
           </view>
         </view>
       </view>
-      <view catchtap="openMap" data-reservation-index="{{ index }}" class="reservation-address">
-        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/10.png"></image>
+      <view catchtap="openMap" wx:if="{{ item.address }}"  data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
         <text class="address-text">{{ item.address }}</text>
-        <text class="more-icon">></text>
+        <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
       </view>
     </view>
   </view>

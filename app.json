@@ -21,15 +21,16 @@
     "list": [{
         "pagePath": "pages/index/index",
         "text": "预约项目",
-        "iconPath": "./images/home.png",
-        "selectedIconPath": "./images/homeBlue.png"
+        "iconPath": "./images/home.jpg",
+        "selectedIconPath": "./images/homeBlue.jpg"
       },
       {
         "pagePath":"pages/userInfo/userInfo",
         "text": "我的",
-        "iconPath": "./images/mine.png",
-        "selectedIconPath": "./images/mineBlue.png"
+        "iconPath": "./images/user.jpg",
+        "selectedIconPath": "./images/userBlue.jpg"
       }
-    ]
+    ],
+    "selectedColor":"#409eff"
   }
 }

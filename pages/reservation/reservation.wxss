@@ -47,7 +47,7 @@ input {
 }
 .code-box .get-code {
   width: 110px;
-  color:  #0366d6;
+  color:  #409eff;
   padding: 10px 15px;
   white-space: nowrap;
   margin: 0;
@@ -207,6 +207,7 @@ picker-view view {
   bottom: 0;
   margin-top: 20px;
   background-color: #fff; 
+  border-top: 1px solid #efeef0;
 }
 .submit-btn {
   width: auto;

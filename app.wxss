@@ -54,7 +54,7 @@ input {
 .submit-btn {
   width: 100%;
   color: #fff;
-  background-color: #0366d6;
+  background-color: #409eff;
   font-weight: normal;
   display: block;
   z-index: 2;

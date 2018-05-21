@@ -273,8 +273,8 @@ Page({
               duration: 1000,
               success: () => {
                 setTimeout(function() {
-                  wx.navigateTo({
-                    url: "../projects/projects"
+                  wx.switchTab({
+                    url: "../userInfo/userInfo"
                   })
                 }, 1000)
               }

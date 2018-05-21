@@ -13,6 +13,13 @@ Page({
     wx.getStorage({
       key: 'reservationInfo',
       success: (res) => {
+        var date = new Date(Date.parse(res.data.update_time.replace(/-/g,"/")));
+        var update_time = date.getFullYear() + '-' +
+        (date.getMonth() + 1) + '-' +
+        date.getDate() + ' ' +
+        date.getHours() + ':' +
+        date.getMinutes() + ':' +
+        date.getSeconds()
         if(res.data.state != "已成功" && res.data.state != "待审核"){
           this.setData({
             orderAgain: false,
@@ -39,6 +46,7 @@ Page({
           reservation: res.data,
           project_id: res.data.project_id,
           id: res.data.id,
+          update_time: update_time,
           mask: true
         })
       }

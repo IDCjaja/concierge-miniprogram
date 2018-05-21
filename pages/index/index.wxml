@@ -4,7 +4,7 @@
     <view class="homepage-header">
       <view class="dropdown-wrapper">
         <view class="dropdown" catchtap="openDropdown">
-          <image src="../../images/location.png" class="dropdown-icon"></image>
+          <image src="http://p1ctmsz1g.bkt.clouddn.com/locateBlue.jpg" class="dropdown-icon"></image>
           <text>{{ defaultText }}</text>
         </view>
         <view class="dropdown-options" hidden="{{ hiddenDropdown }}">
