@@ -1,8 +1,11 @@
+page {
+	background-color:#f6f9fe;
+}
 .page-body-info {
   background-image: url('http://p1ctmsz1g.bkt.clouddn.com/userInfo-bac.jpg');
   background-size: cover;
   padding: 30px 0;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .userinfo {
   display: flex;
@@ -27,6 +30,11 @@
   align-items: center;
   justify-content: center;
   padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+.item:last-child {
+  border-bottom-color: transparent;
 }
 .item-icon {
   width: 20px;

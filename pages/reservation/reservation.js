@@ -273,8 +273,8 @@ Page({
               duration: 1000,
               success: () => {
                 setTimeout(function() {
-                  wx.navigateTo({
-                    url: "../projects/projects"
+                  wx.switchTab({
+                    url: "../userInfo/userInfo"
                   })
                 }, 1000)
               }
@@ -374,7 +374,8 @@ Page({
     var dataList = this.data.times[this.data.value[1]];
     var selIndex = e.currentTarget.dataset.selectIndex;
     var index = this.data.selList.indexOf(selIndex);
-    if(index < 0){
+
+    if(index === -1){
       selArr.push(e.currentTarget.dataset.selectIndex);
       dataList.forEach((item) => {
         if(item.id == selIndex){
@@ -383,15 +384,15 @@ Page({
       })
     } else {
       dataList.forEach((item) => {
-        if(item.id == selIndex){
+        if(item.id === selIndex){
           item.selStatus = false
         }
-        selArr.splice(index,1)
       })
+      selArr.splice(index,1)
     }
     var selValue = []
-    selArr.forEach((index)=>{
-      selValue.push(dataList[index].time)
+    selArr.forEach((item)=>{
+      selValue.push(dataList[item].time)
     })
     this.setData({
       selList: selArr,

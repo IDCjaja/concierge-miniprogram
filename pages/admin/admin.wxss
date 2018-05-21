@@ -31,11 +31,13 @@ icon[type='search'] {
 }
 .project {
   position: relative;
+  border: 1px solid #edeef0;
 }
 .project-cover {
   width: 100%;
   height: 200px;
   margin: 10px 0;
+  box-shadow: 0 0 10px rgb(0,0,0,0.2);
 }
 .project-name {
   font-size: 18px;

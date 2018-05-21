@@ -43,6 +43,10 @@
           <text class="more-icon">></text>
         </view>
       </view>
+      <view catchtap="openMap" wx:if="{{ item.address }}" data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
+        <text class="address-text">{{ item.address }}</text>
+        <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
     </block>
     <block wx:else>
       <view class="no-reservations">
@@ -91,6 +95,10 @@
           <text class="more-icon">></text>
         </view>
       </view>
+      <view catchtap="openMap" wx:if="{{ item.address }}"  data-reservation-index="{{ index }}" class="reservation-address">
+        <image class="icon" src="http://p1ctmsz1g.bkt.clouddn.com/border-locate.jpg"></image>
+        <text class="address-text">{{ item.address }}</text>
+        <image class="more-icon" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image>
     </block>
     <block wx:else>
       <view class="no-reservations">

@@ -40,6 +40,8 @@
   margin-top:10px;
   position: relative;
   padding:0 4%;
+  border-bottom: 1px solid #efeef0;
+  border-top: 1px solid #efeef0;
 }
 .reservations-item:first-child {
   margin-top: 0px;
@@ -57,11 +59,9 @@
   color: #000;
 }
 .reservation-datatime {
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   min-height: 44px;
-  border-bottom: 1px solid #edeef0;
 }
 .icon-datetime-wrapper {
   display: flex;
@@ -79,7 +79,8 @@
   margin-right: 5px;
 }
 .reservation-address {
-  padding-bottom: 10px;
+  padding: 10px 0;
+  border-top: 1px solid #edeef0;
   display: flex;
   position: relative;
 }
@@ -91,8 +92,11 @@
   color: #737373;
 }
 .more-icon {
+  width: 15px;
+  height: 15px;
   position: absolute;
   right: 0;
+  top: 13px;
   font-size: 14px;
   color: #737373;
 }

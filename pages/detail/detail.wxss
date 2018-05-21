@@ -80,12 +80,12 @@ view {
   padding-top: 22px;
   border-bottom:1px solid #f1f1f1;
   color: #fff;
-  background: #6177ff;
+  background: #409eff;
 }
 .detail-title {
   text-align: center;
   font-weight: bold;
-  background: #6177ff;
+  background: #409eff;
 }
 .detail-Qrcode {
   text-align: center;
@@ -115,9 +115,12 @@ view {
 .state {
   display: flex;
   align-items: center;
-  font-size: 24px;
   padding: 15px 0;
-  background: #6177ff;
+  background: #409eff;
+}
+.state text {
+  font-size: 24px;
+  line-height: 1;
 }
 .state image {
   width: 15px;
@@ -155,19 +158,19 @@ view {
 .user-information {
   margin-bottom:8.5px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+}
+.user-information text:first-child {
+  flex: 0 0 70px;
 }
 .user-information:last-child {
   margin-bottom: 0;
 }
 .detail-times {
   display: flex;
-  justify-content: space-between;
 }
 .detail-cancelMessage {
   white-space: nowrap;
-  margin-right: 15px;
 }
 .cancelRemark {
   max-width: 60%;
@@ -180,9 +183,10 @@ view {
   width:100%;
   bottom:0;
   background-color: #fff; 
+  border-top: 1px solid #efeef0;
 }
-.detail-footer .warning-text {
-  padding: 10px;
+.warning-text {
+  padding: 10px 15px;
 }
 .submit-btn {
   width: auto;
