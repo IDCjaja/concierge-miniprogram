@@ -65,13 +65,17 @@ Page({
   },
   changeTab(event) {
     this.setData({
-      currentTabIndex: event.currentTarget.dataset.tabIndex
+      currentTabIndex: event.currentTarget.dataset.tabIndex,
+      loading: true,
+      nomoreData: true
     })
     this.refreshData()
   },
   changeState(event) {
     this.setData({
-      currentState: event.currentTarget.dataset.state
+      currentState: event.currentTarget.dataset.state,
+      loading: true,
+      nomoreData: true
     })
     this.refreshData()
   },

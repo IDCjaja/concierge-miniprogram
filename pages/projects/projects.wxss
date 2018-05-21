@@ -73,7 +73,6 @@
 .icon {
   width: 15px;
   height: 15px;
-  margin-top: 2px;
   margin-right: 15px;
 }
 .reservation-date{
@@ -136,4 +135,26 @@
 .state-active {
   background-color: #409eff;
   color: #fff;
+}
+.no-reservations {
+  display:flex;
+  margin-top:82px;
+  flex-direction:column;
+  align-items:center;
+}
+.no-reservations-icon {
+  width: 73px;
+  height: 73px;
+}
+.no-reservations-tip-top {
+  font-size: 18px;
+  color: #222222;
+  margin-top: 35px;
+  text-align: center;
+}
+.no-reservations-tip-bottom {
+  font-size: 15px;
+  color: #acacac;
+  text-align: center;
+  margin-top: 19px;
 }
