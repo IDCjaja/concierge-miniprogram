@@ -1,3 +1,9 @@
+<view class="loading-mask" hidden="{{mask}}">
+  <view class="box">
+    <view class="loader" wx:if="{{loader}}"></view>
+    <button class="requestAgain" bindtap="refreshData" wx:if="{{requestAgain}}">重新加载</button>
+  </view>
+</view>
 <view class="content-wrapper {{ maskHidden?'':'content-with-mask' }}" bindtap="closeDropdown">
   <view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
   <view class="container">

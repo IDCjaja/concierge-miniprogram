@@ -18,11 +18,17 @@ Page({
     nomoreData: true,
     refresh: true,
     maskHidden: true,
+    loader: true,
+    requestAgain: false,
     pageIndex: 1,
     projects: [],
     currentPageProjects: []
   },
   refreshData(){
+    this.setData({
+      loader: true,
+      requestAgain: false
+    })
     wx.request({
       url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
       header: {
@@ -35,7 +41,8 @@ Page({
         this.setData({
           projects: response.data.projects,
           pageIndex: 1,
-          currentPageProjects: response.data.projects
+          currentPageProjects: response.data.projects,
+          mask: true
         })
         setTimeout(()=>{
           wx.stopPullDownRefresh()
@@ -43,10 +50,19 @@ Page({
             refresh: true
           })
         },1000)
+      },
+      fail: error => {
+        this.setData({
+          loader: false,
+          requestAgain: true
+        })
       }
     })
   },
   onLoad() {
+    this.setData({
+      mask: false
+    })
     if(app.globalData.token){
       wx.getLocation({
         success: resData => {

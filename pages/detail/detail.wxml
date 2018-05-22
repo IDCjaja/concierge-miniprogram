@@ -41,9 +41,11 @@
       </view>
       <view class="detail-datetime user-information">
         <text class="grid-name">预约时间</text>
-        <view wx:for="{{reservation.time}}">
-          <text class="date">{{reservation.date}}</text>
-          <text class="time">{{item}}</text>
+        <view>
+          <view wx:for="{{reservation.time}}">
+            <text class="date">{{reservation.date}}</text>
+            <text class="time">{{item}}</text>
+          </view>
         </view>
       </view>
       <view class="user-information">
@@ -67,7 +69,7 @@
   </view>
 </view>
 <view class="detail-footer">
-  <button type="primary" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
+  <button class="submit-btn" hidden="{{orderCancel}}" bindtap="orderCancel">取消预约</button>
   <text class="warning-text block-text" wx:if="{{open}}">该预约已暂停</text>
-  <button type="primary" hidden="{{orderAgain}}" disabled="{{canOrder}}" bindtap="orderAgain">再次预约</button>
+  <button class="submit-btn" hidden="{{orderAgain}}" disabled="{{canOrder}}" bindtap="orderAgain">再次预约</button>
 </view>
