@@ -3,7 +3,6 @@ var app = getApp()
 Page({
   data:{
     setTimr: false,
-    multiIndex: [0,0],
     value: [0,0],
     selList: [],
     buttonDisabled: true,
@@ -78,17 +77,10 @@ Page({
       })
     })
     this.setData({
-      multiArray: [dayArr,arr[0]],
-      dayArr: dayArr,
-      arr: arr,
       times: times,
       dates: dayArr,
       date: dayArr[0],
       timeList: times[0],
-      requestDate: requestDate,
-      requestTime: requestTime,
-      selectValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]],
-      displayValue: dayArr[multiIndex[0]]+','+arr[0][multiIndex[1]].slice(0,11)
     })
     if(res.data.need_sms == true){
       this.setData({
@@ -110,14 +102,12 @@ Page({
     if(multi_time == true){
       this.setData({
         multiPicker: true,
-        radioPicker: false,
         requestDate: [],
         requestTime: []
       })
     } else {
       this.setData({
         multiPicker: false,
-        radioPicker: true
       })
     }
   },
@@ -236,21 +226,14 @@ Page({
   reservation: function(){
     var name = this.data.name;
     var code = this.data.code;
-    var remain = Number(this.getRemain(this.data.selectValue));
     if(name == ''|| name == null){
       wx.showToast({
         title:'用户名不为空',
         icon: 'none'
       })
       return;
-    }else if(remain === 0){
-      wx.showToast({
-        title:'名额不足',
-        icon: 'none',
-        duration: 2000
-      })
-      return;
-    }else if(app.globalData.flag == true){
+    }
+    else if(app.globalData.flag == true){
       app.globalData.flag = false
       wx.request({
         url: app.globalData.server + '/miniprogram/reservations',
@@ -315,44 +298,6 @@ Page({
       })
     }
   },
-  bindMultiPickerColumnChange: function(e){
-    var multiIndex = this.data.multiIndex
-    multiIndex[e.detail.column] = e.detail.value;
-    this.setData({
-      multiArray: [this.data.dayArr,this.data.arr[multiIndex[0]]]
-    })
-    var multiArray = this.data.multiArray;
-    if(e.detail.column == 0){
-      var multiIndex = [multiIndex[0],0];
-    }else{
-      var multiIndex = multiIndex;
-    }
-    var requestDate = multiArray[0][multiIndex[0]].slice(0,11);
-    var requestTime = [multiArray[1][multiIndex[1]].slice(0,11)];
-    this.setData({
-      multiIndex: multiIndex,
-      requestDate: requestDate,
-      requestTime: requestTime
-    })
-  },
-  bindMultiPickerChange: function (e) {
-    var valueStr = this.data.multiArray[1][this.data.multiIndex[1]];
-    var remain = Number(this.getRemain(valueStr));
-    if(remain !=0){
-      this.setData({
-        multiIndex: e.detail.value,
-        selectValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]],
-        displayValue: this.data.multiArray[0][this.data.multiIndex[0]]+','+this.data.multiArray[1][this.data.multiIndex[1]].slice(0,11)
-      })
-    }else if(remain === 0){
-      wx.showToast({
-        title: '名额不足',
-        icon: 'none',
-        duration: 2000
-      })
-      return
-    }
-  },
   bindChange(e) {
     const val = e.detail.value;
     var timeVal = [];
@@ -374,30 +319,43 @@ Page({
     var dataList = this.data.times[this.data.value[1]];
     var selIndex = e.currentTarget.dataset.selectIndex;
     var index = this.data.selList.indexOf(selIndex);
-
-    if(index === -1){
+    var selRemain = [];
+    if(this.data.multiPicker == true){
+      if(index === -1){
+        selArr.push(e.currentTarget.dataset.selectIndex);
+        dataList.forEach((item) => {
+          if(item.id == selIndex){
+            item.selStatus = true
+          } 
+        })
+      } else {
+        dataList.forEach((item) => {
+          if(item.id === selIndex){
+            item.selStatus = false
+          }
+        })
+        selArr.splice(index,1)
+      }
+    }else if(this.data.multiPicker == false){
+      selArr = [];
       selArr.push(e.currentTarget.dataset.selectIndex);
       dataList.forEach((item) => {
+        item.selStatus = false;
         if(item.id == selIndex){
           item.selStatus = true
         } 
       })
-    } else {
-      dataList.forEach((item) => {
-        if(item.id === selIndex){
-          item.selStatus = false
-        }
-      })
-      selArr.splice(index,1)
     }
     var selValue = []
     selArr.forEach((item)=>{
-      selValue.push(dataList[item].time)
+      selValue.push(dataList[item].time),
+      selRemain.push(dataList[item].remain)
     })
     this.setData({
       selList: selArr,
       timeList: dataList,
       selValue: selValue,
+      selRemain: selRemain
     })
   },
   cancel(){
@@ -406,15 +364,33 @@ Page({
     })
   },
   confirm(){
-    if(this.data.selValue.length > 0){
-      this.setData({
-        dateShow: this.data.date,
-        selValueShow: this.data.selValue,
-        requestDate: this.data.date.slice(0,10),
-        requestTime: this.data.selValue,
-        buttonDisabled: false
+    if(this.data.selValue.length){
+      var notZero = this.data.selRemain.every((value)=>{
+        return value != 0;
       })
-    }else if(this.data.selValue.length < 1){
+      if(notZero == false){
+        wx.showToast({
+          title: '名额不足',
+          icon: 'none',
+          duration: 2000
+        })
+        this.setData({
+          dateShow: "",
+          selValueShow: [],
+          requestDate: [],
+          requestTime: [],
+          buttonDisabled: true
+        })
+      }else{
+        this.setData({
+          dateShow: this.data.date,
+          selValueShow: this.data.selValue,
+          requestDate: this.data.date.slice(0,10),
+          requestTime: this.data.selValue,
+          buttonDisabled: false,
+        })
+      }
+    }else{
       this.setData({
         dateShow: "",
         selValueShow: this.data.selValue,

@@ -21,20 +21,8 @@
     <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
     <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
   </view>
-  <!-- 单选时间选择器 -->
-  <view wx:if="{{radioPicker}}">
-    <view  class="section group-inline">
-      <image class="picker-icon" src="http://p1ctmsz1g.bkt.clouddn.com/timeBlue.jpg" />
-      <text class="required" style="white-space: nowrap;">预约时间</text>
-      <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcancel="bindMultiPickerCancel" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-        <view class="picker picker-text">
-          <text class="picker-value">{{displayValue}}</text>
-        </view>
-      </picker>
-    </view>
-  </view>
   <!-- 多选时间选择器 -->
-  <view wx:if="{{multiPicker}}">
+  <view>
     <view class="section group-inline" bindtap="multiShow">
       <image class="picker-icon" src="http://p1ctmsz1g.bkt.clouddn.com/timeBlue.jpg" />
       <text class="required" style="white-space: nowrap;">预约时间</text>
@@ -48,7 +36,7 @@
       </view>
     </view>
     <!-- 多选时间选择器弹出层 -->
-    <view wx:if="{{multiPicker}}" class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
+    <view class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
       <view class="picker-btngroup"><text bindtap="cancel" class="picker-btn cancel-btn">取消</text><text bindtap="confirm" class="picker-btn confirm-btn">确定</text></view>
       <view class="picker-box">
         <picker-view indicator-style="height: 34px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
@@ -65,12 +53,6 @@
             </view>
           </picker-view-column>
         </picker-view>
-        <!-- <scroll-view class="multi-picker" scroll-y="true">
-          <view wx:for="{{timeList}}" catchtap="select" class="multi-column" data-select-index="{{ index }}" data-selected="{{select}}">
-            {{item.time}}  剩余:{{item.remain}}
-            <image class="selected-icon {{item.selStatus?'selected':'notSelected'}}" src="http://p1ctmsz1g.bkt.clouddn.com/check.png" />
-          </view>
-        </scroll-view> -->
       </view>
     </view>
   </view>
