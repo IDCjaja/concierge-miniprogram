@@ -19,6 +19,7 @@ page {
   top: 20%;
   margin: 0 6%;
   transition: opacity .4s;
+  padding-bottom: 15px;
 }
 .wrap-hidden {
   opacity: 0;
@@ -34,6 +35,9 @@ page {
   padding: 15px 0;
   text-align: center;
   border-radius: 5px 5px 0 0;
+  font-size: 18px;
+  line-height: 1;
+  font-weight: 500;
 }
 .modal-header image {
   width: 12px;
@@ -70,6 +74,9 @@ page {
   height: 100%;
   position: relative;
   border-radius: 5px;
+  margin: 10px 4%;
+  margin-bottom: 60px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4)
 }
 view {
   background: #fff;
@@ -81,6 +88,7 @@ view {
   border-bottom:1px solid #f1f1f1;
   color: #fff;
   background: #409eff;
+  border-radius: 5px 5px 0 0;
 }
 .detail-title {
   text-align: center;
@@ -102,6 +110,7 @@ view {
   padding: 15px;
   padding-left: 0;
   border-top: 1px solid #f1f1f1;
+  border-radius: 0 0 5px 5px;
 }
 .detail-name {
   display:flex;
@@ -139,6 +148,7 @@ view {
   border-bottom:1px solid #f1f1f1;
   display: flex;
   align-items: center;
+  border-radius: 0 0 5px 5px;
 }
 .detail-address text {
   flex:  0 0 85%;
@@ -160,7 +170,7 @@ view {
   display:flex;
   align-items:center;
 }
-.user-information text:first-child {
+.user-information .grid-name {
   flex: 0 0 70px;
 }
 .user-information:last-child {
