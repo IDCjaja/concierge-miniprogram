@@ -3,11 +3,13 @@ page {
   padding-bottom: 60px;
   height: auto;
 }
+.image-box {
+  margin-right: 15px;
+}
 .introduce-image{
   width: 100%;
   height: 200px;
   border-radius: 5px;
-  margin-right: 15px;
 }
 view {
   background: #fff;

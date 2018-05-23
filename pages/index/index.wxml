@@ -1,7 +1,10 @@
 <view class="loading-mask" hidden="{{mask}}">
   <view class="box">
     <view class="loader" wx:if="{{loader}}"></view>
-    <button class="requestAgain" bindtap="refreshData" wx:if="{{requestAgain}}">重新加载</button>
+    <view class="requestAgain" wx:if="{{requestAgain}}">
+      <view class="reload-tip">请求失败,请检查网络</view>
+      <button bindtap="wxLogin">重新加载</button>
+    </view>
   </view>
 </view>
 <view class="content-wrapper {{ maskHidden?'':'content-with-mask' }}" bindtap="closeDropdown">

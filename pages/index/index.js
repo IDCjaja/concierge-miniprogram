@@ -50,12 +50,6 @@ Page({
             refresh: true
           })
         },1000)
-      },
-      fail: error => {
-        this.setData({
-          loader: false,
-          requestAgain: true
-        })
       }
     })
   },
@@ -74,31 +68,44 @@ Page({
         }
       })
     } else {
-      wx.login({
-        success: resCode => {
-          wx.request({
-            url: app.globalData.server + '/miniprogram/login',
-            method: 'POST',
-            data: {
-              'code': resCode.code 
-            },
-            success: result => {
-              app.globalData.token = result.data.token;
-              app.globalData.role = result.data.role;
-              wx.getLocation({
-                success: resData => {
-                  this.setData({
-                    longitude: resData.longitude,
-                    latitude: resData.latitude
-                  })
-                  this.refreshData();
-                }
-              });
-            }
-          })
-        }
-      })
+      this.wxLogin();
     }
+  },
+  wxLogin(){
+    this.setData({
+      loader: true,
+      requestAgain: false
+    })
+    wx.login({
+      success: resCode => {
+        wx.request({
+          url: app.globalData.server + '/miniprogram/login',
+          method: 'POST',
+          data: {
+            'code': resCode.code 
+          },
+          success: result => {
+            app.globalData.token = result.data.token;
+            app.globalData.role = result.data.role;
+            wx.getLocation({
+              success: resData => {
+                this.setData({
+                  longitude: resData.longitude,
+                  latitude: resData.latitude
+                })
+                this.refreshData();
+              }
+            });
+          },
+        })
+      },
+      fail: error => {
+        this.setData({
+          loader: false,
+          requestAgain: true
+        })
+      }
+    })
   },
   openDropdown() {
     this.setData({

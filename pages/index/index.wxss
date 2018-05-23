@@ -2,14 +2,7 @@ page {
   height: 100%;
   background-color: #f6f9fe;
 }
-.requestAgain {
-  background: #fff;
-  border: 1px solid rgb(240, 240, 240);
-  font-size: 14px;
-  position: relative;
-  top: 46%;
-  left: 46%;
-}
+
 .content-wrapper {
   height: 100%;
   position: relative;

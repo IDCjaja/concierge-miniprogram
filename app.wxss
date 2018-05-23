@@ -75,11 +75,24 @@ input {
 .box{
 	display: inline-block;
 	height: 200px;
-	width: 33.3%;
+	width: auto;
   padding: 0;
 	float:left;
 	position: relative;
 	transition: all .2s ease;
+}
+.requestAgain {
+  font-size: 14px;
+  position: relative;
+  top: 46%;
+}
+.requestAgain .reload-tip{
+  margin-bottom: 10px;
+}
+.requestAgain button{
+  background: #fff;
+  border: 1px solid rgb(240, 240, 240);
+  font-size: 14px;
 }
 .loader:before{
 	content: "";

@@ -4,7 +4,7 @@
   </view>
 </view>
 <view class="content">
-  <view>
+  <view class="image-box">
     <image src="{{imageUrl}}" class="introduce-image" />
   </view>
   <view>
@@ -40,6 +40,9 @@
     </view>
     <view class="full-tip">
       <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
+    </view>
+    <view class="full-tip" wx:if="{{state == 'pause'}}">
+      <text class="warning-text block-text">该项目已关闭</text>
     </view>
   </view>
 </view>
