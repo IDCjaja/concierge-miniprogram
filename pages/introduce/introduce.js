@@ -107,7 +107,8 @@ Page({
                     longitude:res.data.longitude,
                     latitude: res.data.latitude,
                     address: res.data.address,
-                    mask: true
+                    mask: true,
+                    state: res.data.state
                   })
                   wx.setStorage({
                     key: 'project',

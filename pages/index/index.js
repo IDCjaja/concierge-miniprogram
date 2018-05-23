@@ -18,11 +18,17 @@ Page({
     nomoreData: true,
     refresh: true,
     maskHidden: true,
+    loader: true,
+    requestAgain: false,
     pageIndex: 1,
     projects: [],
     currentPageProjects: []
   },
   refreshData(){
+    this.setData({
+      loader: true,
+      requestAgain: false
+    })
     wx.request({
       url: app.globalData.server + "/miniprogram/projects?distance="+this.data.distance+"&longitude="+this.data.longitude+"&latitude="+this.data.latitude,
       header: {
@@ -35,7 +41,8 @@ Page({
         this.setData({
           projects: response.data.projects,
           pageIndex: 1,
-          currentPageProjects: response.data.projects
+          currentPageProjects: response.data.projects,
+          mask: true
         })
         setTimeout(()=>{
           wx.stopPullDownRefresh()
@@ -47,6 +54,9 @@ Page({
     })
   },
   onLoad() {
+    this.setData({
+      mask: false
+    })
     if(app.globalData.token){
       wx.getLocation({
         success: resData => {
@@ -58,31 +68,44 @@ Page({
         }
       })
     } else {
-      wx.login({
-        success: resCode => {
-          wx.request({
-            url: app.globalData.server + '/miniprogram/login',
-            method: 'POST',
-            data: {
-              'code': resCode.code 
-            },
-            success: result => {
-              app.globalData.token = result.data.token;
-              app.globalData.role = result.data.role;
-              wx.getLocation({
-                success: resData => {
-                  this.setData({
-                    longitude: resData.longitude,
-                    latitude: resData.latitude
-                  })
-                  this.refreshData();
-                }
-              });
-            }
-          })
-        }
-      })
+      this.wxLogin();
     }
+  },
+  wxLogin(){
+    this.setData({
+      loader: true,
+      requestAgain: false
+    })
+    wx.login({
+      success: resCode => {
+        wx.request({
+          url: app.globalData.server + '/miniprogram/login',
+          method: 'POST',
+          data: {
+            'code': resCode.code 
+          },
+          success: result => {
+            app.globalData.token = result.data.token;
+            app.globalData.role = result.data.role;
+            wx.getLocation({
+              success: resData => {
+                this.setData({
+                  longitude: resData.longitude,
+                  latitude: resData.latitude
+                })
+                this.refreshData();
+              }
+            });
+          },
+        })
+      },
+      fail: error => {
+        this.setData({
+          loader: false,
+          requestAgain: true
+        })
+      }
+    })
   },
   openDropdown() {
     this.setData({

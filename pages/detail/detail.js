@@ -47,7 +47,9 @@ Page({
           project_id: res.data.project_id,
           id: res.data.id,
           update_time: update_time,
-          mask: true
+          mask: true,
+          latitude: res.data.latitude,
+          longitude: res.data.longitude
         })
       }
     })

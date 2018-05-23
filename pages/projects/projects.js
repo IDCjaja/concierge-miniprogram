@@ -110,7 +110,7 @@ Page({
   },
   openMap(event) {
     var index = event.currentTarget.dataset.reservationIndex;
-    if(this.this.data.reservationsList[index].latitude && this.data.reservationsList[index].longitude){
+    if(this.data.reservationsList[index].latitude && this.data.reservationsList[index].longitude){
       wx.openLocation({
         latitude: this.data.reservationsList[index].latitude,
         longitude: this.data.reservationsList[index].longitude,

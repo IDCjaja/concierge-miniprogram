@@ -133,7 +133,7 @@ input {
 }
 .confirm-btn {
   text-align: right;
-  color: #1AAD19;
+  color: #409eff;
 }
 .picker-box {
   width: 100%;

@@ -6,13 +6,14 @@
   display: flex;
   justify-content: space-around;
   border-bottom: 1px solid #f1f1f1;
-  padding-bottom:5px;
 }
 .tab {
+  padding: 0 10px 10px 10px;
   font-size: 16px;
 }
 .active {
   color: #409eff;
+  border-bottom: 3px solid #409eff;
 }
 .current-projects {
   padding-top: 10px;
@@ -83,8 +84,10 @@
   border-top: 1px solid #edeef0;
   display: flex;
   position: relative;
+  
 }
 .address-text {
+  flex: 0 0 85%;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
