@@ -31,13 +31,21 @@
       </view>
     </view>
     <view class="homepage-body">
-      <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
-        <image src="{{ item.cover }}" class="project-cover"></image>
-        <view class="project-name">{{ item.name }}</view>
-        <view class="project-address">{{ item.address }}</view>
+      <view wx:if="{{ projects.length == 0 }}">
+        <view class="no-project">
+          <image class="no-project-icon" src="../../images/no-result.png"></image>
+        </view>
+        <view class="no-project-tip">您所在的范围没有预约项目</view>
       </view>
-      <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
-      <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
+      <view wx:else>
+        <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
+          <image src="{{ item.cover }}" class="project-cover"></image>
+          <view class="project-name">{{ item.name }}</view>
+          <view class="project-address">{{ item.address }}</view>
+        </view>
+        <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
+        <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
+      </view>
     </view>
   </view>
   <view class="mask" hidden="{{ maskHidden }}"></view>

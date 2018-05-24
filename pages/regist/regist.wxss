@@ -14,7 +14,7 @@ input {
   color: #a3a5a1;
 }
 .input-group {
-  padding-left: 10px;
+  padding: 0 4%;
 }
 .input-group input {
   border-bottom: 1px solid #d7d8d5;
@@ -22,7 +22,7 @@ input {
 .code-box {
   display: flex;
   align-items: center;
-  margin-left: 10px;
+  margin: 0 4%;
   padding-top: 15px;
   background-color: #fff;
   border-bottom: 1px solid #d7d8d5;
@@ -50,6 +50,10 @@ input {
 .footer-button {
   width: 100%;
   margin-top: 65px;
+}
+.footer-button .submit-btn {
+  margin: 0 4%;
+  width: auto;
 }
 .deep {
   background-color: #0652a8;

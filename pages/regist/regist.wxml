@@ -1,3 +1,8 @@
+<view class="loading-mask" hidden="{{mask}}">
+  <view class="box">
+    <view class="loader"></view>
+  </view>
+</view>
 <view class="regist-title">注册</view>
 <view class="input-group">
   <input bindinput="nameBindChange" placeholder-class="phstyle" type="text" value="{{name}}" placeholder="请输入用户名"/>

@@ -4,7 +4,44 @@ Page({
     setTimr: false,
     phone: '',
     code: '',
-    name: ''
+    name: '',
+    mask: true
+  },
+  validateRole(){
+    var role = app.globalData.role;
+    if(role !== 'customer'){
+      wx.redirectTo({
+        url: '../admin/admin'
+      })
+    }
+    this.setData({
+      mask: true
+    })
+  },
+  onLoad(){
+    if(app.globalData.token){
+      this.validateRole();
+    } else {
+      this.setData({
+        mask: false
+      })
+      wx.login({
+        success: resCode => {
+          wx.request({
+            url: app.globalData.server + '/miniprogram/login',
+            method: 'POST',
+            data: {
+              'code': resCode.code
+            },
+            success: result => {
+              app.globalData.token = result.data.token;
+              app.globalData.role = result.data.role;
+              this.validateRole();
+            },
+          })
+        }
+      })
+    }
   },
   phoneBindChange: function(e){
     var phone = e.detail.value;

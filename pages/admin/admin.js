@@ -39,14 +39,7 @@ Page({
     })
   },
   onLoad(){
-    var role = app.globalData.role;
-    if(role == 'customer'){
-      wx.redirectTo({
-        url: '../regist/regist'
-      })
-    } else {
-      this.refreshData();
-    }
+    this.refreshData();
   },
   onReachBottom() {
     this.setData({

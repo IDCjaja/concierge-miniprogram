@@ -1,0 +1,11 @@
+<view class="homepage-body">
+  <view>
+    <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
+      <image src="{{ item.cover }}" class="project-cover"></image>
+      <view class="project-name">{{ item.name }}</view>
+      <view class="project-address">{{ item.address }}</view>
+    </view>
+    <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
+    <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
+  </view>
+</view>

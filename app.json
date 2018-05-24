@@ -2,9 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/group/group",
+    "pages/regist/regist",
     "pages/projects/projects",
     "pages/reservation/reservation",
-    "pages/regist/regist",
     "pages/search/search",
     "pages/introduce/introduce",
     "pages/admin/admin",

@@ -16,7 +16,7 @@ Page({
   },
   admin (){
     wx.navigateTo({
-      url: '../admin/admin'
+      url: '../regist/regist'
     })
   }
 })

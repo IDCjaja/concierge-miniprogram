@@ -108,3 +108,19 @@ page {
 .project-address {
   color:#777;
 }
+.no-project {
+  display:flex;
+  margin-top:100px;
+  flex-direction:column;
+  align-items:center;
+}
+.no-project-icon {
+  width: 73px;
+  height: 73px;
+}
+.no-project-tip {
+  font-size: 16px;
+  color: #222222;
+  margin-top: 35px;
+  text-align: center;
+}
