@@ -38,11 +38,13 @@ Page({
         'Authorization': app.globalData.token
       },
       success: res => {
-        this.setData({
-          reservationsList: this.formatReservations(res.data.reservations),
-          pageIndex: 1,
-          currentPageReservations: this.formatReservations(res.data.reservations)
-        })
+        if(this.data.stateType === this.data.currentState){
+          this.setData({
+            reservationsList: this.formatReservations(res.data.reservations),
+            pageIndex: 1,
+            currentPageReservations: this.formatReservations(res.data.reservations)
+          })
+        }
         setTimeout(()=>{
           wx.stopPullDownRefresh()
           this.setData({

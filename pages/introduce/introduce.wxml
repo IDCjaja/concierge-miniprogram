@@ -47,7 +47,7 @@
   </view>
 </view>
 <view class="introduce-footer">
-  <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable}}">
+  <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable || state === 'pause'}}">
     立即预约
   </button>
 </view>

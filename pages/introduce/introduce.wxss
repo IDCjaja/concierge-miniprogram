@@ -23,6 +23,7 @@ view {
   border-top: 1px solid #efeef0;
 }
 .content-with-tip {
+  padding: 10px 0;
   margin-bottom: 18px;
 }
 text {

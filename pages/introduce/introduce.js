@@ -121,7 +121,6 @@ Page({
         }
       })
     }
-
   },
   openMap: function () {
     if(this.data.latitude && this.data.longitude){

@@ -15,8 +15,15 @@ Page({
     })
   },
   admin (){
-    wx.navigateTo({
-      url: '../regist/regist'
-    })
+    var role = app.globalData.role;
+    if(role !== 'customer'){
+      wx.navigateTo({
+        url: '../admin/admin'
+      })
+    }else{
+      wx.navigateTo({
+        url: '../regist/regist'
+      })
+    }
   }
 })
