@@ -48,7 +48,7 @@
           </view>
         </view>
       </view>
-      <view class="user-information">
+      <view class="user-information" wx:if="{{reservation.state === '已取消'}}">
         <text class="grid-name">取消时间</text>
         <text>{{update_time}}</text>
       </view>
