@@ -9,7 +9,8 @@
     "pages/introduce/introduce",
     "pages/admin/admin",
     "pages/detail/detail",
-    "pages/userInfo/userInfo"
+    "pages/userInfo/userInfo",
+    "pages/groupRecord/groupRecord"
   ],
   "window": {
     "backgroundTextStyle": "light",

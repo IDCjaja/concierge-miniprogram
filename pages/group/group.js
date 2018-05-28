@@ -1,4 +1,4 @@
-const app = getApp();
+var app = getApp();
 
 Page({
   data: {
@@ -6,47 +6,121 @@ Page({
     nomoreData: true,
     pageIndex: 1,
     projects: [],
-    currentPageProjects: []
+    currentPageProjects: [],
+    projectShow: true
   },
   onLoad(options){
-    var scene = options.scene
-    wx.login({
-      success: resCode => {
-        wx.request({
-          url: app.globalData.server + '/miniprogram/login',
-          method: 'POST',
-          data: {
-            'code': resCode.code 
-          },
-          success: result => {
-            app.globalData.token = result.data.token;
-            app.globalData.role = result.data.role;
-            wx.request({
-              url: app.globalData.server + "/miniprogram/projects?group="+scene,
-              header: {
-                'Authorization': app.globalData.token
-              },
-              success: response => {
-                response.data.projects.forEach(function(item) {
-                  item.cover = app.globalData.server + item.cover;
-                })
-                this.setData({
-                  projects: response.data.projects,
-                  pageIndex: 1,
-                  currentPageProjects: response.data.projects,
-                  mask: true
-                })
-                setTimeout(()=>{
-                  wx.stopPullDownRefresh()
-                  this.setData({
-                    refresh: true
-                  })
-                },1000)
-              }
-            })
-          },
-        })
+    var id = options.scene || options.id;
+    if(app.globalData.token){
+      this.getProjectsInGroup(id);
+      this.getGroupName(id);
+    } else {
+      wx.login({
+        success: resCode => {
+          wx.request({
+            url: app.globalData.server + '/miniprogram/login',
+            method: 'POST',
+            data: {
+              'code': resCode.code 
+            },
+            success: result => {
+              app.globalData.token = result.data.token;
+              app.globalData.role = result.data.role;
+              this.getProjectsInGroup(id);
+              this.getGroupName(id);
+            },
+          });
+        },
+      })
+    }
+  },
+  getProjectsInGroup(id){
+    wx.request({
+      url: app.globalData.server + "/miniprogram/projects?group="+id,
+      header: {
+        'Authorization': app.globalData.token
       },
+      success: response => {
+        if(response.statusCode == 404){
+          this.setData({
+            projectShow: false
+          })
+          wx.getStorage({
+            key: "groupRecord",
+            success: res => {
+              res.data.forEach((item,index) => {
+                if(item.id === id){
+                  res.data.splice(index,1)
+                }
+              })
+              wx.setStorage({
+                key: "groupRecord",
+                data: res.data
+              })
+            }
+          })
+        }else{
+          response.data.projects.forEach(function(item) {
+            item.cover = app.globalData.server + item.cover;
+          })
+          this.setData({
+            projects: response.data.projects,
+            pageIndex: 1,
+            currentPageProjects: response.data.projects,
+            mask: true,
+            projectShow: true
+          })
+          setTimeout(()=>{
+            wx.stopPullDownRefresh()
+            this.setData({
+              refresh: true
+            })
+          },1000)
+        }
+      }
+    })
+  },
+  getGroupName(id){
+    wx.request({
+      url: app.globalData.server + '/miniprogram/groups/'+id,
+      method: 'GET',
+      header: {
+        'Authorization': app.globalData.token
+      },
+      success: resName => {
+        var groupName = resName.data.name;
+        var data = {};
+        data.name = groupName;
+        data.id = id;
+        wx.getStorage({
+          key: "groupRecord",
+          success: res => {
+            var flag = true;
+            if(resName.statusCode !== 404){
+              res.data.forEach(item => {
+                if(item.id === id){
+                  flag = false;
+                }
+              })
+              if(flag){
+                res.data.push(data);
+                wx.setStorage({
+                  key: "groupRecord",
+                  data: res.data
+                })
+              }
+            }
+          },
+          fail: res => {
+            var groupRecord = [];
+            groupRecord.push(data);
+            wx.setStorage({
+              key: "groupRecord",
+              data: groupRecord
+            })
+          }
+        })
+      }
     })
   },
   onReachBottom() {
@@ -94,6 +168,11 @@ Page({
   showProject(event) {
     wx.navigateTo({
       url: "../introduce/introduce?id=" + event.currentTarget.dataset.projectId
+    })
+  },
+  backToHome(){
+    wx.reLaunch({
+      url: '../index/index'
     })
   }
 })

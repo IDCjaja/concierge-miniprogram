@@ -25,5 +25,10 @@ Page({
         url: '../regist/regist'
       })
     }
+  },
+  category (){
+    wx.navigateTo({
+      url: '../groupRecord/groupRecord'
+    })
   }
 })

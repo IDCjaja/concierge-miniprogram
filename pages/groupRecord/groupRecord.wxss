@@ -1,0 +1,41 @@
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  background: #fff;
+}
+.item-icon {
+  width: 20px;
+  height: 20px;
+}
+.item-title {
+  flex: auto;
+  padding-left: 15px;
+  font-size: 15px;
+  color: #333;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.item-truncate {
+  width: 20px;
+  height: 20px;
+}
+.no-group {
+  display:flex;
+  margin-top:82px;
+  flex-direction:column;
+  align-items:center;
+}
+.no-group-icon {
+  width: 73px;
+  height: 73px;
+}
+.no-group-tip-top {
+  font-size: 18px;
+  color: #222222;
+  margin-top: 35px;
+  text-align: center;
+}

@@ -176,7 +176,7 @@ picker-view view {
   flex: 5;
 }
 .multi-column-time {
-  width: 130px;
+  flex: auto;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;

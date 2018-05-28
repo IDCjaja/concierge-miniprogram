@@ -25,4 +25,9 @@
     <text class="item-title">我是管理员</text>
     <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
   </view>
+  <view class="item" bindtap="category">
+    <image class="item-icon" src="../../images/guide.jpg"/>
+    <text class="item-title">分类浏览记录</text>
+    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  </view>
 </view>

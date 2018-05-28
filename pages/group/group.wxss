@@ -23,3 +23,19 @@ page {
 .project-address {
   color:#777;
 }
+.no-groupProjects {
+  display:flex;
+  margin-top:82px;
+  flex-direction:column;
+  align-items:center;
+}
+.no-groupProjects-icon {
+  width: 73px;
+  height: 73px;
+}
+.no-groupProjects-tip-top {
+  font-size: 18px;
+  color: #222222;
+  margin-top: 35px;
+  text-align: center;
+}

@@ -1,5 +1,5 @@
 <view class="homepage-body">
-  <view>
+  <block wx:if="{{projectShow}}">
     <view class="project" wx:for="{{ projects }}" bindtap="showProject" data-project-id="{{ item.id }}">
       <image src="{{ item.cover }}" class="project-cover"></image>
       <view class="project-name">{{ item.name }}</view>
@@ -7,5 +7,12 @@
     </view>
     <view class="projects-loading" hidden="{{ loading }}">努力加载中</view>
     <view class="projects-loading-complete" hidden="{{ nomoreData }}">暂无更多数据</view>
-  </view>
+  </block>
+  <block wx:else>
+    <view class="no-groupProjects">
+      <image class="no-groupProjects-icon" src="../../images/no-result.png"></image>
+    </view>
+    <view class="no-groupProjects-tip-top">该项目已删除</view>
+    <button bindtap="backToHome">返回首页</button>
+  </block>
 </view>

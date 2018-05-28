@@ -1,0 +1,12 @@
+<block wx:if="{{groupRecord.length}}">
+  <view  wx:for="{{groupRecord}}" bindtap="showGroup" class="item" data-group-id="{{item.id}}">
+    <text class="item-title">{{item.name}}</text>
+    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  </view>
+</block>
+<block wx:else>
+  <view class="no-group">
+    <image class="no-group-icon" src="../../images/no-result.png"></image>
+  </view>
+  <view class="no-group-tip-top">暂无分类浏览记录</view>
+</block>
