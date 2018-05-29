@@ -20,6 +20,22 @@
   background-color: #f6f9fe;
   margin-bottom: 10px;
 }
+.projects-mask {
+  width: 100%;
+  position: fixed;
+  top: 94px;
+  left: 0;
+  bottom: 0;
+  background-color: #fff;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s;
+}
+.projects-mask-tabs {
+  top: 149px;
+}
 .search-wrapper {
   border: 1px solid #ebeef5;
   border-radius: 5px;

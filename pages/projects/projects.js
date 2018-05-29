@@ -25,12 +25,16 @@ Page({
     nomoreData: true,
     refresh: true,
     currentPageReservations: [],
-    pageIndex: 1
+    pageIndex: 1,
+    mask: true
   },
   onShow() {
     this.refreshData()
   },
   refreshData(){
+    this.setData({
+      mask: false
+    })
     this.getStateType();
     wx.request({
       url: app.globalData.server + '/miniprogram/reservations?type=' + this.data.stateType,
@@ -38,12 +42,23 @@ Page({
         'Authorization': app.globalData.token
       },
       success: res => {
-        //if(this.data.stateType === this.data.currentState){
-        this.setData({
-          reservationsList: this.formatReservations(res.data.reservations),
-          pageIndex: 1,
-          currentPageReservations: this.formatReservations(res.data.reservations)
-        })
+        if(this.data.currentTabIndex === 1){
+          if(this.data.stateType === this.data.currentState){
+            this.setData({
+              reservationsList: this.formatReservations(res.data.reservations),
+              pageIndex: 1,
+              currentPageReservations: this.formatReservations(res.data.reservations),
+              mask: true
+            })
+          }
+        } else {
+          this.setData({
+            reservationsList: this.formatReservations(res.data.reservations),
+            pageIndex: 1,
+            currentPageReservations: this.formatReservations(res.data.reservations),
+            mask: true
+          })
+        }
         setTimeout(()=>{
           wx.stopPullDownRefresh()
           this.setData({

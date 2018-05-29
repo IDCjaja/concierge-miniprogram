@@ -27,7 +27,7 @@
       <image class="picker-icon" src="http://p1ctmsz1g.bkt.clouddn.com/timeBlue.jpg" />
       <text class="required" style="white-space: nowrap;">预约时间</text>
     </view>
-    <view class="picker picker-text multi-picker-text" wx:if="{{selValueShow.length}}">
+    <view bindtap="multiShow" class="picker picker-text multi-picker-text" wx:if="{{selValueShow.length}}">
       <view>
         <view class="multipicker-value" wx:for="{{selValueShow}}">
           <text class="multipicker-date">{{dateShow}}</text>

@@ -25,7 +25,7 @@
     </block>
   </view>
   <view class="project-detail" wx:if="{{description}}">
-    <text class="block-text">预约详情</text>
+    <text class="block-text description-title">预约详情</text>
     <text>{{description}}</text>
   </view>
   <view class="tip">

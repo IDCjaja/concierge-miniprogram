@@ -10,7 +10,9 @@ Page({
     phone:'',
     selValue:[],
     multiHidden: true,
-    dateShow: ""
+    dateShow: "",
+    initTimeList: [],
+    initValue: [0,0]
   },
   dataInit(){
     var times = this.data.times;
@@ -320,31 +322,31 @@ Page({
     var selIndex = e.currentTarget.dataset.selectIndex;
     var index = this.data.selList.indexOf(selIndex);
     var selRemain = [];
-    if(this.data.multiPicker == true){
-      if(index === -1){
+    if(index === -1){
+      if(this.data.multiPicker == false){
+        selArr = [];
+        selArr.push(e.currentTarget.dataset.selectIndex);
+        dataList.forEach((item) => {
+          item.selStatus = false;
+          if(item.id == selIndex){
+            item.selStatus = true
+          } 
+        })
+      }else{
         selArr.push(e.currentTarget.dataset.selectIndex);
         dataList.forEach((item) => {
           if(item.id == selIndex){
             item.selStatus = true
           } 
         })
-      } else {
-        dataList.forEach((item) => {
-          if(item.id === selIndex){
-            item.selStatus = false
-          }
-        })
-        selArr.splice(index,1)
       }
-    }else if(this.data.multiPicker == false){
-      selArr = [];
-      selArr.push(e.currentTarget.dataset.selectIndex);
+    } else {
       dataList.forEach((item) => {
-        item.selStatus = false;
-        if(item.id == selIndex){
-          item.selStatus = true
-        } 
+        if(item.id === selIndex){
+          item.selStatus = false
+        }
       })
+      selArr.splice(index,1)
     }
     var selValue = []
     selArr.forEach((item)=>{
@@ -388,6 +390,8 @@ Page({
           requestDate: this.data.date.slice(0,10),
           requestTime: this.data.selValue,
           buttonDisabled: false,
+          initTimeList: this.data.selList,
+          initValue: this.data.value
         })
       }
     }else{
@@ -396,7 +400,9 @@ Page({
         selValueShow: this.data.selValue,
         requestDate: [],
         requestTime: [],
-        buttonDisabled: true
+        buttonDisabled: true,
+        initTimeList: [],
+        initValue: [0,0]
       })
     }
     this.setData({
@@ -405,8 +411,20 @@ Page({
     })
   },
   multiShow(){
+    this.data.times[this.data.initValue[1]].forEach((item,valueIndex) => {
+      item.selStatus = false
+    })
+    this.data.initTimeList.forEach((index)=>{
+      this.data.times[this.data.initValue[1]].forEach((item,valueIndex) => {
+        if(valueIndex == index){
+          item.selStatus = true
+        } 
+      })
+    })
     this.setData({
-      multiHidden: false
+      multiHidden: false,
+      value: this.data.initValue,
+      timeList: this.data.times[this.data.initValue[1]]
     })
   },
   getRemain(valueStr){

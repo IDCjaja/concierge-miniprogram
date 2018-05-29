@@ -15,6 +15,11 @@
     </view>
   </view>
   <view class="current-projects" hidden="{{ currentTabIndex == 1 }}">
+    <view class="projects-mask" hidden="{{mask}}">
+      <view class="box">
+        <view class="loader"></view>
+      </view>
+    </view>
     <block wx:if="{{ reservationsList.length }}">
       <view class="reservations-item"
             wx:for="{{ reservationsList }}"
@@ -54,6 +59,11 @@
   </view>
   <view class="history-projects" hidden="{{ currentTabIndex == 0 }}">
     <view class="state-select">
+      <view class="projects-mask projects-mask-tabs" hidden="{{mask}}">
+        <view class="box">
+          <view class="loader"></view>
+        </view>
+      </view>
       <view class="state-btn-wrapper">
         <view class="state-btn {{ currentState === item.state?'state-active':'' }}"
               wx:for="{{ stateList }}"

@@ -84,6 +84,9 @@ text {
 .project-detail text {
   padding: 10px 0;
 }
+.description-title {
+  font-size: 16px;
+}
 .introduce-footer {
   position:fixed;
   width:100%;
