@@ -321,7 +321,7 @@ Page({
     var dataList = this.data.times[this.data.value[1]];
     var selIndex = e.currentTarget.dataset.selectIndex;
     var index = this.data.selList.indexOf(selIndex);
-    var selRemain = [];
+    
     if(index === -1){
       if(this.data.multiPicker == false){
         selArr = [];
@@ -332,7 +332,7 @@ Page({
             item.selStatus = true
           } 
         })
-      }else{
+      } else {
         selArr.push(e.currentTarget.dataset.selectIndex);
         dataList.forEach((item) => {
           if(item.id == selIndex){
@@ -348,16 +348,9 @@ Page({
       })
       selArr.splice(index,1)
     }
-    var selValue = []
-    selArr.forEach((item)=>{
-      selValue.push(dataList[item].time),
-      selRemain.push(dataList[item].remain)
-    })
     this.setData({
-      selList: selArr,
-      timeList: dataList,
-      selValue: selValue,
-      selRemain: selRemain
+      selArr: selArr,
+      timeList: dataList
     })
   },
   cancel(){
@@ -366,8 +359,14 @@ Page({
     })
   },
   confirm(){
-    if(this.data.selValue.length){
-      var notZero = this.data.selRemain.every((value)=>{
+    var selRemain = [];
+    var selValue = []
+    this.data.selArr.forEach((item)=>{
+      selValue.push(this.data.timeList[item].time),
+      selRemain.push(this.data.timeList[item].remain)
+    })
+    if(selValue.length){
+      var notZero = selRemain.every((value)=>{
         return value != 0;
       })
       if(notZero == false){
@@ -385,10 +384,13 @@ Page({
         })
       }else{
         this.setData({
+          selList: this.data.selArr
+        })
+        this.setData({
           dateShow: this.data.date,
-          selValueShow: this.data.selValue,
+          selValueShow: selValue,
           requestDate: this.data.date.slice(0,10),
-          requestTime: this.data.selValue,
+          requestTime: selValue,
           buttonDisabled: false,
           initTimeList: this.data.selList,
           initValue: this.data.value
@@ -397,7 +399,7 @@ Page({
     }else{
       this.setData({
         dateShow: "",
-        selValueShow: this.data.selValue,
+        selValueShow: selValue,
         requestDate: [],
         requestTime: [],
         buttonDisabled: true,
@@ -424,7 +426,8 @@ Page({
     this.setData({
       multiHidden: false,
       value: this.data.initValue,
-      timeList: this.data.times[this.data.initValue[1]]
+      timeList: this.data.times[this.data.initValue[1]],
+      selArr: this.data.initTimeList
     })
   },
   getRemain(valueStr){

@@ -126,7 +126,7 @@
   color: #ffa449;
 }
 .history {
-  color: #f1f1f1;
+  color: #cdcdcf;
 }
 .state-select {
   position: relative;
