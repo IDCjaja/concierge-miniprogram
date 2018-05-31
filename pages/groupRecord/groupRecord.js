@@ -12,7 +12,7 @@ Page({
     })
   },
   showGroup(event){
-    var id = event.currentTarget.dataset.groupId
+    var id = event.currentTarget.dataset.groupId;
     wx.navigateTo({
       url: "../group/group?id=" + id
     })

@@ -164,16 +164,17 @@
 .no-reservations-icon {
   width: 73px;
   height: 73px;
+  margin-left: 12px;
 }
 .no-reservations-tip-top {
   font-size: 18px;
   color: #222222;
-  margin-top: 35px;
+  margin-top: 20px;
   text-align: center;
 }
 .no-reservations-tip-bottom {
   font-size: 15px;
   color: #acacac;
   text-align: center;
-  margin-top: 19px;
+  margin-top: 8px;
 }

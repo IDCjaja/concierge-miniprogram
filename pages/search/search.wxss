@@ -60,12 +60,12 @@ page {
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin-top: 82px;
+  margin-top: 150px;
 }
 .no-project-icon {
   width: 73px;
   height: 73px;
-  margin-bottom:35px;
+  margin-bottom:15px;
 }
 .reservations-item {
   background-color: #fff;

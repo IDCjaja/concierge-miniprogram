@@ -39,6 +39,10 @@ Page({
           keyArr.forEach(item => {
             item[0] = this.WEEKDAY_MAP[item[0]]
           })
+          var reservation_per_user = res.data.reservation_per_user
+          if(reservation_per_user === null){
+            reservation_per_user = ''
+          }
           this.setData({
             imageUrl: app.globalData.server + res.data.cover,
             title: res.data.name,
@@ -48,7 +52,7 @@ Page({
             description: res.data.description,
             bookingTime: keyArr,
             aheadTime: res.data.ahead_time,
-            perCount: res.data.reservation_per_user,
+            perCount: reservation_per_user,
             reservable: res.data.reservable,
             longitude:res.data.longitude,
             latitude: res.data.latitude,

@@ -117,10 +117,11 @@ page {
 .no-project-icon {
   width: 73px;
   height: 73px;
+  margin-left: 12px;
 }
 .no-project-tip {
   font-size: 16px;
   color: #222222;
-  margin-top: 35px;
+  margin-top: 20px;
   text-align: center;
 }

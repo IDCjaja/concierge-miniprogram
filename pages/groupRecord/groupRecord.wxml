@@ -1,7 +1,9 @@
 <block wx:if="{{groupRecord.length}}">
-  <view  wx:for="{{groupRecord}}" bindtap="showGroup" class="item" data-group-id="{{item.id}}">
-    <text class="item-title">{{item.name}}</text>
-    <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/more.png" />
+  <view class="item-list">
+    <view  wx:for="{{groupRecord}}" bindtap="showGroup" class="item" data-group-id="{{item.id}}">
+      <text class="item-title">{{item.name}}</text>
+      <image class="item-truncate" src="http://p1ctmsz1g.bkt.clouddn.com/white-more.jpg" />
+    </view>
   </view>
 </block>
 <block wx:else>

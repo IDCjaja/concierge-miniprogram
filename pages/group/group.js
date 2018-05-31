@@ -11,6 +11,7 @@ Page({
   },
   onLoad(options){
     var id = options.scene || options.id;
+    var name = options.name;
     if(app.globalData.token){
       this.getProjectsInGroup(id);
       this.getGroupName(id);
@@ -119,6 +120,9 @@ Page({
               data: groupRecord
             })
           }
+        })
+        this.setData({
+          groupName: groupName
         })
       }
     })

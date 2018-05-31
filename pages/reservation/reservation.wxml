@@ -1,6 +1,8 @@
-
-
-
+<view class="loading-mask" hidden="{{mask}}">
+  <view class="box">
+    <view class="loader"></view>
+  </view>
+</view>
 <view class="page-container">
   <view class="mask {{multiHidden?'hidden':'show'}}" bindtap="cancel"></view>
   <view class="content">
@@ -39,7 +41,7 @@
     <view class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
       <view class="picker-btngroup"><text bindtap="cancel" class="picker-btn cancel-btn">取消</text><text bindtap="confirm" class="picker-btn confirm-btn">确定</text></view>
       <view class="picker-box">
-        <picker-view indicator-style="height: 34px;" style="width: 100%; height: 300px;" value="{{value}}" bindchange="bindChange">
+        <picker-view indicator-style="height: 34px;" style="width: 100%; height: 232px;" value="{{value}}" bindchange="bindChange">
           <picker-view-column>
             <view wx:for="{{dates}}" style="line-height: 34px">{{item}}</view>
           </picker-view-column>

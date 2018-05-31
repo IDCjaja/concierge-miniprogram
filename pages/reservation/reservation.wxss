@@ -172,7 +172,7 @@ picker-view view {
   justify-content: space-between;
 }
 .multi-picker {
-  height: 300px;
+  height: 232px;
   flex: 5;
 }
 .multi-column-time {
