@@ -1,0 +1,10 @@
+view {
+  width: 100%;
+  text-align: center;
+  background: #f6f9fe;
+}
+image {
+  width: 320px;
+  height: 1740px;
+  margin: 0 auto;
+}

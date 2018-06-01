@@ -4,12 +4,13 @@
     "pages/group/group",
     "pages/regist/regist",
     "pages/projects/projects",
-    "pages/reservation/reservation",
     "pages/search/search",
     "pages/introduce/introduce",
+    "pages/projectConfirm/projectConfirm",
     "pages/admin/admin",
     "pages/detail/detail",
     "pages/userInfo/userInfo",
+    "pages/useGuide/useGuide",
     "pages/groupRecord/groupRecord"
   ],
   "window": {

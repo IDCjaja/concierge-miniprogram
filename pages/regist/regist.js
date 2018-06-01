@@ -143,7 +143,7 @@ Page({
             duration: 2000
           })
           app.globalData.role = res.data.role
-          wx.navigateTo({
+          wx.redirectTo({
             url:'../admin/admin'
           })
         }else if(res.statusCode == 400){

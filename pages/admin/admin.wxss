@@ -8,36 +8,37 @@
   margin-top: 5px;
 }
 .page-chathead{
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
-  margin: 0 10px; 
-}
-.content {
-  padding: 10px;
+  margin: 0 10px;
+  overflow: hidden;
 }
 .page-title {
   text-align: center;
   line-height: 30px;
   flex: auto;
+  padding-right: 60px;
+}
+.project-title {
+  padding: 10px;
 }
 icon[type='search'] {
   padding-right: 10px;
 }
-.createProject {
-  width: 25px;
-  height: 25px;
-  margin-right: 10px;
-}
 .project {
   position: relative;
-  border: 1px solid #edeef0;
+  border-top: 1px solid #edeef0;
+  border-bottom: 1px solid #edeef0;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 .project-cover {
   width: 100%;
   height: 200px;
   margin: 10px 0;
   box-shadow: 0 0 10px rgb(0,0,0,0.2);
+  border-radius: 5px;
 }
 .project-name {
   font-size: 18px;
@@ -61,4 +62,21 @@ icon[type='search'] {
 .project-address {
   font-size: 14px;
   color: #ccc;
+}
+.no-project {
+  display:flex;
+  margin-top:100px;
+  flex-direction:column;
+  align-items:center;
+}
+.no-project-icon {
+  width: 73px;
+  height: 73px;
+  margin-left: 12px;
+}
+.no-project-tip {
+  font-size: 16px;
+  color: #222222;
+  margin-top: 20px;
+  text-align: center;
 }

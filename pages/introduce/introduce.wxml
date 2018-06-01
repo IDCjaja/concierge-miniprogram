@@ -3,51 +3,96 @@
     <view class="loader"></view>
   </view>
 </view>
-<view class="content">
-  <view class="image-box">
-    <image src="{{imageUrl}}" class="introduce-image" />
-  </view>
-  <view>
-    <text class="introduce-title block-text underline">{{title}}</text>
-    <view bindtap="openMap" wx:if="{{address}}" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate-gray.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
-  </view>
-</view>
-<view class="content content-with-tip">
-  <view class="underline" style="padding-bottom: 10px">
-    <text class="block-text underline reservation-time">预约时间</text>
-    <block wx:for="{{bookingTime}}" wx:key="bookingTime" wx:for-item="itemName">
-      <view class="time-item">
-        <text class="date-text">{{itemName[0]}}</text>
-        <text>{{itemName[1][0].time}}</text>
-        <text wx:if="{{itemName[1].length > 1}}">,{{itemName[1][1].time}}</text>
-        <text wx:if="{{itemName[1].length > 2}}">...</text>
+<block wx:if="{{introduceShow}}">
+  <view class="page-container">
+    <view class="mask {{multiHidden?'hidden':'show'}}" bindtap="cancel"></view>
+    <view class="image-wrapper">
+      <image src="{{imageUrl}}" class="introduce-image" />
+      <view class="content content-with-address">
+        <text class="introduce-title block-text underline">{{title}}</text>
+        <view bindtap="openMap" wx:if="{{address}}" class="introduce-address"><image class="address-icon" src="http://p1ctmsz1g.bkt.clouddn.com/locate-gray.jpg"></image><text>{{address}}</text><image class="address-more" src="http://p1ctmsz1g.bkt.clouddn.com/more.png"></image></view>
       </view>
-    </block>
+    </view>
+    <view class="content">
+      <view class="group-inline">
+        <text class="required">姓名</text>
+        <input type="text" bindinput="bindNameChange" value="{{defaultName}}" placeholder="请输入预约人姓名" />
+      </view>
+      <view class="group-inline">
+        <text class="required">手机</text>
+        <input type="text" bindinput="bindPhoneChange" value="{{defaultPhone}}" placeholder="请输入手机号"/>
+      </view>
+      <view class="code-box" hidden="{{codeBox}}">
+        <text class="required">验证码</text>
+        <input placeholder="请输入验证码" bindinput="bindCodeChange" value="{{code}}" placeholder-class="phstyle" />
+        <text wx:if="{{isFull || state == 'pause' || !reservable}}" class="disabled">获取验证码</text>
+        <view wx:else class="get-code-box">
+          <text wx:if="{{setTimr}}" class="disabled">重新获取{{count}}s</text>
+          <text class="get-code" wx:else bindtap="getCode">获取验证码</text>
+        </view>
+      </view>
+      <text wx:if="{{nameAjx}}" class="block warning">请填写姓名</text>
+      <text wx:if="{{phoneAjx}}" class="block warning">手机格式不正确</text>
+    </view>
+    <view class="tip content" wx:if="{{ perCount || aheadTime.hour || aheadTime.day || aheadTime.minute}}">
+      <view class="project-detail"  wx:if="{{!isFull || state !== 'pause'}}">
+        <text wx:if="{{perCount}}">每人可预约{{perCount}}次;</text>
+        <text wx:if="{{aheadTime.hour}}">提前{{aheadTime.hour}}小时预约;</text>
+        <text wx:if="{{aheadTime.day}}">提前{{aheadTime.day}}天预约;</text>
+        <text wx:if="{{aheadTime.minute}}">提前{{aheadTime.minute}}分钟预约;</text>
+      </view>
+      <view class="full-tip" wx:if="{{isFull}}">
+        <text class="warning-text block-text">预约已满，请重新选择其他预约</text>
+      </view>
+    </view>
+    <!-- 多选时间选择器 -->
+    <view class="multipicker-wrapper">
+      <view class="section group-inline" bindtap="multiShow">
+        <image class="picker-icon" src="http://p1ctmsz1g.bkt.clouddn.com/timeBlue.jpg" />
+        <text class="required" style="white-space: nowrap;">预约时间</text>
+      </view>
+      <view bindtap="multiShow" class="picker picker-text multi-picker-text" wx:if="{{selValueShow.length}}">
+        <view>
+          <view class="multipicker-value" wx:for="{{selValueShow}}">
+            <text class="multipicker-date">{{dateShow}}</text>
+            <text class="multipicker-time">{{item}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
   </view>
-  <view class="project-detail" wx:if="{{description}}">
-    <text class="block-text description-title underline">预约详情</text>
-    <text>{{description}}</text>
+  <!-- 多选时间选择器弹出层 -->
+  <view class="picker-custom {{multiHidden?'picker-hidden':'picker-show'}}">
+    <view class="picker-btngroup"><text bindtap="cancel" class="picker-btn cancel-btn">取消</text><text bindtap="confirm" class="picker-btn confirm-btn">确定</text></view>
+    <view class="picker-box">
+      <picker-view indicator-style="height: 34px;" style="width: 100%; height: 232px;" value="{{value}}" bindchange="bindChange">
+        <picker-view-column>
+          <view wx:for="{{dates}}" style="line-height: 34px">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+      <picker-view indicator-style="height: 34px;" class="multi-picker" value="{{timeValue}}">
+        <picker-view-column>
+          <view wx:for="{{timeList}}" bindtap="select" class="multi-column" data-select-index="{{index}}" data-selected="{{select}}">
+            <text class="multi-column-time">{{item.time}}  剩余:{{item.remain}}</text>
+            <image wx:if="{{item.selStatus}}" class="selected-icon" src="http://p1ctmsz1g.bkt.clouddn.com/reservation-checked.jpg" />
+            <image wx:else class="selected-icon" src="http://p1ctmsz1g.bkt.clouddn.com/reservation-unckecked.jpg" />
+          </view>
+        </picker-view-column>
+      </picker-view>
+    </view>
   </view>
-  <view class="tip">
-    <view class="project-detail" wx:if="{{aheadTime.hour}}">
-      <text class="block-text">提前{{aheadTime.hour}}小时预约</text>
-    </view>
-    <view class="project-detail" wx:if="{{aheadTime.day}}">
-      <text class="block-text">提前{{aheadTime.day}}天预约</text>
-    </view>
-    <view class="project-detail" wx:if="{{!(perCount === null)}}">
-      <text class="block-text">每人可预约该项目的个数{{perCount}}</text>
-    </view>
-    <view class="full-tip">
-      <text class="warning-text block-text" wx:if="{{isFull}}">预约已满，请重新选择其他预约</text>
-    </view>
-    <view class="full-tip" wx:if="{{state == 'pause'}}">
-      <text class="warning-text block-text">该项目已关闭</text>
-    </view>
+  <view class="footer-button">
+    <button wx:if="{{state == 'pause'}}" disabled="true">预约已结束</button>
+    <button wx:else bindtap="reservation" hover-class="deep" disabled="{{buttonDisabled}}" class="submit-btn">提交预约</button>
   </view>
-</view>
-<view class="introduce-footer">
-  <button bindtap="openReservation" data-project-id="{{id}}" hover-class="deep" class="submit-btn" disabled="{{isFull || !reservable || state === 'pause'}}">
-    立即预约
-  </button>
-</view>
+</block>
+<block wx:else>
+  <view class="no-result-wrap">
+    <view class="no-groupProjects">
+      <image class="no-groupProjects-icon" src="../../images/no-result.png"></image>
+    </view>
+    <view class="no-groupProjects-tip-top">该项目已删除</view>
+    <view class="no-result-footer"><button class="backtohome" bindtap="backToHome">返回首页</button></view>
+  </view>
+</block>
+

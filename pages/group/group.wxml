@@ -15,7 +15,7 @@
       <view class="no-groupProjects">
         <image class="no-groupProjects-icon" src="../../images/no-result.png"></image>
       </view>
-      <view class="no-groupProjects-tip-top">该项目已删除</view>
+      <view class="no-groupProjects-tip-top">该分类已删除</view>
       <view class="no-result-footer"><button class="backtohome"  bindtap="backToHome">返回首页</button></view>  
     </view>
   </block>

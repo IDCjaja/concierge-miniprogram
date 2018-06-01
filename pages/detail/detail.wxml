@@ -24,7 +24,7 @@
       <view class="detail-title">预约详情</view>
       <view class="state">
         <image wx:if="{{reservation.state == '已成功' || reservation.state == '待审核'}}" src="http://p1ctmsz1g.bkt.clouddn.com/3.png"></image>
-        <image wx:if="{{reservation.state == '已取消' || reservation.state == '已拒绝'}}" src="http://p1ctmsz1g.bkt.clouddn.com/cancel.png"></image>
+        <image wx:if="{{reservation.state == '已取消' || reservation.state == '已拒绝' || reservation.state == '已过期'}}" src="http://p1ctmsz1g.bkt.clouddn.com/cancel.png"></image>
         <text>{{reservation.state}}</text>
       </view>
       <text class="name">{{reservation.project_name}}</text>

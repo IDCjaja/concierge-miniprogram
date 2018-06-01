@@ -32,14 +32,15 @@ input {
   margin: 0;
 }
 .code-box text {
+  flex: 0 0 110px;
   color:  #0366d6;
-  padding:0 10px;
   white-space: nowrap;
   margin: 0;
   border: none;
   border-left: 1px solid #ccc;
   background-color: #fff;
   font-size: 14px;
+  text-align: center;
 }
 .code-box text:hover {
   color: #0652a8;

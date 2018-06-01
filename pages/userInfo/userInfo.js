@@ -11,7 +11,7 @@ Page({
   },
   userGuide (){
     wx.navigateTo({
-      url: ''
+      url: '../useGuide/useGuide'
     })
   },
   admin (){
