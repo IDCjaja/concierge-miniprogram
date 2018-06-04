@@ -1,0 +1,15 @@
+.description-container {
+  margin: 0 15px;
+}
+.description-header {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+}
+.header-line {
+  flex: auto;
+  border: 1px solid #ecebf1;
+}
+.description-detail {
+  padding: 0 10px;
+}

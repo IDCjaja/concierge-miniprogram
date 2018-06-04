@@ -1,0 +1,8 @@
+<view class="description-container">
+  <view class="description-header">
+    <text class="header-line"></text>
+    <text class="description-detail">预约详情</text>
+    <text class="header-line"></text>
+  </view>
+  <view class="">{{description}}</view>
+</view>
