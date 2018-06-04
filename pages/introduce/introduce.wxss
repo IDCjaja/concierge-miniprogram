@@ -161,7 +161,7 @@ input {
 }
 /*多项时间选择器*/
 .multipicker-wrapper {
-  margin-bottom: 72px;
+  margin-bottom: 76px;
 }
 .mask {
   position: absolute;

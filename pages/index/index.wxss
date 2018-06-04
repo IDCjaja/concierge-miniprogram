@@ -85,12 +85,12 @@ page {
   display: flex;
   align-items: center;
 }
-
 .project {
   background-color:#fff;
   margin-top:15px;
   padding:4%;
-  border: 1px solid #efeef0;
+  border-top: 1px solid #efeef0;
+  border-bottom: 1px solid #efeef0;
 }
 .project-cover {
   width:100%;

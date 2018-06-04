@@ -35,7 +35,7 @@ page {
 }
 .no-group {
   display:flex;
-  margin-top:82px;
+  padding-top:82px;
   flex-direction:column;
   align-items:center;
 }
