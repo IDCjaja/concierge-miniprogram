@@ -134,6 +134,9 @@ input {
   margin-top: 10px;
   border-top: 1px solid #ecebf1;
 }
+.section text.required {
+  padding: 15px 10px 15px 0;
+}
 .picker-text {
   width: 100%;
   background: #fff;

@@ -3,7 +3,7 @@
     <view class="loader"></view>
   </view>
 </view>
-<view class="modal-mask {{modalHidden?'wrap-hidden':'wrap-show'}}">
+<view class="modal-mask {{modalHidden?'wrap-hidden':'wrap-show'}}" bindtap="close">
   <view class="modal-wrap">
     <view class="modal-header">取消预约
       <image bindtap="close" src="http://p1ctmsz1g.bkt.clouddn.com/delete.jpg"></image>
