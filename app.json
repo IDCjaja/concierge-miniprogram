@@ -11,7 +11,8 @@
     "pages/detail/detail",
     "pages/userInfo/userInfo",
     "pages/useGuide/useGuide",
-    "pages/groupRecord/groupRecord"
+    "pages/groupRecord/groupRecord",
+    "pages/projectDetail/projectDetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

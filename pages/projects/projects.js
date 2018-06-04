@@ -23,7 +23,6 @@ Page({
     reservationsList: [],
     loading: true,
     nomoreData: true,
-    refresh: true,
     currentPageReservations: [],
     pageIndex: 1,
     mask: true
@@ -59,12 +58,6 @@ Page({
             mask: true
           })
         }
-        setTimeout(()=>{
-          wx.stopPullDownRefresh()
-          this.setData({
-            refresh: true
-          })
-        },1000)
       }
     })
   },
@@ -173,11 +166,5 @@ Page({
         })
       },1000)
     }
-  },
-  onPullDownRefresh(){
-    this.setData({
-      refresh: false
-    })
-    this.refreshData();
   }
 })

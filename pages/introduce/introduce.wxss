@@ -1,6 +1,11 @@
 page {
   overflow: hidden;
 }
+.page-body {
+  overflow:hidden;
+  height:100%;
+  position:relative
+}
 .page-container {
   height: 100%;
   background-color: #f6f9fe;
@@ -9,6 +14,16 @@ page {
 }
 .image-wrapper {
   font-size: 0;
+  position: relative;
+}
+.detail-button {
+  position: absolute;
+  top: 155px;
+  right: 15px;
+  font-size: 12px;
+  border-radius: 30px;
+  background: #409eff;
+  color: #fff;
 }
 .content {
   padding-left: 15px;
@@ -37,7 +52,7 @@ page {
   font-size: 12px;
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 .introduce-address text {
   flex:  0 0 85%;

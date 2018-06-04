@@ -1,5 +1,4 @@
-<view class="pullDownRefresh" hidden="{{ refresh }}">正在刷新</view>
-<view class="projects-contianer">
+<view class="projects-contianer {{mask?'':'overflow-class'}}">
   <view style="background-color: #fff">
     <view class="search-wrapper" bindtap="search">
       <icon type="search" size="14" color="#909399" class="search-icon"></icon>

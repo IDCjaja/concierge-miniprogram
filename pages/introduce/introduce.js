@@ -156,10 +156,10 @@ Page({
         } else {
           this.setData({
             imageUrl: app.globalData.server + res.data.cover,
-            title: res.data.name,
             id: project_id,
             isFull: res.data.full,
             address: res.data.address,
+            title: res.data.name,
             description: res.data.description,
             aheadTime: res.data.ahead_time,
             perCount: res.data.reservation_per_user,
@@ -170,6 +170,10 @@ Page({
             mask: true,
             introduceShow: true,
             state: res.data.state
+          })
+          wx.setStorage({
+            key: 'projectName',
+            data: res.data.name
           })
           this.getData(res,project_id,this.data.multiIndex)
         }
@@ -517,6 +521,15 @@ Page({
   backToHome(){
     wx.reLaunch({
       url: '../index/index'
+    })
+  },
+  checkProjectDetail(){
+    wx.setStorage({
+      key: 'projectDetail',
+      data: this.data.description
+    })
+    wx.navigateTo({
+      url:'../projectDetail/projectDetail'
     })
   }
 })

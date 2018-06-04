@@ -30,6 +30,14 @@ Page({
         })
       }
     })
+    wx.getStorage({
+      key: 'projectName',
+      success: res => {
+        wx.setNavigationBarTitle({
+          title: res.data
+        })
+      }
+    })
   },
   openMap() {
     if(this.data.latitude && this.data.longitude){

@@ -2,6 +2,9 @@
   height: 100%;
   background-color: #f6f9fe;
 }
+.overflow-class {
+  overflow: hidden;
+}
 .projects-tabs {
   display: flex;
   justify-content: space-around;
